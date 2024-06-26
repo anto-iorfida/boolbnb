@@ -1,12 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\Apartment;
-use App\Models\Message;
-use App\Models\Service;
-use App\Models\View;
-use App\Models\User;
+use Database\Seeders\UsersTableSeeder;
+use Database\Seeders\ApartmentsTableSeeder;
+use Database\Seeders\ServicesTableSeeder;
+use Database\Seeders\MessagesTableSeeder;
+use Database\Seeders\ViewTableSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\View\ViewServiceProvider;
@@ -32,9 +31,7 @@ class DatabaseSeeder extends Seeder
             ApartmentsTableSeeder::class,
             ServicesTableSeeder::class,
             MessagesTableSeeder::class,
-            ViewTableSeeder::class,
-
-
+            ViewsTableSeeder::class,
         ]);
     }
 }

@@ -6,27 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('views', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('apartment_id')->constrained();
+            $table->unsignedBigInteger('apartment_id')->nullable();
             $table->string('ip_address');
-            $table->date('date_time');
+            $table->dateTime('date_time');
             $table->timestamps();
+
+            $table->foreign('apartment_id')
+                ->references('id')
+                ->on('apartments')
+                ->onDelete('set null');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('views');
