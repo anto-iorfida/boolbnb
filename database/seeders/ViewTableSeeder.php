@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use  App\Models\View;
-use Faker\Generator as Faker;
+use App\Models\View;
+use Faker\Factory as Faker;
 
-class ViewSeeder extends Seeder
+class ViewTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +16,8 @@ class ViewSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create(); //.
+
         for($i = 0; $i < 10; $i++) {
             $newView = new View();
             $newView->ip_address = $faker->ipv4;

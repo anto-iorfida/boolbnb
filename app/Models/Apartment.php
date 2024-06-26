@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Service;
+use App\Models\View;
 
 class Apartment extends Model
 {
@@ -14,6 +15,11 @@ class Apartment extends Model
     }
 
     public function view() {
-        return $this->belongsTo(View::class);
+        return $this->hasMany(View::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user'); 
     }
 }
