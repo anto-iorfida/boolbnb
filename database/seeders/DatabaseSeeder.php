@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Apartment;
+use App\Models\Service;
+use App\Models\Message;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +26,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             Apartment::class,
+            Service::class,
+            Message::class
         ]);
     }
 }
