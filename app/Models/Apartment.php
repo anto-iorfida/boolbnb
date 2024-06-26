@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Service;
 use App\Models\View;
+use App\Models\User;
 
 
 class Apartment extends Model
