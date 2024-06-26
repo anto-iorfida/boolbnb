@@ -15,10 +15,10 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartment = Apartment::all();
+        $apartments = Apartment::all();
 
 
-        return view('admin.apartments.index', compact('apartment'));
+        return view('admin.apartments.index', compact('apartments'));
        
     }
 
@@ -49,9 +49,11 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
         //
+        // $apartment= Apartment::all();
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
