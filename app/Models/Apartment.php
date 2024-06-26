@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Service;
 use App\Models\View;
 
+
 class Apartment extends Model
 {
     use HasFactory;
@@ -15,7 +16,7 @@ class Apartment extends Model
     }
 
     public function view() {
-        return $this->hasMany(View::class);
+        return $this->belongsToMany(View::class);
     }
 
     public function user()
