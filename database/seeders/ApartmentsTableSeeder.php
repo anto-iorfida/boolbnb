@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Str;
 use App\Models\Apartment;
+use App\Models\User;
 
 class ApartmentsTableSeeder extends Seeder
 {
@@ -34,7 +35,7 @@ class ApartmentsTableSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             $title = $titles[$i];
             $apartament = Apartment::create([
-                'id_user' => $faker->numberBetween(1, 30), 
+                'id_user' => $faker->numberBetween(1, 6), 
                 'title' => $title,
                 'slug' => Str::slug($title),
                 'description' => $faker->paragraph, 

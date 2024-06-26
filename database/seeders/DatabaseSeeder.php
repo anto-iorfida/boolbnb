@@ -32,9 +32,7 @@ class DatabaseSeeder extends Seeder
             ApartmentsTableSeeder::class,
             ServicesTableSeeder::class,
             MessagesTableSeeder::class,
-            ViewTableSeeder::class,
-
-
+            ViewsTableSeeder::class,
         ]);
     }
 }
