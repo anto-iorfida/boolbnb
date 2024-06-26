@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Apartment;
 use App\Models\Service;
 use App\Models\View;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
             Apartment::class,
             Service::class,
             View::class,
+            User::class,
         ]);
     }
 }
