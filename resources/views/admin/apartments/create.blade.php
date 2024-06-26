@@ -5,11 +5,11 @@
     <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
-        {{-- <div class="mb-3">
+        <div class="mb-3">
             <label for="title" class="form-label">Titolo</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
         </div>
-        @error('name')
+        {{-- @error('name')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
@@ -32,9 +32,9 @@
         </div>
         @error('summary')
             <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+        @enderror --}}
 
         <button type="submit" class="btn btn-primary">Salva</button>
-        <a href="{{ route('admin.project.index') }}" class="btn btn-primary">Indietro</a> --}}
+        <a href="{{ route('admin.apartments.index') }}" class="btn btn-primary">Indietro</a>
     </form>
 @endsection

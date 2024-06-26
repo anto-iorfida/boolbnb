@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
-
+use Illuminate\Support\Str;
 class ApartmentController extends Controller
 {
     /**
@@ -43,6 +43,12 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         //
+        $formData= $request->all();
+        $newApartment= new Apartment();
+        $newApartment->fill($formData);
+        $newApartment->slug = Str::slug($newApartment->title, '-');
+        $newApartment->save();
+        return redirect()->route('admin.apartments.show',['apartments'=>$newApartment->slug]);
     }
 
     /**
