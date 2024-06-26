@@ -37,20 +37,20 @@
                             <div class="icon-colum d-flex gap-3">
     
                                 <div>
-                                    <a href="{{ route('admin.apartments.show', ['apartment' => $apartment->id]) }}">
+                                    <a href="{{ route('admin.apartments.show', ['apartment' => $apartment->slug]) }}">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                 </div>
     
                                 <div>
-                                    <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}">
+                                    <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
                                 </div>
     
                                 <div>
-                                    <form id="delete-form-{{ $apartment->id }}"
-                                        action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->id]) }}"
+                                    <form id="delete-form-{{ $apartment->slug }}"
+                                        action="{{ route('admin.apartments.destroy', ['apartment' => $apartment->slug]) }}"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')

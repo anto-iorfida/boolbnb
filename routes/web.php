@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::resource('apartments', ApartmentController::class)->parameters(['apartemts'=>'apartment:slug']);
+        Route::resource('apartments', ApartmentController::class) ->parameters(['apartments'=>'apartment:slug']);
+        
     });
-
 require __DIR__ . '/auth.php';
