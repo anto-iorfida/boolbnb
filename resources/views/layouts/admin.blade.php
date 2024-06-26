@@ -57,7 +57,12 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.index')}}">
-                                    <i class="fa-solid fa-file"></i> tutti appartament
+                                    <i class="fa-solid fa-file"></i> tutti apartament
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.create')}}">
+                                    <i class="fa-solid fa-plus"></i> Create apartment
                                 </a>
                             </li>
                             
