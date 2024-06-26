@@ -14,6 +14,10 @@ class Apartment extends Model
         return $this->belongsToMany(Service::class);
     }
 
+
+    public function messages(){
+        return $this->hasMany(Message::class);
+}
     public function view() {
         return $this->hasMany(View::class);
     }
@@ -21,5 +25,6 @@ class Apartment extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user'); 
+
     }
 }
