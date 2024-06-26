@@ -7,7 +7,7 @@ use Faker\Factory as Faker;
 use Illuminate\Support\Str;
 use App\Models\Apartment;
 
-class ApartamentsTableSeeder extends Seeder
+class ApartmentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
