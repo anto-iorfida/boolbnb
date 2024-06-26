@@ -34,7 +34,7 @@ class ApartmentsTableSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             $title = $titles[$i];
             $apartament = Apartment::create([
-                'id_user' => $faker->numberBetween(1, 30), 
+                'id_user' => $faker->numberBetween(1, 6), 
                 'title' => $title,
                 'slug' => Str::slug($title),
                 'description' => $faker->paragraph, 
