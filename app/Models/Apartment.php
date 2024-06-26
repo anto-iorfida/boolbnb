@@ -12,7 +12,6 @@ use App\Models\User;
 class Apartment extends Model
 {
     use HasFactory;
-
     
     public function services(){
         return $this->belongsToMany(Service::class);
