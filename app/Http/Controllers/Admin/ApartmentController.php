@@ -17,8 +17,7 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::all();
 
-        dd($apartment);
-        return view('admin.apartment.index', compact('apartment'));
+        return view('admin.apartments.index', compact('apartment'));
     }
 
     /**
