@@ -19,11 +19,11 @@ class Apartment extends Model
     public function messages(){
         return $this->hasMany(Message::class);
 }
-    public function view() {
-        return $this->belongsToMany(View::class);
+    public function views() {
+        return $this->hasMany(View::class);
     }
 
-    public function user()
+    public function users()
     {
         return $this->belongsTo(User::class, 'id_user'); 
 

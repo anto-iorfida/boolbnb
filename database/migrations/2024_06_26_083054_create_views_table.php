@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('views', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('apartment_id')->constrained();
             $table->string('ip_address');
             $table->date('date_time');
             $table->timestamps();

@@ -20,6 +20,7 @@ class ViewTableSeeder extends Seeder
 
         for($i = 0; $i < 10; $i++) {
             $newView = new View();
+            $newView->apartment_id= $faker->numberBetween(1,10);
             $newView->ip_address = $faker->ipv4;
             $newView->date_time = $faker->dateTime;
             $newView->save();

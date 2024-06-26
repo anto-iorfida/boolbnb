@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
@@ -40,6 +41,8 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::resource('apartments', ApartmentController::class)->parameters(['apartemts'=>'apartment:slug']);
     });
 
 require __DIR__ . '/auth.php';
