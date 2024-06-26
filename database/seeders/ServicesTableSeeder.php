@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\Models\Service;
+
 class ServicesTableSeeder extends Seeder
 {
     /**
@@ -30,14 +31,13 @@ class ServicesTableSeeder extends Seeder
             "Vista sul mare",
             "Portiere",
             "Animali domestici ammessi"
-           ];
+        ];
 
-           foreach($nameServices as $singleService){
-               $newService= new Service();
-               $newService->name=$singleService;
-               $newService->icon=$singleService;
-               $newService->save();
-           }
-
+        foreach ($nameServices as $singleService) {
+            $newService = new Service();
+            $newService->name = $singleService;
+            $newService->icon = $singleService;
+            $newService->save();
+        }
     }
 }
