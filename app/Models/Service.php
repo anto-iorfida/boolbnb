@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
-    public function rules(){
+    public function appartaments(){
         return $this->belongsToMany('App\Models\Appartament');
     }
 }
