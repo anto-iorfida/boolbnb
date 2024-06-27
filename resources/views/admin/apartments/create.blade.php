@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-  
-<div class="container">
-    <h2>Crea Nuovo Appartamento</h2>
+
+    <div class="container">
+        <h2>Crea Nuovo Appartamento</h2>
 
     @if (session('success'))
         <div class="alert alert-success">
