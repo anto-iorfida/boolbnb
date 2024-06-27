@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container py-3">
         <h2>Crea Nuovo Appartamento</h2>
 
     @if (session('success'))
@@ -123,7 +123,7 @@
                     @enderror
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Crea Appartamento</button>
+            <button type="submit" class="btn btn-primary mb-5">Crea Appartamento</button>
         </form>
     </div>
 @endsection

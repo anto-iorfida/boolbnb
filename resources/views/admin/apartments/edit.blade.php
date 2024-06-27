@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<div class="container p-3">
     <h2>Modifica Appartamento</h2>
 
     @if (session('success'))
@@ -121,8 +121,8 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Salva Modifiche</button>
-        <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">Annulla</a>
+        <button type="submit" class="btn btn-primary mb-5">Salva Modifiche</button>
+        <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary mb-5">Annulla</a>
     </form>
 </div>
 @endsection
