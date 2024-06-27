@@ -28,8 +28,13 @@ class Apartment extends Model
         'price',
         'visibility',
     ];
-    public function services(){
-        return $this->belongsToMany(Service::class);
+    // public function services(){
+    //     return $this->belongsToMany(Service::class);
+    // }
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'apartments_services', 'id_apartment', 'id_service');
     }
 
     public function messages(){
