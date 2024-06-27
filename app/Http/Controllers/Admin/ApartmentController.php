@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Apartment;
-
-use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Str;
 
 
