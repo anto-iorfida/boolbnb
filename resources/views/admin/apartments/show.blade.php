@@ -9,8 +9,8 @@
     @endif --}}
     <div class="card mt-4">
         @if ($apartment->thumb)
-            <div class="card-img-top">
-                <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}">
+            <div>
+                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}">
             </div>
         @endif
         <div class="card-body">

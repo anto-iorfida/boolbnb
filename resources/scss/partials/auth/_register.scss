@@ -24,7 +24,13 @@
     font-size: 20px;
     font-weight: 500;
     color: white;
+    transition: 0.6s;
     border-radius: 30px;
+}
+.my-btn:hover{
+    transform: 0.3s;
+    color: black;
+    background-color: #DD25AB;
 }
 .my-wrap input{
     width: 70%;

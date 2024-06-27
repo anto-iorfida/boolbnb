@@ -35,20 +35,16 @@ class ApartmentController extends Controller
 
         $validatedData['slug'] = $slug;
 
-        
         $formData = $validatedData;
-
-        if ($request->hasFile('thumb')) {
-            $img_path = Storage::disk('public')->put('apartment_images', $request->file('thumb'));
-            $formData['thumb'] = $img_path;
-        }
-
+        if($request->hasFile('thumb')){
+            $img_path = Storage::disk('public')->put('apartment_images',$formData['thumb']);
+            $formData['thumb']=$img_path;
+    }
         $newApartment = new Apartment();
         $newApartment->fill($formData);
 
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->id_user= Auth::id();
-
         $newApartment->save();
 
         return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');

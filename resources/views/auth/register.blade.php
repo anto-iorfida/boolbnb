@@ -14,7 +14,7 @@
                                     <div class="row d-flex align-items-center">
                                         <div class="col-4">
                                             <div class="img-logo-register">
-                                                <img src="{{ Vite::asset('resources/img/logo-boolbnb.png') }}" class="img-fluid" alt="Logo Bool BnB" style="width:350px">
+                                                <img src="{{ Vite::asset('resources/img/logo-boolbnb.png') }}" class="img-fluid" alt="Logo Bool BnB" >
                                             </div>
                                             <div>
                                                 <p class="fs-6">

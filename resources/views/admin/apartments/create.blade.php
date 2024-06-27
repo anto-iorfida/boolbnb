@@ -22,7 +22,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.apartments.store') }}" method="POST">
+        <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class=" mb-3 col-12 col-md-6">
@@ -65,10 +65,17 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class=" mb-3 col-12 col-md-6">
+                {{-- <div class=" mb-3 col-12 col-md-6">
                     <label for="thumb" class="form-label">URL Immagine</label>
                     <input type="url" class="form-control @error('thumb') is-invalid @enderror" id="thumb"
                         name="thumb" value="{{ old('thumb') }}">
+                    @error('thumb')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div> --}}
+                <div class="mb-3 col-12 col-md-6">
+                    <label for="thumb" class="form-label">Immagine copertina appartamento</label>
+                    <input class="form-control" type="file" id="thumb" name="thumb">
                     @error('thumb')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
