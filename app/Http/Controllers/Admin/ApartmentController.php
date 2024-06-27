@@ -26,25 +26,23 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         $validatedData = $this->validation($request->all());
-
         $slug = Str::slug($validatedData['title'], '-');
+
         $validatedData['slug'] = $slug;
 
-        // $validatedData['id_user'] = Auth::id();
+        
+        $formData = $validatedData;
 
         if ($request->hasFile('thumb')) {
             $img_path = Storage::disk('public')->put('apartment_images', $request->file('thumb'));
-            $validatedData['thumb'] = $img_path;
+            $formData['thumb'] = $img_path;
         }
 
         $newApartment = new Apartment();
         $newApartment->fill($formData);
-        $newApartment->slug = Str::slug($newApartment->title, '-');
-        $newApartment->id_user=7;
         $newApartment->save();
 
-        return redirect()->route('admin.apartments.show', $newApartment->id)
-            ->with('message', $newApartment->title . ' successfully created.');
+        return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');
     }
 
     public function show(Apartment $apartment)
