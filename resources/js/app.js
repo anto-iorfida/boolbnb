@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const apartmentTitleElement = document.getElementById('apartment-title');
     const deleteForm = document.getElementById('delete-form');
 
-    deleteButtons.forEach(function(button) {
+    deleteButtons.forEach(function (button) {
         button.addEventListener('click', function () {
             const apartmentId = this.getAttribute('data-apartment-id');
             const apartmentTitle = this.getAttribute('data-apartment-title');
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //  funzione che da risultati all'input del created.blade.php----------------------------------------
 // aggiungiamo un listener per l'evento 'DOMContentLoaded', che viene eseguito quando il documento HTML è stato completamente caricato e analizzato.
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // selezioniamo l'elemento input con id 'address' dal DOM e lo assegna alla costante addressInput.
     const addressInput = document.getElementById('address');
     // selezioniamo l'elemento div con id 'addressSuggestions' dal DOM e lo assegna alla costante addressSuggestions.
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const longitudeInput = document.getElementById('longitude');
 
     // aggiungiamo un listener per l'evento 'input' sull'elemento addressInput.
-    addressInput.addEventListener('input', function() {
+    addressInput.addEventListener('input', function () {
         // ottenuto il valore corrente dell'input addressInput e lo assegna alla variabile query.
         const query = addressInput.value;
 
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         // impostiamo il testo dell'elemento 'a' sull'indirizzo suggerito.
                         suggestion.textContent = result.address.freeformAddress;
                         // aggiungiamo un listener per l'evento 'click' sull'elemento 'a'.
-                        suggestion.addEventListener('click', function(e) {
+                        suggestion.addEventListener('click', function (e) {
                             e.preventDefault(); // Previene il comportamento predefinito del link.
                             // impostiamo il valore dell'input addressInput sull'indirizzo suggerito.
                             addressInput.value = result.address.freeformAddress;
@@ -89,3 +89,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 //  ///funzione che da risultati all'input del created.blade.php----------------------------------------
+

@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('content')
-    {{-- @if (session('apartments_create'))
+    @if (session('apartments_create'))
         <div class="mess-info">Progetto creato con successo!</div>
-    @endif --}}
+    @endif
 
-    {{-- @if (session('apartments_edit'))
+    @if (session('apartments_edit'))
         <div class="mess-info">Progetto modificato con successo!</div>
-    @endif --}}
+    @endif
     <div class="card mt-4">
         @if ($apartment->thumb)
             <div>
@@ -112,3 +112,7 @@
         }
     </style>
 @endsection
+
+
+
+
