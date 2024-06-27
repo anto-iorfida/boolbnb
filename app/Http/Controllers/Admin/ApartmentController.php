@@ -48,8 +48,6 @@ class ApartmentController extends Controller
 
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->id_user= Auth::id();
-        dd($newApartment->id_user);
-
         $newApartment->save();
 
         return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');
