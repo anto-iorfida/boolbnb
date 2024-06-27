@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // controloo se la lunghezza del valore di input è maggiore di 2.
         if (query.length > 2) {
-            // Esegue una richiesta fetch per ottenere suggerimenti di indirizzi dall'API di TomTom.
+            // Esegue una richiesta fetch per ottenere suggerimenti di indirizzi dall'API di TomTom.chiave ***NON TOCCARE LA CHIAVE*****
             fetch(`https://api.tomtom.com/search/2/search/${query}.json?key=tNdeH4PSEGzxLQ1CKK0HdCagLd1BsXSc&countrySet=IT`)
                 .then(response => response.json()) // Converte la risposta in formato JSON.
                 .then(data => {
