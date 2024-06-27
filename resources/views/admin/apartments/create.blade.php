@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
   
-=======
 <div class="container">
     <h2>Crea Nuovo Appartamento</h2>
 
@@ -143,5 +141,4 @@
 >>>>>>> 2eb52efeae78b368e7eeb27b4b9b1a27dd86d2e3
     </form>
 </div>
->>>>>>> 2eb52efeae78b368e7eeb27b4b9b1a27dd86d2e3
 @endsection
