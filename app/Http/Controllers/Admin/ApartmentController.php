@@ -47,6 +47,7 @@ class ApartmentController extends Controller
         $newApartment= new Apartment();
         $newApartment->fill($formData);
         $newApartment->slug = Str::slug($newApartment->title, '-');
+        $newApartment->id_user=7;
         $newApartment->save();
         return redirect()->route('admin.apartments.show',['apartments'=>$newApartment->slug]);
     }
