@@ -3,6 +3,7 @@
 @use './partials/apartments/edit';
 @use './partials/apartments/create';
 @use './partials/auth/register';
+@use './partials/auth/login';
 @use './partials/_error404';
 @import '~bootstrap/scss/bootstrap';
 
