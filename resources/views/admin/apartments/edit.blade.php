@@ -88,24 +88,6 @@
                 </div>
 
                 <div class=" mb-3 col-12 col-md-6">
-                    <label for="longitude" class="form-label">Longitudine</label>
-                    <input type="text" class="form-control @error('longitude') is-invalid @enderror" id="longitude"
-                        name="longitude" value="{{ $apartment->longitude }}">
-                    @error('longitude')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class=" mb-3 col-12 col-md-6">
-                    <label for="latitude" class="form-label">Latitudine</label>
-                    <input type="text" class="form-control @error('latitude') is-invalid @enderror" id="latitude"
-                        name="latitude" value="{{ $apartment->latitude }}">
-                    @error('latitude')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class=" mb-3 col-12 col-md-6">
                     <label for="price" class="form-label">Prezzo</label>
                     <input type="text" class="form-control @error('price') is-invalid @enderror" id="price"
                         name="price" value="{{ $apartment->price }}">
@@ -125,6 +107,10 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <input type="hidden" id="longitude" name="longitude" value="{{ $apartment->longitude }}">
+                <input type="hidden" id="latitude" name="latitude" value="{{ $apartment->latitude }}">
+
                 <div>
                     <button type="submit" class="btn btn-primary mb-5">Salva Modifiche</button>
                     <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary mb-5">Annulla</a>
