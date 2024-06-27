@@ -23,13 +23,13 @@
 
     <form action="{{ route('admin.apartments.store') }}" method="POST">
         @csrf
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="id_user" class="form-label">ID Utente</label>
             <input type="number" class="form-control @error('id_user') is-invalid @enderror" id="id_user" name="id_user" value="{{ old('id_user') }}">
             @error('id_user')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
-        </div>
+        </div> --}}
         <div class="mb-3">
             <label for="title" class="form-label">Titolo</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}">

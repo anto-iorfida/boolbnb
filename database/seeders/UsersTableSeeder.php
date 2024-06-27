@@ -23,7 +23,6 @@ class UsersTableSeeder extends Seeder
                 'email' => $faker->unique()->safeEmail,
                 'password' => bcrypt('password'), 
                 'date_birth' => $faker->date($format = 'Y-m-d',$min = '1950-01-01' ,$max = '2003-01-01'), 
-                // 'date_birth' =>  $faker->dateTimeBetween('1950-01-01', '2003-01-01')->format('d-m-Y'), 
             ]);
         }
     }
