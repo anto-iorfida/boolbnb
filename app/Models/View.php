@@ -11,7 +11,8 @@ class View extends Model
 
     protected $fillable = ['apartment_id', 'ip_address', 'date_time'];
 
-    public function apartments() {
-        return $this->hasMany(Apartment::class);
+    public function apartment()
+    {
+        return $this->belongsTo(Apartment::class);
     }
 }
