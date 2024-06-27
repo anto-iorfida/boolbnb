@@ -112,7 +112,6 @@
     </main>
 @endsection
 
-<<<<<<< HEAD
 <style>
     .my-wrap {
         width: 100%;
@@ -128,5 +127,3 @@
         width: 100%
     }
 </style>
-=======
->>>>>>> main
