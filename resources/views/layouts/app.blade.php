@@ -24,8 +24,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container d-flex align-items-center">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                    <div class="">
-                        <img src="https://cdn.discordapp.com/attachments/1253278465843531788/1255827880026574902/Logo_Bool_bb.png?ex=667e8c5a&is=667d3ada&hm=3ec1d15ebb0333dfc7329c9fcd0c6ddf6f1a532447df88dc143ff1e2c3f51084&" class="img-fluid" alt="Logo Bool BnB" style="width: 150px">
+                    <div>
+                        <img src="{{ Vite::asset('resources/img/logo-boolbnb.png') }}" class="img-fluid ms-logo" alt="Logo Bool BnB">
                     </div>
                 </a>
 
@@ -37,7 +37,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto d-flex align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link p-0 fs-5" href="{{ url('/') }}">{{ __('Home') }}</a>
+                            <a class="nav-link p-0 fs-6" href="{{ url('/') }}">{{ __('Home') }}</a>
                         </li>
                     </ul>
 
@@ -46,11 +46,11 @@
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link fs-5" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link fs-6" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link fs-5" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link fs-6" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         @endif
                         @else

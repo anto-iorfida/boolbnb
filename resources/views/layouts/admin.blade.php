@@ -28,8 +28,10 @@
 <body class="overflow-hidden">
     <div id="app">
 
-        <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap shadow px-2">
-            <a class="navbar-brand col-md-3 col-lg-2 me-0 text-center" href="/">Bool BnB</a>
+        <header class="navbar sticky-top ms-bg-primary flex-md-nowrap shadow px-2">
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center" href="/">
+                <img class="ms-logo" src="{{ Vite::asset('resources/img/logo-dashboard.png') }}">
+            </a>
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -49,21 +51,21 @@
 
         <div class="container-fluid vh-100">
             <div class="row h-100">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark navbar-dark sidebar collapse vh-100">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-primary navbar-dark sidebar collapse vh-100">
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}" href="{{ route('admin.dashboard')}}">
+                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}" href="{{ route('admin.dashboard')}}">
                                     <i class="fa-solid fa-gauge-high"></i> Dashboard Utente
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.index')}}">
+                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-light text-dark' : '' }}" href="{{ route('admin.apartments.index')}}">
                                     <i class="fa-regular fa-rectangle-list"></i> I tuoi appartamenti
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.create')}}">
+                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-light text-dark' : '' }}" href="{{ route('admin.apartments.create')}}">
                                     <i class="fa-solid fa-plus"></i> Inserisci un appartamento
                                 </a>
                             </li>
@@ -85,12 +87,16 @@
 
 </html>
 <style>
+
+    .ms-bg-primary {
+        background-color: white;
+    }
     .nav .nav-item a{
         color: white;
     }
 
  .nav .nav-item:hover{
-    background: #c0bcbc;
+    background: white;
     border-radius: 5px;
     }
     .nav .nav-item:hover a{
