@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Apartment;
 use Illuminate\Support\Str;
+
 class ApartmentController extends Controller
 {
     public function index()
@@ -24,34 +25,25 @@ class ApartmentController extends Controller
 
     public function store(Request $request)
     {
-<<<<<<< HEAD
         $validatedData = $this->validation($request->all());
-        $slug = Str::slug($validatedData['title'], '-');
 
+        $slug = Str::slug($validatedData['title'], '-');
         $validatedData['slug'] = $slug;
 
-        // Use validated data instead of request data
-        $formData = $validatedData;
+        // $validatedData['id_user'] = Auth::id();
 
         if ($request->hasFile('thumb')) {
             $img_path = Storage::disk('public')->put('apartment_images', $request->file('thumb'));
-            $formData['thumb'] = $img_path;
+            $validatedData['thumb'] = $img_path;
         }
 
         $newApartment = new Apartment();
-        $newApartment->fill($formData);
+        $newApartment->fill($validatedData);
+        $newApartment->id_user = Auth::id();
         $newApartment->save();
 
-        return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');
-=======
-        //
-        $formData= $request->all();
-        $newApartment= new Apartment();
-        $newApartment->fill($formData);
-        $newApartment->slug = Str::slug($newApartment->title, '-');
-        $newApartment->save();
-        return redirect()->route('admin.apartments.show',['apartments'=>$newApartment->slug]);
->>>>>>> 3e571e4076ae58c8dc5ff4b04ebbf984628c801d
+        return redirect()->route('admin.apartments.show', $newApartment->id)
+            ->with('message', $newApartment->title . ' successfully created.');
     }
 
     public function show(Apartment $apartment)
@@ -94,10 +86,10 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::findOrFail($id);
         $apartment->delete();
-        
+
         return redirect()->route('admin.apartments.index')->with('apartment_deleted', 'Appartamento eliminato con successo!');
     }
-    
+
     private function validation($data)
     {
         return Validator::make(
