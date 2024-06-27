@@ -48,7 +48,6 @@ class ApartmentController extends Controller
 
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->id_user= Auth::id();
-        dd($newApartment->id_user);
 
         $newApartment->save();
 
@@ -70,7 +69,7 @@ class ApartmentController extends Controller
     {
         $validatedData = $this->validation($request->all());
         $slug = Str::slug($validatedData['title'], '-');
-        $slug = $this->generateUniqueSlug($slug, $id);
+        // $slug = $this->generateUniqueSlug($slug, $id);
 
         $validatedData['slug'] = $slug;
 

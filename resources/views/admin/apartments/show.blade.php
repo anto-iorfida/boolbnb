@@ -11,7 +11,7 @@
         @if ($apartment->thumb)
             <div class="card-img-top">
                 <img style="width: 100%; height: auto; border-top-left-radius: 20px; border-top-right-radius: 20px;" 
-                     src="https://www.welcomekado.com/wp-content/uploads/2018/10/affittare-casa-vacanza.jpg" 
+                     src="{{ $apartment->thumb }}" 
                      alt="{{ $apartment->title }}">
             </div>
         @endif
