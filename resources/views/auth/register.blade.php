@@ -13,10 +13,10 @@
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
 
-                                    <div class="row">
+                                    <div class="row d-flex align-items-center">
                                         <div class="col-4">
                                             <div class="img-logo-register">
-                                                <img src="https://cdn.discordapp.com/attachments/1253278465843531788/1255827880026574902/Logo_Bool_bb.png?ex=667e8c5a&is=667d3ada&hm=3ec1d15ebb0333dfc7329c9fcd0c6ddf6f1a532447df88dc143ff1e2c3f51084&" class="img-fluid" alt="Logo Bool BnB" style="width:350px">
+                                                <img src="{{ Vite::asset('resources/img/logo-boolbnb.png') }}" class="img-fluid" alt="Logo Bool BnB" style="width:350px">
                                             </div>
                                         </div>
                                         <div class="col-8">
@@ -134,5 +134,6 @@
         margin: 0 auto;
     }
     .img-logo-register img{
+        width: 100%
     }
 </style>
