@@ -1,3 +1,4 @@
+
 @extends('layouts.admin')
 
 @section('content')
@@ -75,7 +76,8 @@
                 <div class=" mb-3 col-12 col-md-6">
                     <label for="address" class="form-label">Indirizzo</label>
                     <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
-                        name="address" value="{{ old('address') }}">
+                        name="address" value="{{ old('address') }}" autocomplete="off">
+                    <div id="addressSuggestions" class="list-group"></div>
                     @error('address')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -127,3 +129,11 @@
         </form>
     </div>
 @endsection
+
+@section('scripts')
+<link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.21.0/maps/maps.css"/>
+<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.21.0/maps/maps-web.min.js"></script>
+<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.21.0/services/services-web.min.js"></script>
+@endsection
+
+    

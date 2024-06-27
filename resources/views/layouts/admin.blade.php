@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     @yield('scripts')
+    
 
 
     <!-- Usando Vite -->
