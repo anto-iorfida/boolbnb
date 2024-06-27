@@ -59,17 +59,6 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-<<<<<<< HEAD
-                {{-- <div class=" mb-3 col-12 col-md-6">
-=======
-                <div class="mb-3 col-12 col-md-6">
->>>>>>> a36b44178f9841e96ba751bbb0c53ca7059bdf6c
-                    <label for="thumb" class="form-label">URL Immagine</label>
-                    <input type="url" class="form-control @error('thumb') is-invalid @enderror" id="thumb" name="thumb" value="{{ old('thumb') }}">
-                    @error('thumb')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div> --}}
                 <div class="mb-3 col-12 col-md-6">
                     <label for="thumb" class="form-label">Immagine copertina appartamento</label>
                     <input class="form-control" type="file" id="thumb" name="thumb">
