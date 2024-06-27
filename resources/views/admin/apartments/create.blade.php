@@ -21,6 +21,9 @@
         </div>
     @endif
 
+<<<<<<< HEAD
+    
+=======
     <form action="{{ route('admin.apartments.store') }}" method="POST">
         @csrf
         {{-- <div class="mb-3">
@@ -135,4 +138,5 @@
         <a href="{{ route('admin.apartments.index') }}" class="btn btn-primary">Indietro</a>
     </form>
 </div>
+>>>>>>> acfcd0e6db7202c226931f69bbdf5e7f87fd43b0
 @endsection
