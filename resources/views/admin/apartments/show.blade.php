@@ -10,14 +10,12 @@
     <div class="card mt-4">
         @if ($apartment->thumb)
             <div class="card-img-top">
-                <img  
-                     src="{{ $apartment->thumb }}" 
-                     alt="{{ $apartment->title }}">
+                <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}">
             </div>
         @endif
         <div class="card-body">
             <h2 class="card-title mb-4">Titolo: {{ $apartment->title }}</h2>
-            
+
             <div class="section mb-4">
                 <div class="mb-2">
                     <strong>Slug:</strong> {{ $apartment->slug }}
@@ -29,13 +27,13 @@
                     <strong>Data di Modifica:</strong> {{ $apartment->updated_at->format('d/m/Y H:i') }}
                 </div>
             </div>
-    
+
             @if ($apartment->description)
                 <div class="section mb-4">
                     <p><strong>Descrizione: </strong>{{ $apartment->description }}</p>
                 </div>
             @endif
-    
+
             <div class="section mb-4">
                 <div class="row">
                     <div class="col-md-6 mb-2">
@@ -52,7 +50,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="section mb-4">
                 <div class="mb-2">
                     <strong>Indirizzo:</strong> {{ $apartment->address }}
@@ -64,16 +62,16 @@
                     <strong>Latitudine:</strong> {{ $apartment->latitude }}
                 </div>
             </div>
-    
+
             <div class="section mb-4">
                 <strong>Prezzo:</strong> {{ number_format($apartment->price, 2) }} €
             </div>
-    
+
             <div class="section mb-4">
                 <strong>Visibilità:</strong> {{ $apartment->visibility ? 'Visibile' : 'Non Visibile' }}
             </div>
         </div>
-    
+
         <div class="card-footer d-flex justify-content-between">
             <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
                 <i class="fa-solid fa-arrow-left"></i> Indietro
@@ -83,31 +81,34 @@
             </a>
         </div>
     </div>
-</div>
-    
+    </div>
+
     <style>
         .card {
             border-radius: 20px;
         }
+
         .card-title {
             font-size: 1.75rem;
             font-weight: bold;
         }
+
         .card-body strong {
             color: #495057;
         }
+
         .section {
             border-bottom: 1px solid #dee2e6;
             padding-bottom: 15px;
         }
+
         .card-footer {
             background-color: #f8f9fa;
             border-top: 1px solid #dee2e6;
         }
+
         .card-footer .btn {
             margin: 0 5px;
         }
     </style>
-    
-    
 @endsection
