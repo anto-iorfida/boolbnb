@@ -52,17 +52,17 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}" href="{{ route('admin.dashboard')}}">
+                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}" href="{{ route('admin.dashboard')}}">
                                     <i class="fa-solid fa-gauge-high"></i> Dashboard Utente
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.index')}}">
+                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.index')}}">
                                     <i class="fa-regular fa-rectangle-list"></i> I tuoi appartamenti
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.create')}}">
+                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.create')}}">
                                     <i class="fa-solid fa-plus"></i> Inserisci un appartamento
                                 </a>
                             </li>
@@ -90,9 +90,11 @@
 
  .nav .nav-item:hover{
     background: #c0bcbc;
+    border-radius: 5px;
     }
     .nav .nav-item:hover a{
+        color: black;
         font-size: 18px;
-        transition: 0.5s;
+        transition: 0.8s;
     }
 </style>
