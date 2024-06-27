@@ -2,4 +2,9 @@
 @use './partials/apartments/show';
 @use './partials/apartments/edit';
 @use './partials/apartments/create';
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+
+main{
+    background-color: #F6F6F6;
+}
+
