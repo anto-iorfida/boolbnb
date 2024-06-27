@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Apartment;
+<<<<<<< HEAD
 
+=======
+>>>>>>> acfcd0e6db7202c226931f69bbdf5e7f87fd43b0
 use Illuminate\Support\Str;
 
 
@@ -16,7 +19,10 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::all();
+        $userId = Auth::id();
+
+        $apartments = Apartment::where('id_user', $userId)->get();
+
         return view('admin.apartments.index', compact('apartments'));
     }
 
