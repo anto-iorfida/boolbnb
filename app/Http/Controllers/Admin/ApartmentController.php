@@ -5,10 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Apartment;
+
 use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Str;
+
+
 class ApartmentController extends Controller
 {
     public function index()
@@ -29,7 +34,7 @@ class ApartmentController extends Controller
 
         $validatedData['slug'] = $slug;
 
-        // Use validated data instead of request data
+        
         $formData = $validatedData;
 
         if ($request->hasFile('thumb')) {
@@ -39,9 +44,11 @@ class ApartmentController extends Controller
 
         $newApartment = new Apartment();
         $newApartment->fill($formData);
+
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->id_user= Auth::id();
         dd($newApartment->id_user);
+
         $newApartment->save();
 
         return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');
@@ -87,10 +94,10 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::findOrFail($id);
         $apartment->delete();
-        
+
         return redirect()->route('admin.apartments.index')->with('apartment_deleted', 'Appartamento eliminato con successo!');
     }
-    
+
     private function validation($data)
     {
         return Validator::make(
