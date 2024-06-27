@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Apartment;
-
+use Illuminate\Support\Facades\Auth;
 class ApartmentController extends Controller
 {
     public function index()
@@ -39,10 +39,9 @@ class ApartmentController extends Controller
 
         $newApartment = new Apartment();
         $newApartment->fill($formData);
-
         $newApartment->slug = Str::slug($newApartment->title, '-');
-        $newApartment->id_user=7;
-
+        $newApartment->id_user= Auth::id();
+        dd($newApartment->id_user);
         $newApartment->save();
 
         return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');
@@ -97,7 +96,6 @@ class ApartmentController extends Controller
         return Validator::make(
             $data,
             [
-                'id_user' => 'required|integer',
                 'title' => 'required|string|max:255',
                 'description' => 'required|string',
                 'number_rooms' => 'required|integer',
@@ -112,7 +110,6 @@ class ApartmentController extends Controller
                 'visibility' => 'required|boolean',
             ],
             [
-                'id_user.required' => 'Il campo ID utente è obbligatorio',
                 'title.required' => 'Il campo titolo è obbligatorio',
                 'description.required' => 'Il campo descrizione è obbligatorio',
                 'number_rooms.required' => 'Il campo numero di stanze è obbligatorio',
