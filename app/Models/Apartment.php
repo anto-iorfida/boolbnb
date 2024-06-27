@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Service;
 use App\Models\View;
 use App\Models\User;
+use App\Models\Album;
 
 
 class Apartment extends Model
@@ -43,5 +44,9 @@ class Apartment extends Model
     {
         return $this->belongsTo(User::class, 'id_user'); 
 
+    }
+
+    public function albums() {
+        return $this->hasMany(Album::class);
     }
 }
