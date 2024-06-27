@@ -125,6 +125,6 @@
         margin: 0 auto;
     }
     .img-logo-register img{
-        width: 100%
+        max-width: 100%;
     }
 </style>
