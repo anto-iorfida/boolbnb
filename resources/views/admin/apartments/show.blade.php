@@ -10,7 +10,7 @@
     <div class="card mt-4">
         @if ($apartment->thumb)
             <div class="card-img-top">
-                <img style="width: 100%; height: auto; border-top-left-radius: 20px; border-top-right-radius: 20px;" 
+                <img  
                      src="{{ $apartment->thumb }}" 
                      alt="{{ $apartment->title }}">
             </div>
