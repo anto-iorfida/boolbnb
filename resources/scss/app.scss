@@ -1,1 +1,5 @@
+@use './partials/apartments/index';
+@use './partials/apartments/show';
+@use './partials/apartments/edit';
+@use './partials/apartments/create';
 @import '~bootstrap/scss/bootstrap'
