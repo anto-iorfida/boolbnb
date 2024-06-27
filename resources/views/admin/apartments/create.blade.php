@@ -36,6 +36,7 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
+<<<<<<< HEAD
 
         <div class="mb-3">
             <label for="title" class="form-label">Titolo</label>
@@ -45,6 +46,8 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
+=======
+>>>>>>> 2eb52efeae78b368e7eeb27b4b9b1a27dd86d2e3
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
@@ -126,12 +129,15 @@
             @enderror
         </div>
         <button type="submit" class="btn btn-primary">Crea Appartamento</button>
+<<<<<<< HEAD
         @error('summary')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror --}}
 
         <button type="submit" class="btn btn-primary">Salva</button>
         <a href="{{ route('admin.apartments.index') }}" class="btn btn-primary">Indietro</a>
+=======
+>>>>>>> 2eb52efeae78b368e7eeb27b4b9b1a27dd86d2e3
     </form>
 </div>
 @endsection
