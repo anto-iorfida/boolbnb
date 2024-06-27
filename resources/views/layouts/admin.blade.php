@@ -53,17 +53,17 @@
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}" href="{{ route('admin.dashboard')}}">
-                                    <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> Dashboard
+                                    <i class="fa-solid fa-gauge-high"></i> Dashboard Utente
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.index')}}">
-                                    <i class="fa-solid fa-file"></i> tutti apartament
+                                    <i class="fa-regular fa-rectangle-list"></i> I tuoi appartamenti
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.create')}}">
-                                    <i class="fa-solid fa-plus"></i> Create apartment
+                                    <i class="fa-solid fa-plus"></i> Inserisci un appartamento
                                 </a>
                             </li>
                             
