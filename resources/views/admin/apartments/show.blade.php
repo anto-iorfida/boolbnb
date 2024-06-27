@@ -83,6 +83,14 @@
             </a>
         </div>
     </div>
+
+
+    <div class="icon-show">
+        <div><a href="{{ route('admin.apartments.index') }}"><i class="fa-solid fa-arrow-left"></i></a></div>
+        <div><a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}"><i
+                    class="fa-solid fa-pen-to-square"></i></a></div>
+    </div>
+</div>
     
     <style>
         .card {

@@ -12,7 +12,6 @@ use App\Models\User;
 class Apartment extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'id_user',
         'title',
@@ -29,7 +28,6 @@ class Apartment extends Model
         'price',
         'visibility',
     ];
-    
     public function services(){
         return $this->belongsToMany(Service::class);
     }

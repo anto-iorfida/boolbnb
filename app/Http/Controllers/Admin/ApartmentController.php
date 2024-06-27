@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Apartment;
-
+use Illuminate\Support\Str;
 class ApartmentController extends Controller
 {
     public function index()
@@ -24,6 +24,7 @@ class ApartmentController extends Controller
 
     public function store(Request $request)
     {
+<<<<<<< HEAD
         $validatedData = $this->validation($request->all());
         $slug = Str::slug($validatedData['title'], '-');
 
@@ -42,6 +43,15 @@ class ApartmentController extends Controller
         $newApartment->save();
 
         return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');
+=======
+        //
+        $formData= $request->all();
+        $newApartment= new Apartment();
+        $newApartment->fill($formData);
+        $newApartment->slug = Str::slug($newApartment->title, '-');
+        $newApartment->save();
+        return redirect()->route('admin.apartments.show',['apartments'=>$newApartment->slug]);
+>>>>>>> 3e571e4076ae58c8dc5ff4b04ebbf984628c801d
     }
 
     public function show(Apartment $apartment)
