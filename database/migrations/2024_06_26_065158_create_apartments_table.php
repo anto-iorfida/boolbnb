@@ -28,9 +28,8 @@ return new class extends Migration
             $table->double('longitude', 15, 8);
             $table->double('latitude', 15, 8);
             $table->decimal('price', 10, 2);
-            $table->boolean('visibility');
+            $table->boolean('visibility')->nullable();
             $table->timestamps();
-
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });

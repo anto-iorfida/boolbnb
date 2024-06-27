@@ -38,8 +38,9 @@ class ApartmentController extends Controller
         }
 
         $newApartment = new Apartment();
-        $newApartment->fill($validatedData);
-        $newApartment->id_user = Auth::id();
+        $newApartment->fill($formData);
+        $newApartment->slug = Str::slug($newApartment->title, '-');
+        $newApartment->id_user=7;
         $newApartment->save();
 
         return redirect()->route('admin.apartments.show', $newApartment->id)
