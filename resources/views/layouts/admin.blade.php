@@ -52,17 +52,17 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}" href="{{ route('admin.dashboard')}}">
+                                <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}" href="{{ route('admin.dashboard')}}">
                                     <i class="fa-solid fa-tachometer-alt fa-lg fa-fw"></i> Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.index')}}">
+                                <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.index')}}">
                                     <i class="fa-solid fa-file"></i> tutti apartament
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.create')}}">
+                                <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-secondary' : '' }}" href="{{ route('admin.apartments.create')}}">
                                     <i class="fa-solid fa-plus"></i> Create apartment
                                 </a>
                             </li>
@@ -83,3 +83,16 @@
 </body>
 
 </html>
+<style>
+    .nav .nav-item a{
+        color: white;
+    }
+
+ .nav .nav-item:hover{
+    background: #c0bcbc;
+    }
+    .nav .nav-item:hover a{
+        font-size: 18px;
+        transition: 0.5s;
+    }
+</style>

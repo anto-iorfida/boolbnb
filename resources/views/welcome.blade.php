@@ -2,8 +2,8 @@
 
 @section('content')
 
-<div class="jumbotron p-5 mb-4 bg-light rounded-3" style="height: 100vh; overflow: hidden;">
-    <div class="container py-5 text-center">
+<div class="jumbotron mb-4 bg-light rounded-3" style="height: 100vh; overflow: hidden;">
+    <div class="container text-center">
         <div class="">
             <img src="https://cdn.discordapp.com/attachments/1253278465843531788/1255827880026574902/Logo_Bool_bb.png?ex=667e8c5a&is=667d3ada&hm=3ec1d15ebb0333dfc7329c9fcd0c6ddf6f1a532447df88dc143ff1e2c3f51084&" class="img-fluid" alt="Logo Bool BnB" style="width:350px">
         </div>

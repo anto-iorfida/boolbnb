@@ -2,6 +2,7 @@
 @use './partials/apartments/show';
 @use './partials/apartments/edit';
 @use './partials/apartments/create';
+@use './partials/auth/register';
 @use './partials/_error404';
 @import '~bootstrap/scss/bootstrap';
 
