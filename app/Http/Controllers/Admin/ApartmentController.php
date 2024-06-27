@@ -39,11 +39,10 @@ class ApartmentController extends Controller
 
         $newApartment = new Apartment();
         $newApartment->fill($formData);
-<<<<<<< HEAD
+
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->id_user=7;
-=======
->>>>>>> 2eb52efeae78b368e7eeb27b4b9b1a27dd86d2e3
+
         $newApartment->save();
 
         return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');
