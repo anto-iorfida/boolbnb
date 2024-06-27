@@ -22,7 +22,6 @@
 
     <form action="{{ route('admin.apartments.store') }}" method="POST">
         @csrf
-<<<<<<< HEAD
         <div class="mb-3">
             <label for="id_user" class="form-label">ID Utente</label>
             <input type="number" class="form-control @error('id_user') is-invalid @enderror" id="id_user" name="id_user" value="{{ old('id_user') }}">
@@ -37,17 +36,6 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
-=======
-
-        <div class="mb-3">
-            <label for="title" class="form-label">Titolo</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}">
-        </div>
-        {{-- @error('name')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-
->>>>>>> 3e571e4076ae58c8dc5ff4b04ebbf984628c801d
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
@@ -69,7 +57,6 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
-<<<<<<< HEAD
         <div class="mb-3">
             <label for="number_baths" class="form-label">Numero di Bagni</label>
             <input type="number" class="form-control @error('number_baths') is-invalid @enderror" id="number_baths" name="number_baths" value="{{ old('number_baths') }}">
@@ -130,14 +117,6 @@
             @enderror
         </div>
         <button type="submit" class="btn btn-primary">Crea Appartamento</button>
-=======
-        @error('summary')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror --}}
-
-        <button type="submit" class="btn btn-primary">Salva</button>
-        <a href="{{ route('admin.apartments.index') }}" class="btn btn-primary">Indietro</a>
->>>>>>> 3e571e4076ae58c8dc5ff4b04ebbf984628c801d
     </form>
 </div>
 @endsection
