@@ -23,6 +23,7 @@
                                             </div>
                                         </div>
                                         <div class="col-8">
+                                            <h3 class="text-center">Welcome</h3>
                                             <div class="mb-4 row">
                                                   <div class=" col-md-12 d-flex justify-content-center">
                                                     <input id="name" type="text"
@@ -85,7 +86,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="mb-4 row">
+                                            <div class="mb-5 row">
                                                 <div class=" col-md-12 d-flex justify-content-center">
                                                     <input id="password-confirm" type="password" class="form-control"
                                                         name="password_confirmation" required autocomplete="new-password"
