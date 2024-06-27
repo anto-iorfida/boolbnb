@@ -20,7 +20,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::middleware(['auth', 'verified'])
+    ->name('admin.')
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment']);
+    });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,21 +34,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-Route::middleware(['auth', 'verified'])
-
-
-    ->name('admin.') // nome delle rotte
-
-
-    ->prefix('admin') //nome che si aggiungono allinizio dell'url 
-
-
-    ->group(function () {
-
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-        Route::resource('apartments', ApartmentController::class) ->parameters(['apartments'=>'apartment:slug']);
-        
-    });
 require __DIR__ . '/auth.php';
