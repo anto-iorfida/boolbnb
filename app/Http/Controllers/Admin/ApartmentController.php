@@ -14,9 +14,10 @@ use App\Models\Sponsor;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+
 class ApartmentController extends Controller
 {
-    public function index()
+    public function index() //----------------------------------------------------------------------------------------------------------------------------------
     {
         $userId = Auth::id();
 
@@ -25,12 +26,13 @@ class ApartmentController extends Controller
         return view('admin.apartments.index', compact('apartments'));
     }
 
-    public function create()
+    public function create(Service $services) //----------------------------------------------------------------------------------------------------------------------------------
     {
-        return view('admin.apartments.create');
+        $services = Service::all();
+        return view('admin.apartments.create', compact('services'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request) //---------------------------------------------------------------------------------------------------------------------
     {
         $validatedData = $this->validation($request->all());
         $slug = Str::slug($validatedData['title'], '-');
@@ -38,6 +40,8 @@ class ApartmentController extends Controller
         $validatedData['slug'] = $slug;
 
         $formData = $validatedData;
+
+
         if ($request->hasFile('thumb')) {
             $img_path = Storage::disk('public')->put('apartment_images', $formData['thumb']);
             $formData['thumb'] = $img_path;
@@ -48,13 +52,24 @@ class ApartmentController extends Controller
 
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->id_user = Auth::id();
-
+        // dd($request->all());
         $newApartment->save();
+
+        // "Attaccare" i services scelti dall'utente all'appartamento creato
+        // if ($request->has('services')) {
+        //     $newApartment->services()->attach($validatedData['services']);
+        // }
+        if($request->has('services')) {
+            $newApartment->services()->attach($formData['services']);
+        } else {
+            $newApartment->services()->detach();
+        }
+
 
         return redirect()->route('admin.apartments.show', $newApartment->slug)->with('message', $newApartment->title . ' successfully created.');
     }
 
-    public function show(Apartment $apartment,Sponsor $sponsor, Request $request)//----------------------------------------------------------------------------
+    public function show(Apartment $apartment, Sponsor $sponsor, Request $request) //----------------------------------------------------------------------------
     {
         $sponsor = Sponsor::all();
         $ipAddress = $request->ip();
@@ -78,18 +93,18 @@ class ApartmentController extends Controller
             $request->session()->put($viewKey, true);
         }
 
-        return view('admin.apartments.show', compact('apartment','sponsor'));
+        return view('admin.apartments.show', compact('apartment', 'sponsor'));
     }
 
-    public function edit(Apartment $apartment)
+    public function edit(Apartment $apartment) //--------------------------------------------------------------------------------------------------------------------
     {
 
         return view('admin.apartments.edit', compact('apartment'));
     }
 
-    public function update(Request $request, Apartment $apartment)
+    public function update(Request $request, Apartment $apartment) //----------------------------------------------------------------------------------------------
     {
-           $request->validate(
+        $request->validate(
             [
                 'title' => [
                     'required',
@@ -108,7 +123,8 @@ class ApartmentController extends Controller
                 'latitude' => 'required|numeric|between:-90,90',
                 'price' => 'required|numeric',
                 'visibility' => 'required|boolean',
-            ], [
+            ],
+            [
                 'title.required' => 'Il campo titolo è obbligatorio',
                 'description.required' => 'Il campo descrizione è obbligatorio',
                 'number_rooms.required' => 'Il campo numero di stanze è obbligatorio',
@@ -126,6 +142,7 @@ class ApartmentController extends Controller
             ]
         );
         $formData = $request->all();
+
         if ($request->hasFile('thumb')) {
             if ($apartment->thumb) {
                 Storage::disk('public')->delete($apartment->thumb);
