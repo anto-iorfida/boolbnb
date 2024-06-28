@@ -13,6 +13,7 @@
                                 <th>Indirizzo</th>
                                 <th>Prezzo</th>
                                 <th>Visibilità</th>
+                                <th>Visualizzazioni</th>
                                 <th>Azioni</th>
                             </tr>
                         </thead>
@@ -24,6 +25,7 @@
                                     <td>{{ $apartment->address }}</td>
                                     <td>{{ $apartment->price }}</td>
                                     <td>{{ $apartment->visibility_text }}</td>
+                                    <td>{{ $apartment->views_count }}</td>
                                     <td>
                                         <div class="d-flex gap-3">
                                             <a href="{{ route('admin.apartments.show', ['apartment' => $apartment->slug]) }}"
