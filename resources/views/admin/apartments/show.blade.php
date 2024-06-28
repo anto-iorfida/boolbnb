@@ -21,7 +21,7 @@
         @endif
         <div class="card-body">
             <h2 class="card-title mb-4">Titolo: {{ $apartment->title }}</h2>
-            <div class="container p-5">
+            <div class="container">
 
                 <div class="row">
                     <div class="col">
