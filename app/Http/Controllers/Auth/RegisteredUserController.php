@@ -44,8 +44,6 @@ class RegisteredUserController extends Controller
             'date_birth' => $request->date_birth,
         ]);
 
-        dd($user);
-
         event(new Registered($user));
 
         Auth::login($user);

@@ -45,9 +45,11 @@ class ApartmentController extends Controller
         $newApartment->fill($formData);
 
         $newApartment->slug = Str::slug($newApartment->title, '-');
-        $newApartment->id_user = Auth::id();
+        $newApartment->id_user= Auth::id();
+
         $newApartment->save();
-        return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');
+
+        return redirect()->route('admin.apartments.show', $newApartment->slug)->with('message', $newApartment->title . ' successfully created.');
     }
 
     public function show(Apartment $apartment, Request $request)
@@ -76,13 +78,13 @@ class ApartmentController extends Controller
         return view('admin.apartments.show', compact('apartment'));
     }
 
-    public function edit($id)
+    public function edit(Apartment $apartment)
     {
-        $apartment = Apartment::findOrFail($id);
+       
         return view('admin.apartments.edit', compact('apartment'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Apartment $apartment)
     {
         $validatedData = $this->validation($request->all());
         $slug = Str::slug($validatedData['title'], '-');
@@ -90,7 +92,7 @@ class ApartmentController extends Controller
 
         $validatedData['slug'] = $slug;
 
-        $apartment = Apartment::findOrFail($id);
+        $apartment = Apartment::findOrFail($slug);
         $formData = $validatedData;
 
         if ($request->hasFile('thumb')) {
@@ -104,12 +106,11 @@ class ApartmentController extends Controller
 
         $apartment->update($formData);
 
-        return redirect()->route('admin.apartments.show', $apartment->id)->with('message', $apartment->title . ' successfully updated.');
+        return redirect()->route('admin.apartments.show', $apartment->slug)->with('message', $apartment->title . ' successfully updated.');
     }
 
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        $apartment = Apartment::findOrFail($id);
         $apartment->delete();
 
         return redirect()->route('admin.apartments.index')->with('apartment_deleted', 'Appartamento eliminato con successo!');
@@ -126,11 +127,12 @@ class ApartmentController extends Controller
                 'number_beds' => 'required|integer',
                 'number_baths' => 'nullable|integer',
                 'square_meters' => 'nullable|integer',
-                'thumb' => 'nullable|max:2048',
+                'thumb' => 'required|image|max:256',
                 'address' => 'required|string',
                 'longitude' => 'required|numeric|between:-180,180',
                 'latitude' => 'required|numeric|between:-90,90',
                 'price' => 'required|numeric',
+                'visibility' => 'required|boolean',
             ],
             [
                 'title.required' => 'Il campo titolo è obbligatorio',
@@ -143,8 +145,10 @@ class ApartmentController extends Controller
                 'latitude.required' => 'Il campo latitudine è obbligatorio',
                 'latitude.between' => 'Il campo latitudine deve essere compreso tra -90 e 90',
                 'price.required' => 'Il campo prezzo è obbligatorio',
-                'thumb.image' => 'Il file deve essere un\'immagine',
+                'thumb.required' => 'Il campo thumb è obbligatorio',
+                'thumb.image' => 'Il file deve essere un immagine',
                 'thumb.max' => 'L\'immagine non può superare i 2MB',
+                'visibility.required' => 'Il campo visibilità è obbligatorio',
             ]
         )->validate();
     }
