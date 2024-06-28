@@ -36,10 +36,11 @@
                 </div>
             @endif
 
-            <p><strong>Visualizzazioni:</strong> {{ $apartment->views_count }}</p>
-
             <div class="section mb-4">
                 <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <strong>Visualizzazioni:</strong> {{ $apartment->views_count }}
+                    </div>
                     <div class="col-md-6 mb-2">
                         <strong>Numero di Camere:</strong> {{ $apartment->number_rooms }}
                     </div>
@@ -72,7 +73,7 @@
                 <strong>Visibilità:</strong> {{ $apartment->visibility ? 'Visibile' : 'Non Visibile' }}
             </div>
 
-            <div class="card-footer d-flex justify-content-between">
+            <div class="mb-3 d-flex justify-content-between">
                 <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
                     <i class="fa-solid fa-arrow-left"></i> Indietro
                 </a>
