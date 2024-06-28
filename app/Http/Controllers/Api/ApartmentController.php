@@ -18,4 +18,23 @@ class ApartmentController extends Controller
             'result' => $apartments
         ]);
     }
+
+    public function show($slug)
+    {
+        $apartment = Apartment::where('slug', '=', $slug)->first();//aggiungere relazione
+
+        if ($apartment) {
+            $data = [
+                'success' => true,
+                'apartment' => $apartment
+            ];
+        } else {
+            $data = [
+                'success' => false,
+                'error' => 'No apartment found with this slug'
+            ];
+        }
+
+        return response()->json($data);
+    }
 }
