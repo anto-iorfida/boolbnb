@@ -64,10 +64,11 @@
                         <input type="number" class="form-control " id="square_meters" name="square_meters"
                             value="{{ $apartment->square_meters }}">
                     </div>
-                    <div class=" mb-3 col-12 ">
+                    <div class="mb-3 col-12">
                         <label for="address" class="form-label">Indirizzo</label>
                         <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
-                            name="address" value="{{ $apartment->address }}">
+                            name="address" value="{{ old('address') }}" autocomplete="off">
+                        <div id="addressSuggestions" class="list-group"></div>
                         @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
