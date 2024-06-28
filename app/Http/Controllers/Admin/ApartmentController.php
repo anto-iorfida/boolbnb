@@ -45,7 +45,9 @@ class ApartmentController extends Controller
 
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->id_user= Auth::id();
+
         $newApartment->save();
+
         return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');
     }
 
@@ -109,6 +111,7 @@ class ApartmentController extends Controller
                 'longitude' => 'required|numeric|between:-180,180',
                 'latitude' => 'required|numeric|between:-90,90',
                 'price' => 'required|numeric',
+                'visibility' => 'required|boolean',
             ],
             [
                 'title.required' => 'Il campo titolo è obbligatorio',
@@ -123,6 +126,7 @@ class ApartmentController extends Controller
                 'price.required' => 'Il campo prezzo è obbligatorio',
                 'thumb.image' => 'Il file deve essere un\'immagine',
                 'thumb.max' => 'L\'immagine non può superare i 2MB',
+                'visibility.required' => 'Il campo visibilità è obbligatorio',
             ]
         )->validate();
     }

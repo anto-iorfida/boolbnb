@@ -12,7 +12,7 @@
                                     @csrf
 
                                     <div class="row d-flex align-items-center">
-                                        <div class="col-4">
+                                        <div class="col-12 col-md-4">
                                             <div class="img-logo-register">
                                                 <img src="{{ Vite::asset('resources/img/logo-boolbnb.png') }}" class="img-fluid" alt="Logo Bool BnB" >
                                             </div>
@@ -22,7 +22,7 @@
                                                     <span class="color-bnb">BOOLBNB</span>
                                             </div>
                                         </div>
-                                        <div class="col-8">
+                                        <div class="col-12 col-md-8">
                                             <h3 class="text-center">Welcome</h3>
                                             <div class="mb-4 row">
                                                   <div class=" col-md-12 d-flex justify-content-center">
