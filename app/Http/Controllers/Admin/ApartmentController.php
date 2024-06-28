@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Apartment;
-
+use App\Models\View;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
-
 
 class ApartmentController extends Controller
 {
@@ -36,10 +36,11 @@ class ApartmentController extends Controller
         $validatedData['slug'] = $slug;
 
         $formData = $validatedData;
-        if($request->hasFile('thumb')){
-            $img_path = Storage::disk('public')->put('apartment_images',$formData['thumb']);
-            $formData['thumb']=$img_path;
-    }
+        if ($request->hasFile('thumb')) {
+            $img_path = Storage::disk('public')->put('apartment_images', $formData['thumb']);
+            $formData['thumb'] = $img_path;
+        }
+
         $newApartment = new Apartment();
         $newApartment->fill($formData);
 
@@ -51,8 +52,29 @@ class ApartmentController extends Controller
         return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');
     }
 
-    public function show(Apartment $apartment)
+    public function show(Apartment $apartment, Request $request)
     {
+        $ipAddress = $request->ip();
+        $currentDateTime = Carbon::now();
+        $viewKey = 'viewed_apartment_' . $apartment->id;
+
+        // Controlla se l'utente ha già visualizzato questo appartamento nelle ultime 24 ore
+        if (!$request->session()->has($viewKey)) {
+            // Registra una nuova visualizzazione
+            View::create([
+                'apartment_id' => $apartment->id,
+                'ip_address' => $ipAddress,
+                'date_time' => $currentDateTime,
+            ]);
+
+            // Incrementa il conteggio delle visualizzazioni nell'appartamento
+            $apartment->views_count = $apartment->views_count + 1;
+            $apartment->save();
+
+            // Memorizza nella sessione che l'utente ha visualizzato questo appartamento
+            $request->session()->put($viewKey, true);
+        }
+
         return view('admin.apartments.show', compact('apartment'));
     }
 
