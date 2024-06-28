@@ -146,7 +146,7 @@ class ApartmentController extends Controller
                 'latitude.between' => 'Il campo latitudine deve essere compreso tra -90 e 90',
                 'price.required' => 'Il campo prezzo è obbligatorio',
                 'thumb.required' => 'Il campo thumb è obbligatorio',
-                'thumb.image' => 'Il file deve essere un\'immagine',
+                'thumb.image' => 'Il file deve essere un immagine',
                 'thumb.max' => 'L\'immagine non può superare i 2MB',
                 'visibility.required' => 'Il campo visibilità è obbligatorio',
             ]
