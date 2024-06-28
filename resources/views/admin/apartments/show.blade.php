@@ -150,7 +150,7 @@
 
     </div>
 
-    <style>
+    {{-- <style>
         /* width */
         body::-webkit-scrollbar {
             width: 10px;
@@ -212,7 +212,7 @@
         .rounded {
             border-radius: 0.25rem;
         }
-    </style>
+    </style> --}}
 @endsection
 
 
