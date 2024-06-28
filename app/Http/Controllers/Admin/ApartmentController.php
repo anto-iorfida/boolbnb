@@ -213,4 +213,4 @@ class ApartmentController extends Controller
             ]
         )->validate();
     }
-}f
+}
