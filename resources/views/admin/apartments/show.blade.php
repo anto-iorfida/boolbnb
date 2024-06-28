@@ -9,16 +9,19 @@
         <div class="alert alert-success">Progetto modificato con successo!</div>
     @endif
 
-    <div class="card p-5 mb-2">
-        @if ($apartment->thumb)
-            <div class="mb-4">
-                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="img-fluid rounded-5">
-            </div>
-        @endif
-        <div class="card-body">
-            <h2 class="card-title mb-4">Titolo: {{ $apartment->title }}</h2>
+    <div class="container p-5">
 
-            <div class="section mb-4">
+        <div class="row">
+            <h1>{{ $apartment->title }}</h1>
+
+            @if ($apartment->thumb)
+                <div class="mt-2">
+                    <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}">
+                </div>
+            @endif
+
+
+            <div class="col">
                 <div class="mb-2">
                     <strong>Slug:</strong> {{ $apartment->slug }}
                 </div>
@@ -31,12 +34,13 @@
             </div>
 
             @if ($apartment->description)
-                <div class="section mb-4">
-                    <p><strong>Descrizione: </strong>{{ $apartment->description }}</p>
+                <div class="mb-2">
+                    <strong>Descrizione: </strong>
+                    <p>{{ $apartment->description }}</p>
                 </div>
             @endif
 
-            <div class="section mb-4">
+            <div class="mb-4">
                 <div class="row">
                     <div class="col-md-6 mb-2">
                         <strong>Visualizzazioni:</strong> {{ $apartment->views_count }}
@@ -56,8 +60,8 @@
                 </div>
             </div>
 
-            <div class="section mb-4">
-                <div class="mb-2">
+            <div class="mb-4">
+                <div class="pe-2">
                     <strong>Indirizzo:</strong> {{ $apartment->address }}
                 </div>
             </div>
@@ -65,15 +69,17 @@
             <!-- Mappa -->
             <div id="map" class="rounded mb-4"></div>
 
-            <div class="section mb-4">
+            <div class="me-2">
                 <strong>Prezzo:</strong> {{ number_format($apartment->price, 2) }} €
             </div>
 
-            <div class="section mb-4">
+            <div class="me-2">
                 <strong>Visibilità:</strong> {{ $apartment->visibility ? 'Visibile' : 'Non Visibile' }}
             </div>
 
-            <div class="mb-3 d-flex justify-content-between">
+            <!-- Mappa -->
+
+            <div class="d-flex justify-content-between my-4">
                 <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
                     <i class="fa-solid fa-arrow-left"></i> Indietro
                 </a>
@@ -81,12 +87,30 @@
                     <i class="fa-solid fa-pen-to-square"></i> Modifica
                 </a>
             </div>
+
         </div>
+
     </div>
 
     <style>
-        .card {
-            border-radius: 20px;
+        /* width */
+        body::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        body::-webkit-scrollbar-track {
+            background-color: #gray;
+        }
+
+        /* Handle */
+        body::-webkit-scrollbar-thumb {
+            background-color: gray;
+            border-radius: 6px;
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background-color: #0D6EFD;
         }
 
         .card-title {
@@ -132,6 +156,7 @@
         }
     </style>
 @endsection
+
 
 @section('scripts')
     <!-- Librerie di TomTom -->
