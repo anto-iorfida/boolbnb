@@ -54,4 +54,9 @@ class Apartment extends Model
     public function albums() {
         return $this->hasMany(Album::class);
     }
+
+    public function getVisibilityTextAttribute()
+    {
+        return $this->visibility ? 'visibile' : 'non visibile';
+    }
 }
