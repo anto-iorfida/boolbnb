@@ -49,7 +49,7 @@ class ApartmentController extends Controller
 
         $newApartment->save();
 
-        return redirect()->route('admin.apartments.show', $newApartment->id)->with('message', $newApartment->title . ' successfully created.');
+        return redirect()->route('admin.apartments.show', $newApartment->slug)->with('message', $newApartment->title . ' successfully created.');
     }
 
     public function show(Apartment $apartment, Request $request)
@@ -78,13 +78,13 @@ class ApartmentController extends Controller
         return view('admin.apartments.show', compact('apartment'));
     }
 
-    public function edit($id)
+    public function edit(Apartment $apartment)
     {
-        $apartment = Apartment::findOrFail($id);
+       
         return view('admin.apartments.edit', compact('apartment'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Apartment $apartment)
     {
         $validatedData = $this->validation($request->all());
         $slug = Str::slug($validatedData['title'], '-');
@@ -92,7 +92,7 @@ class ApartmentController extends Controller
 
         $validatedData['slug'] = $slug;
 
-        $apartment = Apartment::findOrFail($id);
+        $apartment = Apartment::findOrFail($slug);
         $formData = $validatedData;
 
         if ($request->hasFile('thumb')) {
@@ -106,7 +106,7 @@ class ApartmentController extends Controller
 
         $apartment->update($formData);
 
-        return redirect()->route('admin.apartments.show', $apartment->id)->with('message', $apartment->title . ' successfully updated.');
+        return redirect()->route('admin.apartments.show', $apartment->slug)->with('message', $apartment->title . ' successfully updated.');
     }
 
     public function destroy($id)
