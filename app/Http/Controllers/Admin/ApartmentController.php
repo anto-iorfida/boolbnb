@@ -59,12 +59,9 @@ class ApartmentController extends Controller
         // if ($request->has('services')) {
         //     $newApartment->services()->attach($validatedData['services']);
         // }
-        if($request->has('services')) {
-            $newApartment->services()->attach($formData['services']);
-        } else {
-            $newApartment->services()->detach();
+        if ($request->has('services')) {
+            $newApartment->services()->attach($validatedData['services']);
         }
-
 
         return redirect()->route('admin.apartments.show', $newApartment->slug)->with('message', $newApartment->title . ' successfully created.');
     }
@@ -123,6 +120,8 @@ class ApartmentController extends Controller
                 'latitude' => 'required|numeric|between:-90,90',
                 'price' => 'required|numeric',
                 'visibility' => 'required|boolean',
+                'services' => 'array',
+                'services.*' => 'integer|exists:services,id',
             ],
             [
                 'title.required' => 'Il campo titolo è obbligatorio',
@@ -139,6 +138,10 @@ class ApartmentController extends Controller
                 'thumb.image' => 'Il file deve essere un immagine',
                 'thumb.max' => 'L\'immagine non può superare i 2MB',
                 'visibility.required' => 'Il campo visibilità è obbligatorio',
+                'services.array' => 'I servizi devono essere un array',
+                'services.*.integer' => 'Il servizio deve essere un ID valido',
+                'services.*.exists' => 'Il servizio selezionato non esiste',
+
             ]
         );
         $formData = $request->all();
@@ -152,6 +155,12 @@ class ApartmentController extends Controller
         }
         $apartment->slug = Str::slug($formData['title'], '-');
         $apartment->update($formData);
+
+        if ($request->has('services')) {
+            $apartment->services()->sync($validatedData['services']);
+        } else {
+            $apartment->services()->detach();
+        }
 
         return redirect()->route('admin.apartments.show', $apartment->slug)->with('message', $apartment->title . ' successfully updated.');
     }
@@ -180,6 +189,8 @@ class ApartmentController extends Controller
                 'latitude' => 'required|numeric|between:-90,90',
                 'price' => 'required|numeric',
                 'visibility' => 'required|boolean',
+                'services' => 'array',
+                'services.*' => 'integer|exists:services,id',
             ],
             [
                 'title.required' => 'Il campo titolo è obbligatorio',
@@ -196,6 +207,9 @@ class ApartmentController extends Controller
                 'thumb.image' => 'Il file deve essere un immagine',
                 'thumb.max' => 'L\'immagine non può superare i 2MB',
                 'visibility.required' => 'Il campo visibilità è obbligatorio',
+                'services.array' => 'I servizi devono essere un array',
+                'services.*.integer' => 'Il servizio deve essere un ID valido',
+                'services.*.exists' => 'Il servizio selezionato non esiste',
             ]
         )->validate();
     }

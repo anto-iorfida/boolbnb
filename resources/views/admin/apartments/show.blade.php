@@ -25,15 +25,6 @@
     <div class="container p-5">
 
         <div class="row">
-            <h1>{{ $apartment->title }}</h1>
-
-            @if ($apartment->thumb)
-                <div class="mt-2">
-                    <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}">
-                </div>
-            @endif
-
-
             <div class="col">
                 <div class="mb-2">
                     <strong>Slug:</strong> {{ $apartment->slug }}
@@ -145,9 +136,6 @@
                     <i class="fa-solid fa-pen-to-square"></i> Modifica
                 </a>
             </div>
-
-        </div>
-
     </div>
 
     <style>

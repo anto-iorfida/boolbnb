@@ -1,16 +1,12 @@
 @extends('layouts.admin')
-
 @section('content')
-
     <div class="container py-3">
         <h2>Crea Nuovo Appartamento</h2>
-
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
-
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -20,7 +16,6 @@
                 </ul>
             </div>
         @endif
-
         <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row edit">
@@ -32,10 +27,8 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <div class="mb-3 mt-4">
                     <h5>Servizi</h5>
-
                     @foreach ($services as $service)
                         <div class="form-check">
                             <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox" name="services[]"
@@ -46,7 +39,6 @@
                         </div>
                     @endforeach
                 </div>
-
                 <div class="mb-3 col-12 col-md-6">
                     <label for="number_rooms" class="form-label">Numero di Stanze</label>
                     <input type="number" class="form-control @error('number_rooms') is-invalid @enderror" id="number_rooms"
@@ -120,12 +112,10 @@
             <!-- Hidden fields for latitude and longitude -->
             <input type="hidden" id="longitude" name="longitude" value="{{ old('longitude') }}">
             <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude') }}">
-
             <button type="submit" class="btn btn-primary mb-5">Crea Appartamento</button>
         </form>
     </div>
 @endsection
-
 @section('scripts')
     <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.21.0/maps/maps.css" />
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.21.0/maps/maps-web.min.js"></script>
