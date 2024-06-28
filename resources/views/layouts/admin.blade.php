@@ -93,6 +93,7 @@
     }
     .nav .nav-item a{
         color: white;
+        h
     }
 
     .nav .nav-item:hover{
