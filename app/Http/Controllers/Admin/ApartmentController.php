@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Apartment;
 use App\Models\View;
+use App\Models\Service;
+use App\Models\Sponsor;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -52,8 +54,9 @@ class ApartmentController extends Controller
         return redirect()->route('admin.apartments.show', $newApartment->slug)->with('message', $newApartment->title . ' successfully created.');
     }
 
-    public function show(Apartment $apartment, Request $request)
+    public function show(Apartment $apartment,Sponsor $sponsor, Request $request)//----------------------------------------------------------------------------
     {
+        $sponsor = Sponsor::all();
         $ipAddress = $request->ip();
         $currentDateTime = Carbon::now();
         $viewKey = 'viewed_apartment_' . $apartment->id;
@@ -75,7 +78,7 @@ class ApartmentController extends Controller
             $request->session()->put($viewKey, true);
         }
 
-        return view('admin.apartments.show', compact('apartment'));
+        return view('admin.apartments.show', compact('apartment','sponsor'));
     }
 
     public function edit(Apartment $apartment)

@@ -10,9 +10,14 @@
     @endif
 
     <div class="card p-5 mb-2">
-        @if ($apartment->thumb)
+        @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
             <div class="mb-4">
-                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="img-fluid rounded-5">
+                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}"
+                    class="img-fluid rounded-5">
+            </div>
+        @else
+            <div class="mb-4">
+                <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="img-fluid rounded-5">
             </div>
         @endif
         <div class="card-body">
@@ -27,6 +32,51 @@
                 </div>
                 <div class="mb-2">
                     <strong>Data di Modifica:</strong> {{ $apartment->updated_at->format('d/m/Y H:i') }}
+                </div>
+            </div>
+
+            <div class="section mb-4">
+                <div class="mb-2">
+                    <button>
+                        <i class="fa-solid fa-money-bill-trend-up"></i> Sponsorizza il tuo appartamento
+                    </button>
+                </div>
+                <div class="mb-2">
+                    <div class="d-flex d-none">
+
+                        @foreach ($sponsor as $singleSponsor)
+                                <div class="card text-center">
+                                    <div class="card-header">
+                                        {{$singleSponsor->name}}
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Prezzo : {{$singleSponsor->price}}</h5>
+                                        <p class="card-text">Durata : {{$singleSponsor->duration}} ore</p>
+                                        <a href="#" class="btn btn-primary">Attiva</a>
+                                    </div>
+                                    <div class="card-footer text-body-secondary">
+                                        
+                                    </div>
+                                </div>
+                        @endforeach
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="section mb-4">
+                <div class="mb-2">
+                    <strong>Servizi:</strong>
+                    <br />
+                    @if (count($apartment->services) > 0)
+                        @foreach ($apartment->services as $service)
+                            {{ $service->name }}@if (!$loop->last)
+                                ,
+                            @endif
+                        @endforeach
+                    @else
+                        none
+                    @endif
                 </div>
             </div>
 
