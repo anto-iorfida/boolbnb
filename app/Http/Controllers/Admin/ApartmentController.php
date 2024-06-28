@@ -13,7 +13,7 @@ use App\Models\Service;
 use App\Models\Sponsor;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-
+use Illuminate\Validation\Rule;
 class ApartmentController extends Controller
 {
     public function index()
@@ -47,7 +47,7 @@ class ApartmentController extends Controller
         $newApartment->fill($formData);
 
         $newApartment->slug = Str::slug($newApartment->title, '-');
-        $newApartment->id_user= Auth::id();
+        $newApartment->id_user = Auth::id();
 
         $newApartment->save();
 
@@ -83,30 +83,57 @@ class ApartmentController extends Controller
 
     public function edit(Apartment $apartment)
     {
-       
+
         return view('admin.apartments.edit', compact('apartment'));
     }
 
     public function update(Request $request, Apartment $apartment)
     {
-        $validatedData = $this->validation($request->all());
-        $slug = Str::slug($validatedData['title'], '-');
-        // $slug = $this->generateUniqueSlug($slug, $id);
-
-        $validatedData['slug'] = $slug;
-
-        $apartment = Apartment::findOrFail($slug);
-        $formData = $validatedData;
-
+           $request->validate(
+            [
+                'title' => [
+                    'required',
+                    'min:3',
+                    'max:255',
+                    Rule::unique('apartments')->ignore($apartment)
+                ],
+                'description' => 'required|string',
+                'number_rooms' => 'required|integer',
+                'number_beds' => 'required|integer',
+                'number_baths' => 'nullable|integer',
+                'square_meters' => 'nullable|integer',
+                'thumb' => 'required|image|max:256',
+                'address' => 'required|string',
+                'longitude' => 'required|numeric|between:-180,180',
+                'latitude' => 'required|numeric|between:-90,90',
+                'price' => 'required|numeric',
+                'visibility' => 'required|boolean',
+            ], [
+                'title.required' => 'Il campo titolo è obbligatorio',
+                'description.required' => 'Il campo descrizione è obbligatorio',
+                'number_rooms.required' => 'Il campo numero di stanze è obbligatorio',
+                'number_beds.required' => 'Il campo numero di letti è obbligatorio',
+                'address.required' => 'Il campo indirizzo è obbligatorio',
+                'longitude.required' => 'Il campo longitudine è obbligatorio',
+                'longitude.between' => 'Il campo longitudine deve essere compreso tra -180 e 180',
+                'latitude.required' => 'Il campo latitudine è obbligatorio',
+                'latitude.between' => 'Il campo latitudine deve essere compreso tra -90 e 90',
+                'price.required' => 'Il campo prezzo è obbligatorio',
+                'thumb.required' => 'Il campo thumb è obbligatorio',
+                'thumb.image' => 'Il file deve essere un immagine',
+                'thumb.max' => 'L\'immagine non può superare i 2MB',
+                'visibility.required' => 'Il campo visibilità è obbligatorio',
+            ]
+        );
+        $formData = $request->all();
         if ($request->hasFile('thumb')) {
             if ($apartment->thumb) {
                 Storage::disk('public')->delete($apartment->thumb);
             }
-
             $img_path = Storage::disk('public')->put('apartment_images', $request->file('thumb'));
             $formData['thumb'] = $img_path;
         }
-
+        $apartment->slug = Str::slug($formData['title'], '-');
         $apartment->update($formData);
 
         return redirect()->route('admin.apartments.show', $apartment->slug)->with('message', $apartment->title . ' successfully updated.');
