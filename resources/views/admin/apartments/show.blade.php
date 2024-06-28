@@ -42,7 +42,7 @@
                     </button>
                 </div>
                 <div class="mb-2">
-                    <div class="d-flex d-none">
+                    <div class="d-flex">
 
                         @foreach ($sponsor as $singleSponsor)
                                 <div class="card text-center">
