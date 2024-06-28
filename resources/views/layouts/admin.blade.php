@@ -25,10 +25,10 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body class="overflow-hidden">
+<body class="">
     <div id="app">
 
-        <header class="navbar sticky-top ms-bg-primary flex-md-nowrap shadow px-2">
+        <header class="navbar sticky-top ms-bg-primary flex-md-nowrap shadow px-2 pe-3">
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center" href="/">
                 <img class="ms-logo" src="{{ Vite::asset('resources/img/logo-dashboard.png') }}">
             </a>
@@ -38,9 +38,9 @@
             {{-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> --}}
             <div class="navbar-nav">
                 <div class="nav-item text-nowrap ms-2">
-                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    <a class="btn btn-primary rounded-pill ms-btn" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
+                       <i class="fa-solid fa-right-from-bracket"></i> {{ __('Logout') }}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
@@ -49,9 +49,9 @@
             </div>
         </header>
 
-        <div class="container-fluid vh-100">
+        <div class="container-fluid">
             <div class="row h-100">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-primary navbar-dark sidebar collapse vh-100">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-primary navbar-dark sidebar collapse position-fixed h-100">
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
@@ -76,7 +76,7 @@
                     </div>
                 </nav>
 
-                <main class="col-md-9 ms-sm-auto col-lg-10 p-0 vh-100 overflow-auto">
+                <main class="col-md-9 ms-sm-auto col-lg-10 p-0">
                     @yield('content')
                 </main>
             </div>
@@ -95,13 +95,20 @@
         color: white;
     }
 
- .nav .nav-item:hover{
-    background: white;
-    border-radius: 5px;
+    .nav .nav-item:hover{
+        background: white;
+        border-radius: 5px;
     }
     .nav .nav-item:hover a{
         color: black;
         font-size: 18px;
         transition: 0.8s;
     }
+
+    .ms-btn:hover {
+        background-color: #DA26AD;
+        border-color: #DA26AD;
+        color: black;
+    }
+
 </style>
