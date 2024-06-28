@@ -127,7 +127,7 @@ class ApartmentController extends Controller
                 'number_beds' => 'required|integer',
                 'number_baths' => 'nullable|integer',
                 'square_meters' => 'nullable|integer',
-                'thumb' => 'nullable|max:2048',
+                'thumb' => 'nullable|image|max:256',
                 'address' => 'required|string',
                 'longitude' => 'required|numeric|between:-180,180',
                 'latitude' => 'required|numeric|between:-90,90',

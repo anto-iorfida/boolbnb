@@ -4,7 +4,7 @@
     <main>
         <div class=" my-wrap pt-5">
             <div class="my-container-register">
-                <div class="row w-100  justify-content-center">
+                <div class="row   justify-content-center">
                     <div class="col-md-10">
                         <div class="card">
                             <div class="card-body">

@@ -35,7 +35,7 @@
                                                 <i class="fas fa-edit"></i> Modifica
                                             </a>
                                             <button type="button" class="btn btn-danger js-confirm-delete"
-                                                data-apartment-id="{{ $apartment->id }}"
+                                                data-apartment-id="{{ $apartment->slug }}"
                                                 data-apartment-title="{{ $apartment->title }}">
                                                 <i class="fas fa-trash"></i> Elimina
                                             </button>
