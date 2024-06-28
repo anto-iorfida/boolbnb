@@ -26,11 +26,11 @@
                                     <td>{{ $apartment->price }}</td>
                                     <td>
                                         <div class="d-flex gap-3">
-                                            <a href="{{ route('admin.apartments.show', ['apartment' => $apartment->id]) }}"
+                                            <a href="{{ route('admin.apartments.show', ['apartment' => $apartment->slug]) }}"
                                                 class="btn btn-success">
                                                 <i class="fas fa-eye"></i> Visualizza
                                             </a>
-                                            <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}"
+                                            <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}"
                                                 class="btn btn-warning">
                                                 <i class="fas fa-edit"></i> Modifica
                                             </a>

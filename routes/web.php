@@ -25,7 +25,7 @@ Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment']);
+        Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
     });
 
 Route::middleware('auth')->group(function () {
