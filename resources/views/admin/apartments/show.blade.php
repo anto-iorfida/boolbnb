@@ -150,6 +150,8 @@
                 </div>
             @endif
 
+            <p><strong>Visualizzazioni:</strong> {{ $apartment->views_count }}</p>
+
             <div class="section mb-4">
                 <div class="row">
                     <div class="col-md-6 mb-2">
@@ -259,14 +261,3 @@
         });
     </script>
 @endsection
-
-{{-- let center = [4, 44.4]
-const map = tt.map({
-key: "Vn26cA8knt28s10WBEWvAgWGRUf59mm"',
-container: "map",
-center: center,
-zoom: 10
-})
-map. on (' load', () => {
-new tt.Marker().setLngLat(center).addTo(map)
-} --}}
