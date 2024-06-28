@@ -1,16 +1,18 @@
 @extends('layouts.admin')
+
 @section('content')
     @if (session('apartments_create'))
-        <div class="mess-info">Progetto creato con successo!</div>
+        <div class="alert alert-success">Progetto creato con successo!</div>
     @endif
 
     @if (session('apartments_edit'))
-        <div class="mess-info">Progetto modificato con successo!</div>
+        <div class="alert alert-success">Progetto modificato con successo!</div>
     @endif
-    <div class="card mt-4">
+
+    <div class="card p-5 mb-2">
         @if ($apartment->thumb)
-            <div>
-                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}">
+            <div class="mb-4">
+                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="img-fluid rounded-5">
             </div>
         @endif
         <div class="card-body">
@@ -48,7 +50,7 @@
                         <strong>Numero di Bagni:</strong> {{ $apartment->number_baths ?? 'N/A' }}
                     </div>
                     <div class="col-md-6 mb-2">
-                        <strong>MQ2:</strong> {{ $apartment->square_meters ?? 'N/A' }}
+                        <strong>Metri Quadrati:</strong> {{ $apartment->square_meters ?? 'N/A' }}
                     </div>
                 </div>
             </div>
@@ -60,7 +62,7 @@
             </div>
 
             <!-- Mappa -->
-            <div id="map" style="height: 400px; width: 100%;"></div>
+            <div id="map" class="rounded mb-4"></div>
 
             <div class="section mb-4">
                 <strong>Prezzo:</strong> {{ number_format($apartment->price, 2) }} €
@@ -70,15 +72,15 @@
                 <strong>Visibilità:</strong> {{ $apartment->visibility ? 'Visibile' : 'Non Visibile' }}
             </div>
 
-        <div class="card-footer d-flex justify-content-between">
-            <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
-                <i class="fa-solid fa-arrow-left"></i> Indietro
-            </a>
-            <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}" class="btn btn-primary">
-                <i class="fa-solid fa-pen-to-square"></i> Modifica
-            </a>
+            <div class="card-footer d-flex justify-content-between">
+                <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Indietro
+                </a>
+                <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}" class="btn btn-primary">
+                    <i class="fa-solid fa-pen-to-square"></i> Modifica
+                </a>
+            </div>
         </div>
-    </div>
     </div>
 
     <style>
@@ -112,27 +114,40 @@
         #map {
             height: 400px;
             width: 100%;
+            border: 1px solid #dee2e6;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .rounded {
+            border-radius: 0.25rem;
         }
     </style>
 @endsection
 
 @section('scripts')
-    <!--librerie di TomTom -->
+    <!-- Librerie di TomTom -->
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
     <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css">
-    
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             tt.setProductInfo('Your App Name', 'Your App Version');
-    
+
             let map = tt.map({
                 key: 'tNdeH4PSEGzxLQ1CKK0HdCagLd1BsXSc',
                 container: 'map',
                 center: [{{ $apartment->longitude }}, {{ $apartment->latitude }}],
                 zoom: 15
             });
-    
+
             let marker = new tt.Marker()
                 .setLngLat([{{ $apartment->longitude }}, {{ $apartment->latitude }}])
                 .addTo(map);
