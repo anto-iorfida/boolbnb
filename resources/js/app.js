@@ -92,10 +92,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 //     funzione che fa comparirele card sponsor al click del botton in show----------------------------------------
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('toggleCardsButton').addEventListener('click', function () {
-        const cardsContainer = document.getElementById('cardsContainer');
-        cardsContainer.classList.toggle('d-none');
-    });
+document.getElementById('toggleCardsButton').addEventListener('click', function () {
+    const cardsContainer = document.getElementById('cardsContainer');
+    cardsContainer.classList.toggle('d-none');
 });
 //  ///funzione che fa comparirele card sponsor al click del botton in show----------------------------------------

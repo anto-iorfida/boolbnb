@@ -222,9 +222,5 @@
                 .addTo(map);
         });
 
-        document.getElementById('toggleCardsButton').addEventListener('click', function () {
-            const cardsContainer = document.getElementById('cardsContainer');
-            cardsContainer.classList.toggle('d-none');
-        });
     </script>
 @endsection
