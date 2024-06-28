@@ -57,12 +57,6 @@
                 <div class="mb-2">
                     <strong>Indirizzo:</strong> {{ $apartment->address }}
                 </div>
-                <div class="mb-2">
-                    <strong>Longitudine:</strong> {{ $apartment->longitude }}
-                </div>
-                <div class="mb-2">
-                    <strong>Latitudine:</strong> {{ $apartment->latitude }}
-                </div>
             </div>
 
             <!-- Mappa -->
@@ -75,7 +69,7 @@
             <div class="section mb-4">
                 <strong>Visibilità:</strong> {{ $apartment->visibility ? 'Visibile' : 'Non Visibile' }}
             </div>
-        </div>
+
         <div class="card-footer d-flex justify-content-between">
             <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
                 <i class="fa-solid fa-arrow-left"></i> Indietro
