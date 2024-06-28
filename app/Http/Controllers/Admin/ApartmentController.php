@@ -101,7 +101,7 @@ class ApartmentController extends Controller
 
     public function update(Request $request, Apartment $apartment) //----------------------------------------------------------------------------------------------
     {
-        $request->validate(
+        $validatedData = $request->validate(
             [
                 'title' => [
                     'required',
