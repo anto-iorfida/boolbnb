@@ -77,7 +77,7 @@
                 <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
                     <i class="fa-solid fa-arrow-left"></i> Indietro
                 </a>
-                <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->id]) }}" class="btn btn-primary">
+                <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}" class="btn btn-primary">
                     <i class="fa-solid fa-pen-to-square"></i> Modifica
                 </a>
             </div>
