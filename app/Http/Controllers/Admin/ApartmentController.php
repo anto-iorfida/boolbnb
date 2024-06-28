@@ -60,7 +60,7 @@ class ApartmentController extends Controller
         //     $newApartment->services()->attach($validatedData['services']);
         // }
         if($request->has('services')) {
-            $newApartment->services()->attach($formData['services']);
+            $newApartment->services()->sinch($validatedData['services']);
         } else {
             $newApartment->services()->detach();
         }
