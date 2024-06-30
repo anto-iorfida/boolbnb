@@ -49,8 +49,8 @@
             </div>
         </header>
 
-        <div class="container-fluid">
-            <div class="row h-100">
+        <div class="container-fluid ">
+            <div class="row h-100 ">
                 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-primary navbar-dark sidebar collapse position-fixed h-100">
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
@@ -76,7 +76,7 @@
                     </div>
                 </nav>
 
-                <main class="col-md-9 ms-sm-auto col-lg-10 p-0">
+                <main class="col-md-9 ms-sm-auto col-lg-10 p-0 bg-white">
                     @yield('content')
                 </main>
             </div>
