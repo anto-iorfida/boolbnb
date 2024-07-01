@@ -61,7 +61,7 @@
                             <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-body-secondary text-dark border-start border-primary border-3' : '' }}"
                                 href="{{ route('admin.dashboard') }}">
                                 <i class="fa-solid fa-house"></i>
-                                <small>Dashboard utente   @dump($users)</small>
+                                <small>Dashboard utente</small>
                             </a>
                         </li>
                         <li class="nav-item p-2">
