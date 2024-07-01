@@ -10,14 +10,20 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fontawesome 6 cdn -->
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css'
-        integrity='sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=='
-        crossorigin='anonymous' referrerpolicy='no-referrer' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+       
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+        crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    {{-- font awesome  --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @yield('scripts')
 
@@ -27,98 +33,129 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body class="">
-    <div id="app">
-
-        <header class="navbar sticky-top ms-bg-primary flex-md-nowrap shadow px-2 pe-3">
-            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center" href="/">
-                <img class="ms-logo" src="{{ Vite::asset('resources/img/logo-dashboard.png') }}">
-            </a>
-            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            {{-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> --}}
-            <div class="navbar-nav">
-                <div class="nav-item text-nowrap ms-2">
-                    <a class="btn btn-primary rounded-pill ms-btn" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                        <i class="fa-solid fa-right-from-bracket"></i> {{ __('Logout') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-                </div>
+<body>
+    {{-- |||||||||||||||||||||||||||||||  inizio header ||||||||||||||||||||||||||||||| --}}
+    <header class="sticky-top">
+        <nav class="navbar navbar-light bg-light p-3 ">
+            <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
+                <a class="navbar-brand" href="#">
+                    Simple Dashboard
+                </a>
+                <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse"
+                    data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </div>
-        </header>
+            <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+                {{-- \\\\\\\\\\\\\\\\\\\\ fare dropdown nuovo ///////////////////// --}}
+            </div>
+        </nav>
+    </header>
+    {{-- |||||||||||||||||||||||||||||||  fini header |||||||||||||||||||||||||||||| --}}
 
-        <div class="container-fluid ">
-            <div class="row h-100 ">
-                <nav id="sidebarMenu"
-                    class="col-md-3 col-lg-2 d-md-block bg-primary navbar-dark sidebar collapse position-fixed h-100">
-                    <div class="position-sticky pt-3">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
-                                    href="{{ route('admin.dashboard') }}">
-                                    <i class="fa-solid fa-gauge-high"></i> Dashboard Utente
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-light text-dark' : '' }}"
-                                    href="{{ route('admin.apartments.index') }}">
-                                    <i class="fa-regular fa-rectangle-list"></i> I tuoi appartamenti
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-light text-dark' : '' }}"
-                                    href="{{ route('admin.apartments.create') }}">
-                                    <i class="fa-solid fa-plus"></i> Inserisci un appartamento
-                                </a>
-                            </li>
+    <div class="container-fluid">
+        <div class="row">
+            {{-- |||||||||||||||||||||||||||||||  inizio sidebar ||||||||||||||||||||||||||||||| --}}
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
+                                href="{{ route('admin.dashboard') }}">
+                                <i class="fa-solid fa-house"></i>
+                                <span class="ml-2">Dashboard utente</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
+                                href="{{ route('admin.apartments.index') }}">
+                                <i class="fa-solid fa-building"></i>
+                                <span class="ml-2">I miei appartamenti</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
+                                href="{{ route('admin.apartments.create') }}">
+                                <i class="fa-solid fa-plus"></i>
+                                <span class="ml-2">Inserisci appartamento</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            {{-- |||||||||||||||||||||||||||||||  fine sidebar ||||||||||||||||||||||||||||||| --}}
 
-                        </ul>
-
-
-                    </div>
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Overview</li>
+                    </ol>
                 </nav>
 
-                <main class="col-md-9 ms-sm-auto col-lg-10 p-0 bg-white">
-                    @yield('content')
-                </main>
-            </div>
-        </div>
+                @yield('content')
 
+                <footer class="pt-5 d-flex justify-content-between ">
+                    <span>Copyright © 2019-2020 <a href="https://themesberg.com">Themesberg</a></span>
+                    <ul class="nav m-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" aria-current="page" href="#">Privacy Policy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="#">Terms and conditions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </footer>
+            </main>
+        </div>
     </div>
 </body>
 
 </html>
+
+
 <style>
-    .ms-bg-primary {
-        background-color: white;
+    main{
+         height:100%; 
+        }
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+        padding: 90px 0 0;
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+        z-index: 99;
     }
 
-    .nav .nav-item a {
-        color: white;
-        h
+    @media (max-width: 767.98px) {
+        .sidebar {
+            top: 11.5rem;
+            padding: 0;
+        }
     }
 
-    .nav .nav-item:hover {
-        background: white;
-        border-radius: 5px;
+    .navbar {
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .1);
     }
 
-    .nav .nav-item:hover a {
-        color: black;
-        font-size: 18px;
-        transition: 0.8s;
+    @media (min-width: 767.98px) {
+        .navbar {
+            top: 0;
+            position: sticky;
+            z-index: 999;
+        }
     }
 
-    .ms-btn:hover {
-        background-color: #DA26AD;
-        border-color: #DA26AD;
-        color: black;
+    .sidebar .nav-link {
+        color: #7d7979;
+    }
+
+    .sidebar .nav-link.active {
+        color: #0d6efd;
     }
 </style>
