@@ -73,8 +73,8 @@ class ApartmentController extends Controller
                 $newApartment->albums()->create(['image' => $img_path]);
             }
         }
-
-        return redirect()->route('admin.apartments.show', $newApartment->slug)->with('message', $newApartment->title . ' successfully created.');
+        session()->flash('apartments_create', true);
+        return redirect()->route('admin.apartments.show', $newApartment->slug);
     }
 
     public function show(Apartment $apartment, Sponsor $sponsor, Album $album, Request $request)
@@ -179,7 +179,8 @@ class ApartmentController extends Controller
             $apartment->services()->detach();
         }
 
-        return redirect()->route('admin.apartments.show', $apartment->slug)->with('message', $apartment->title . ' successfully updated.');
+        session()->flash('apartments_edit', true);
+        return redirect()->route('admin.apartments.show', $apartment->slug);
     }
 
 
@@ -187,7 +188,8 @@ class ApartmentController extends Controller
     {
         $apartment->delete();
 
-        return redirect()->route('admin.apartments.index')->with('apartment_deleted', 'Appartamento eliminato con successo!');
+        session()->flash('apartments_deleted', true);
+        return redirect()->route('admin.apartments.index');
     }
 
     private function validation($data)

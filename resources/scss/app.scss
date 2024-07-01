@@ -19,3 +19,20 @@ main{
 .ms-logo-header {
     height: 100%;
 }
+
+// ------------------------
+.mess-info {
+    position: absolute;
+    right: 100px;
+    top: 110px;
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 14px;
+    background: rgb(146, 245, 146);
+    transition: opacity 1s ease-in-out;
+}
+
+.mess-info.fade-out {
+    opacity: 0;
+}
+// ------------------------

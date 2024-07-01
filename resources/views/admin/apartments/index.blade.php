@@ -3,10 +3,13 @@
 @section('content')
    
     <h2 class="fs-4 text-secondary">I tuoi appartamenti</h2>
+    @if (session('apartments_deleted'))
+        <div class="mess-info">Progetto eliminato con successo!</div>
+    @endif
     <p>In questa pagina puoi visualizzare i tuoi appartamenti caricati su BoolB&B</p>
 
     <div class="row">
-        <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+        <div class="col-12 col-xl-9 mb-4 mb-lg-0">
             <div class="card">
                 <h5 class="card-header">Appartamenti inseriti</h5>
                 <div class="card-body">

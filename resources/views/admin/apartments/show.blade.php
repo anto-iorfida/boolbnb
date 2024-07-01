@@ -2,11 +2,11 @@
 
 @section('content')
     @if (session('apartments_create'))
-        <div class="alert alert-success">Progetto creato con successo!</div>
+        <div class="mess-info">Progetto creato con successo!</div>
     @endif
 
     @if (session('apartments_edit'))
-        <div class="alert alert-success">Progetto modificato con successo!</div>
+        <div class="mess-info">Progetto modificato con successo!</div>
     @endif
 
     <div class="card p-5 mb-2">

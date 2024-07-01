@@ -83,7 +83,7 @@
                             </a>
                         </li>
                         <li class="nav-item p-2">
-                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index'  ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
                                 href="{{ route('admin.apartments.index') }}">
                                 <i class="fa-solid fa-building"></i>
                                 <small>I miei appartamenti</small>

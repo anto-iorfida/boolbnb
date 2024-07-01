@@ -97,3 +97,12 @@ document.getElementById('toggleCardsButton').addEventListener('click', function 
     cardsContainer.classList.toggle('d-none');
 });
 //  ///funzione che fa comparirele card sponsor al click del botton in show----------------------------------------
+// -------------------------------------------FAR COMPARIRE PER 4 SECONDI MESSAGGIO SESSIONE------------------------------
+// messaggio che compare per 3 secondi con conferma eliminazione 
+setTimeout(function () {
+    let messageElement = document.querySelector('.mess-info');
+    if (messageElement) {
+        messageElement.classList.add('fade-out');
+    }
+}, 3000); //  3 secondi
+// ------------------------------------------/FAR COMPARIRE PER 4 SECONDI MESSAGGIO SESSIONE------------------------------
