@@ -32,18 +32,7 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="mb-3 mt-4">
-                    <h5>Servizi *</h5>
-                    @foreach ($services as $service)
-                        <div class="form-check">
-                            <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox" name="services[]"
-                                value="{{ $service->id }}" id="service-{{ $service->id }}">
-                            <label class="form-check-label" for="service-{{ $service->id }}">
-                                {{ $service->name }}
-                            </label>
-                        </div>
-                    @endforeach
-                </div>
+                
                 <div class="mb-3 col-12 col-md-6">
                     <label for="number_rooms" class="form-label"><strong>Numero di Stanze *</strong></label>
                     <input type="number" class="form-control @error('number_rooms') is-invalid @enderror" id="number_rooms"
@@ -78,14 +67,15 @@
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong>Immagine copertina
-                        appartamento *</strong></label>
+                            appartamento *</strong></label>
                     <input class="form-control" type="file" id="thumb" name="thumb">
                     @error('thumb')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="images" class="form-label @error('images') is-invalid @enderror">Altre Immagini dell'appartamento</label>
+                    <label for="images" class="form-label @error('images') is-invalid @enderror">Altre Immagini
+                        dell'appartamento</label>
                     <input class="form-control" type="file" id="images" name="images[]" multiple>
                     @error('images')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -115,6 +105,22 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <div class="mb-3 mt-4">
+                    <label for="checkbox"><strong>Servizi *</strong></label>
+                    <div class="row mb-3 mt-3 p-3">
+                        @foreach ($services as $service)
+                            <div class="form-check col-6">
+                                <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox"
+                                    name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                                <label class="form-check-label" for="service-{{ $service->id }}">
+                                    {{ $service->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
                 <div class="mb-3 col-12 col-md-6">
                     <label for="visibility" class="form-label"><strong>Visibilità *</strong></label>
                     <select class="form-control @error('visibility') is-invalid @enderror" id="visibility"
