@@ -117,11 +117,29 @@
 
 
 <style>
+    /* width */
+    body::-webkit-scrollbar {
+        width: 10px;
+    }
 
+    /* Track */
+    body::-webkit-scrollbar-track {
+        background-color: #gray;
+    }
+
+    /* Handle */
+    body::-webkit-scrollbar-thumb {
+        background-color: gray;
+        border-radius: 6px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+        background-color: #0D6EFD;
+    }
 
     main {
         height: 100%;
-        
+
     }
 
     .sidebar {
