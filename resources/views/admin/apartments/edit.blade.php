@@ -58,7 +58,7 @@
                     </div>
 
                     <div class=" mb-3 col-12 ">
-                        <label for="number_baths" class="form-label"><strong>Numero di Bagni *</strong></label>
+                        <label for="number_baths" class="form-label"><strong>Numero di Bagni </strong></label>
                         <input type="number" class="form-control " id="number_baths" name="number_baths"
                             value="{{ $apartment->number_baths }}" min="0">
                         @error('number_baths')
@@ -67,7 +67,7 @@
                     </div>
 
                     <div class=" mb-3 col-12 ">
-                        <label for="square_meters" class="form-label"><strong>Metri Quadrati *</strong></label>
+                        <label for="square_meters" class="form-label"><strong>Metri Quadrati </strong></label>
                         <input type="number" class="form-control " id="square_meters" name="square_meters"
                             value="{{ $apartment->square_meters }}" min="0">
                         @error('square_meters')
@@ -149,22 +149,26 @@
 
                 <div class="mb-3 mt-4">
                     <h5>Servizi</h5>
-        
-                    @foreach ($services as $service)
-                        <div class="form-check">
-                            @if ($errors->any())
-                                {{-- Se cis sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}
-                                <input class="form-check-input" @checked(in_array($service->id, old('services', []))) type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
-                            @else
-                                {{-- Altrimenti vuol dire che stiamo caricando la pagina per la prima volta quindi controlliamo la presenza del service nella collection che ci arriva dal db --}}
-                                <input class="form-check-input" @checked($apartment->services->contains($service)) type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
-                            @endif
-                            
-                            <label class="form-check-label" for="service-{{ $service->id }}">
-                            {{ $service->name }}
-                            </label>
-                        </div>
-                    @endforeach
+                    <div class="row mb-3 mt-3 p-3">
+                        @foreach ($services as $service)
+                            <div class="form-check col-6 ">
+                                @if ($errors->any())
+                                    {{-- Se cis sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}
+                                    <input class="form-check-input" @checked(in_array($service->id, old('services', []))) type="checkbox"
+                                        name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                                @else
+                                    {{-- Altrimenti vuol dire che stiamo caricando la pagina per la prima volta quindi controlliamo la presenza del service nella collection che ci arriva dal db --}}
+                                    <input class="form-check-input" @checked($apartment->services->contains($service)) type="checkbox"
+                                        name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                                @endif
+
+                                <label class="form-check-label" for="service-{{ $service->id }}">
+                                    {{ $service->name }}
+                                </label>
+                            </div>
+                        @endforeach
+
+                    </div>
                 </div>
 
                 <input type="hidden" id="longitude" name="longitude" value="{{ $apartment->longitude }}">

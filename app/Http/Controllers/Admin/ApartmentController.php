@@ -35,13 +35,13 @@ class ApartmentController extends Controller
 
     public function store(Request $request) //---------------------------------------------------------------------------------------------------------------------
     {
+        // dd($request->all());
         $validatedData = $this->validation($request->all());
         $slug = Str::slug($validatedData['title'], '-');
 
         $validatedData['slug'] = $slug;
 
         $formData = $validatedData;
-
 
         if ($request->hasFile('thumb')) {
             $img_path = Storage::disk('public')->put('apartment_images', $formData['thumb']);
@@ -201,8 +201,8 @@ class ApartmentController extends Controller
                 'description' => 'required|string',
                 'number_rooms' => 'required|integer|min:1',
                 'number_beds' => 'required|integer|min:1',
-                'number_baths' => 'required|integer|min:1',
-                'square_meters' => 'required|integer|min:0',
+                'number_baths' => 'nullable|integer|min:1',
+                'square_meters' => 'nullable|integer|min:0',
                 'thumb' => 'required|image|max:256',
                 'address' => 'required|string',
                 'longitude' => 'required|numeric|between:-180,180',
@@ -217,6 +217,7 @@ class ApartmentController extends Controller
                 'description.required' => 'Il campo descrizione è obbligatorio',
                 'number_rooms.required' => 'Il campo numero di stanze è obbligatorio',
                 'number_beds.required' => 'Il campo numero di letti è obbligatorio',
+                'number_beds.min' => 'deve essere palmeno 1',
                 'number_baths.required' => 'Il campo numero di bagni è obbligatorio',
                 'square_meters.required' => 'Il campo metri quadri è obbligatorio',
                 'address.required' => 'Il campo indirizzo è obbligatorio',
