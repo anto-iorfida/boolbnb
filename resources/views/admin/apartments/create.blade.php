@@ -77,7 +77,6 @@
                     @enderror
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-
                     <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong> Immagine copertina
                         appartamento *</strong></label>
                     <input class="form-control" type="file" id="thumb" name="thumb">
