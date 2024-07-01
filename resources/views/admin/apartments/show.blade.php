@@ -12,13 +12,21 @@
     <div class="card p-5 mb-2">
         @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
             <div class="mb-4">
-                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="img-fluid rounded-5">
+                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="img-fluid rounded-4">
             </div>
         @else
             <div class="mb-4">
-                <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="img-fluid rounded-5">
+                <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="img-fluid rounded-4">
             </div>
         @endif
+        <div class="row">
+            @foreach($apartment->albums as $album)
+                <div class="col-md-4">
+                    <img src="{{ asset('storage/' . $album->image) }}" alt="Immagine appartamento" class="img-fluid rounded-4">
+                </div>
+            @endforeach
+        </div>
+        
         <div class="card-body">
             <h2 class="fs-4 text-secondary">Titolo: {{ $apartment->title }}</h2>
             <div class="container">
@@ -175,10 +183,6 @@
             max-width: 100%;
             height: auto;
         }
-
-        .rounded {
-            border-radius: 0.25rem;
-        } */
     </style>
 
 @endsection
