@@ -19,9 +19,9 @@
 
                     {{ __('You are logged in!') }}
 
-                    <div>Benvenuto 🤗{{ $user->name}}</div>
+                    <div>Benvenuto {{ $user->name}}</div>
 
-                    <p>Ti sei registrato correttamente con la email: {{ $user->email }}</p>
+                    <p>Ti sei registrato correttamente con la email: <strong>{{ $user->email }}</strong></p>
                 </div>
             </div>
         </div>

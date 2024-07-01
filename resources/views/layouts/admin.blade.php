@@ -57,25 +57,25 @@
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
+                        <li class="nav-item p-2">
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-body-secondary text-dark border-start border-primary border-3' : '' }}"
                                 href="{{ route('admin.dashboard') }}">
                                 <i class="fa-solid fa-house"></i>
-                                <span class="ml-2">Dashboard utente</span>
+                                <small>Dashboard utente</small>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
+                        <li class="nav-item p-2">
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-body-secondary text-dark border-start border-primary border-3' : '' }}"
                                 href="{{ route('admin.apartments.index') }}">
                                 <i class="fa-solid fa-building"></i>
-                                <span class="ml-2">I miei appartamenti</span>
+                                <small>I miei appartamenti</small>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
+                        <li class="nav-item p-2">
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-body-secondary text-dark border-start border-primary border-3' : '' }}"
                                 href="{{ route('admin.apartments.create') }}">
                                 <i class="fa-solid fa-plus"></i>
-                                <span class="ml-2">Inserisci appartamento</span>
+                                <small>Inserisci appartamento</small>
                             </a>
                         </li>
                     </ul>
@@ -93,21 +93,22 @@
 
                 @yield('content')
 
-                <footer class="pt-5 d-flex justify-content-between ">
-                    <span>Copyright © 2019-2020 <a href="https://themesberg.com">Themesberg</a></span>
+                <footer class="pt-5 d-flex justify-content-between">
+                    <span>Copyright © 2024-2025 <a href="/">BoolB&B</a></span>
                     <ul class="nav m-0">
                         <li class="nav-item">
                             <a class="nav-link text-secondary" aria-current="page" href="#">Privacy Policy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">Terms and conditions</a>
+                            <a class="nav-link text-secondary" href="#">Termini e condizioni</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">Contact</a>
+                            <a class="nav-link text-secondary" href="#">Contatti</a>
                         </li>
                     </ul>
                 </footer>
             </main>
+
         </div>
     </div>
 </body>

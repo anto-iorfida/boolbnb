@@ -20,7 +20,7 @@
             </div>
         @endif
         <div class="card-body">
-            <h2 class="card-title mb-4">Titolo: {{ $apartment->title }}</h2>
+            <h2 class="fs-4 text-secondary">Titolo: {{ $apartment->title }}</h2>
             <div class="container">
 
                 <div class="row">
