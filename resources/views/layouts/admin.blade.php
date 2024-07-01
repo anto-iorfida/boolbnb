@@ -32,7 +32,7 @@
 </head>
 
 <body>
-    {{-- |||||||||||||||||||||||||||||||  inizio header ||||||||||||||||||||||||||||||| --}}
+    {{-- ||||||||||||||||||||||||||||||||  inizio header ||||||||||||||||||||||||||||||| --}}
     <header class="sticky-top ms-bg-header">
         <nav class="navbar navbar-light p-3">
             <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
