@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 
@@ -11,7 +12,7 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::all();
+        $apartments = Apartment::with('services')->paginate(3);
 
         return response()->json([
             'success' => true,
@@ -21,7 +22,7 @@ class ApartmentController extends Controller
 
     public function show($slug)
     {
-        $apartment = Apartment::where('slug', '=', $slug)->first();//aggiungere relazione
+        $apartment = Apartment::where('slug', '=', $slug)->with('services')->first();
 
         if ($apartment) {
             $data = [
