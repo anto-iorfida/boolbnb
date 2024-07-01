@@ -82,9 +82,6 @@
                         appartamento *</strong></label>
                     <input class="form-control" type="file" id="thumb" name="thumb">
 
-                    <label for="thumb" class="form-label @error('thumb') is-invalid @enderror">Immagine copertina appartamento</label>
-                    <input class="form-control" type="file" id="thumb" name="thumb"
-                        value="{{ old('thumb') }}">
                     @error('thumb')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
