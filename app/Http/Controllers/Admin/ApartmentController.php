@@ -99,7 +99,7 @@ class ApartmentController extends Controller
         return view('admin.apartments.edit', compact('apartment'));
     }
 
-    public function update(Request $request, Apartment $apartment) //----------------------------------------------------------------------------------------------
+    public function update(Request $request, Apartment $apartment)
     {
         $validatedData = $request->validate(
             [
@@ -110,15 +110,15 @@ class ApartmentController extends Controller
                     Rule::unique('apartments')->ignore($apartment)
                 ],
                 'description' => 'required|string',
-                'number_rooms' => 'required|integer',
-                'number_beds' => 'required|integer',
-                'number_baths' => 'nullable|integer',
-                'square_meters' => 'nullable|integer',
+                'number_rooms' => 'required|integer|min:0',
+                'number_beds' => 'required|integer|min:0',
+                'number_baths' => 'required|integer|min:0',
+                'square_meters' => 'required|integer|min:0',
                 'thumb' => 'required|image|max:256',
                 'address' => 'required|string',
                 'longitude' => 'required|numeric|between:-180,180',
                 'latitude' => 'required|numeric|between:-90,90',
-                'price' => 'required|numeric',
+                'price' => 'required|numeric|min:0',
                 'visibility' => 'required|boolean',
                 'services' => 'array',
                 'services.*' => 'integer|exists:services,id',
@@ -128,6 +128,8 @@ class ApartmentController extends Controller
                 'description.required' => 'Il campo descrizione è obbligatorio',
                 'number_rooms.required' => 'Il campo numero di stanze è obbligatorio',
                 'number_beds.required' => 'Il campo numero di letti è obbligatorio',
+                'number_baths.required' => 'Il campo numero di bagni è obbligatorio',
+                'square_meters.required' => 'Il campo metri quadri è obbligatorio',
                 'address.required' => 'Il campo indirizzo è obbligatorio',
                 'longitude.required' => 'Il campo longitudine è obbligatorio',
                 'longitude.between' => 'Il campo longitudine deve essere compreso tra -180 e 180',
@@ -136,14 +138,14 @@ class ApartmentController extends Controller
                 'price.required' => 'Il campo prezzo è obbligatorio',
                 'thumb.required' => 'Il campo thumb è obbligatorio',
                 'thumb.image' => 'Il file deve essere un immagine',
-                'thumb.max' => 'L\'immagine non può superare i 2MB',
+                'thumb.max' => 'L\'immagine non può superare i 256KB',
                 'visibility.required' => 'Il campo visibilità è obbligatorio',
                 'services.array' => 'I servizi devono essere un array',
                 'services.*.integer' => 'Il servizio deve essere un ID valido',
                 'services.*.exists' => 'Il servizio selezionato non esiste',
-
             ]
         );
+
         $formData = $request->all();
 
         if ($request->hasFile('thumb')) {
@@ -153,6 +155,7 @@ class ApartmentController extends Controller
             $img_path = Storage::disk('public')->put('apartment_images', $request->file('thumb'));
             $formData['thumb'] = $img_path;
         }
+
         $apartment->slug = Str::slug($formData['title'], '-');
         $apartment->update($formData);
 
@@ -164,6 +167,7 @@ class ApartmentController extends Controller
 
         return redirect()->route('admin.apartments.show', $apartment->slug)->with('message', $apartment->title . ' successfully updated.');
     }
+
 
     public function destroy(Apartment $apartment)
     {
@@ -179,15 +183,15 @@ class ApartmentController extends Controller
             [
                 'title' => 'required|string|max:255',
                 'description' => 'required|string',
-                'number_rooms' => 'required|integer',
-                'number_beds' => 'required|integer',
-                'number_baths' => 'nullable|integer',
-                'square_meters' => 'nullable|integer',
+                'number_rooms' => 'required|integer|min:0',
+                'number_beds' => 'required|integer|min:0',
+                'number_baths' => 'required|integer|min:0',
+                'square_meters' => 'required|integer|min:0',
                 'thumb' => 'required|image|max:256',
                 'address' => 'required|string',
                 'longitude' => 'required|numeric|between:-180,180',
                 'latitude' => 'required|numeric|between:-90,90',
-                'price' => 'required|numeric',
+                'price' => 'required|numeric|min:0',
                 'visibility' => 'required|boolean',
                 'services' => 'array',
                 'services.*' => 'integer|exists:services,id',
@@ -197,6 +201,8 @@ class ApartmentController extends Controller
                 'description.required' => 'Il campo descrizione è obbligatorio',
                 'number_rooms.required' => 'Il campo numero di stanze è obbligatorio',
                 'number_beds.required' => 'Il campo numero di letti è obbligatorio',
+                'number_baths.required' => 'Il campo numero di bagni è obbligatorio',
+                'square_meters.required' => 'Il campo metri quadri è obbligatorio',
                 'address.required' => 'Il campo indirizzo è obbligatorio',
                 'longitude.required' => 'Il campo longitudine è obbligatorio',
                 'longitude.between' => 'Il campo longitudine deve essere compreso tra -180 e 180',
@@ -205,7 +211,7 @@ class ApartmentController extends Controller
                 'price.required' => 'Il campo prezzo è obbligatorio',
                 'thumb.required' => 'Il campo thumb è obbligatorio',
                 'thumb.image' => 'Il file deve essere un immagine',
-                'thumb.max' => 'L\'immagine non può superare i 2MB',
+                'thumb.max' => 'L\'immagine non può superare i 256KB',
                 'visibility.required' => 'Il campo visibilità è obbligatorio',
                 'services.array' => 'I servizi devono essere un array',
                 'services.*.integer' => 'Il servizio deve essere un ID valido',
