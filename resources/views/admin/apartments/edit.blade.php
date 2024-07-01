@@ -57,12 +57,18 @@
                         <label for="number_baths" class="form-label">Numero di Bagni</label>
                         <input type="number" class="form-control " id="number_baths" name="number_baths"
                             value="{{ $apartment->number_baths }}" min="0">
+                        @error('number_baths')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class=" mb-3 col-12 ">
                         <label for="square_meters" class="form-label">Metri Quadrati</label>
                         <input type="number" class="form-control " id="square_meters" name="square_meters"
                             value="{{ $apartment->square_meters }}" min="0">
+                        @error('square_meters')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3 col-12">
                         <label for="address" class="form-label">Indirizzo</label>
