@@ -2,7 +2,7 @@
 
 @section('content')
    
-    <h1 class="h2">I tuoi appartamenti</h1>
+    <h2 class="fs-4 text-secondary">I tuoi appartamenti</h2>
     <p>This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p>
 
     <div class="row">
