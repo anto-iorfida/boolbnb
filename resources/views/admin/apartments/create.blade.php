@@ -42,7 +42,7 @@
                 <div class="mb-3 col-12 col-md-6">
                     <label for="number_rooms" class="form-label">Numero di Stanze</label>
                     <input type="number" class="form-control @error('number_rooms') is-invalid @enderror" id="number_rooms"
-                        name="number_rooms" value="{{ old('number_rooms') }}">
+                        name="number_rooms" value="{{ old('number_rooms') }}" min="0">
                     @error('number_rooms')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -50,7 +50,7 @@
                 <div class="mb-3 col-12 col-md-6">
                     <label for="number_beds" class="form-label">Numero di Letti</label>
                     <input type="number" class="form-control @error('number_beds') is-invalid @enderror" id="number_beds"
-                        name="number_beds" value="{{ old('number_beds') }}">
+                        name="number_beds" value="{{ old('number_beds') }}" min="0">
                     @error('number_beds')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -58,17 +58,17 @@
                 <div class="mb-3 col-12 col-md-6">
                     <label for="number_baths" class="form-label">Numero di Bagni</label>
                     <input type="number" class="form-control" id="number_baths" name="number_baths"
-                        value="{{ old('number_baths') }}">
+                        value="{{ old('number_baths') }}" min="0">
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="square_meters" class="form-label">Metri Quadrati</label>
                     <input type="number" class="form-control " id="square_meters" name="square_meters"
-                        value="{{ old('square_meters') }}">
+                        value="{{ old('square_meters') }}" min="0">
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="thumb" class="form-label @error('thumb') is-invalid @enderror">Immagine copertina
-                        appartamento</label>
-                    <input class="form-control" type="file" id="thumb" name="thumb">
+                    <label for="thumb" class="form-label @error('thumb') is-invalid @enderror">Immagine copertina appartamento</label>
+                    <input class="form-control" type="file" id="thumb" name="thumb"
+                        value="{{ old('thumb') }}">
                     @error('thumb')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -85,7 +85,7 @@
                 <div class="mb-3 col-12 col-md-6">
                     <label for="price" class="form-label">Prezzo</label>
                     <input type="text" class="form-control @error('price') is-invalid @enderror" id="price"
-                        name="price" value="{{ old('price') }}">
+                        name="price" value="{{ old('price') }}" min="0">
                     @error('price')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
