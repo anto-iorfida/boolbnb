@@ -10,10 +10,10 @@
     @endif
 
     <div class="card p-5 mb-2">
-        <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
+        {{-- <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                @foreach($apartment->albums as $key => $album)
+                @foreach ($apartment->albums as $key => $album)
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key + 1 }}" aria-label="Slide {{ $key + 2 }}"></button>
                 @endforeach
             </div>
@@ -25,7 +25,7 @@
                         <img src="{{ $apartment->thumb }}" class="d-block w-100" alt="{{ $apartment->title }}">
                     @endif
                 </div>
-                @foreach($apartment->albums as $album)
+                @foreach ($apartment->albums as $album)
                     <div class="carousel-item">
                         <img src="{{ asset('storage/' . $album->image) }}" class="d-block w-100" alt="Immagine appartamento">
                     </div>
@@ -39,11 +39,34 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-        </div>
-        
+        </div> --}}
+
+
         <div class="card-body">
-            <h2 class="fs-4 text-secondary">Titolo: {{ $apartment->title }}</h2>
+            <h1 class="fs-4 text-secondary">Titolo: {{ $apartment->title }}</h1>
             <div class="container">
+
+                <div class=" p-5 mb-2">
+                    <h3>Immagine di copertina</h3>
+                    @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
+                        <div class="row col-12 mb-4 card d-block">
+                            <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}"
+                                class="img-fluid rounded-4">
+                        </div>
+                    @else
+                        <div class="mb-4 card">
+                            <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="img-fluid rounded-4">
+                        </div>
+                    @endif
+                    <div class="row">
+                        @foreach ($apartment->albums as $album)
+                            <div class="col-4 col-md-4 card d-inline">
+                                <img src="{{ asset('storage/' . $album->image) }}" alt="Immagine appartamento"
+                                    class="img-fluid rounded-4">
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
 
                 <div class="row mb-4">
                     <div class="col">
@@ -74,7 +97,7 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore</div>
-                                        <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>                                        
+                                        <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>
                                     </div>
                                     <div class="card-footer text-body-secondary">
                                         <a href="#" class="btn btn-success">Attiva</a>
@@ -91,7 +114,9 @@
                         <br />
                         @if (count($apartment->services) > 0)
                             @foreach ($apartment->services as $service)
-                                {{ $service->name }}@if (!$loop->last), @endif
+                                {{ $service->name }}@if (!$loop->last)
+                                    ,
+                                @endif
                             @endforeach
                         @else
                             nessuno
@@ -147,7 +172,8 @@
                     <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
                         <i class="fa-solid fa-arrow-left"></i> Indietro
                     </a>
-                    <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}" class="btn btn-primary">
+                    <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}"
+                        class="btn btn-primary">
                         <i class="fa-solid fa-pen-to-square"></i> Modifica
                     </a>
                 </div>
@@ -155,8 +181,7 @@
         </div>
     </div>
 
-<style>
-
+    <style>
         .card-title {
             font-size: 1.75rem;
             font-weight: bold;
@@ -222,6 +247,5 @@
                 .setLngLat([{{ $apartment->longitude }}, {{ $apartment->latitude }}])
                 .addTo(map);
         });
-
     </script>
 @endsection
