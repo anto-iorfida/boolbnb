@@ -11,6 +11,7 @@ use App\Models\Apartment;
 use App\Models\View;
 use App\Models\Service;
 use App\Models\Sponsor;
+use App\Models\Album;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -76,7 +77,7 @@ class ApartmentController extends Controller
         return redirect()->route('admin.apartments.show', $newApartment->slug)->with('message', $newApartment->title . ' successfully created.');
     }
 
-    public function show(Apartment $apartment, Sponsor $sponsor, Request $request) //----------------------------------------------------------------------------
+    public function show(Apartment $apartment, Sponsor $sponsor, Album $album, Request $request)
     {
         $sponsor = Sponsor::all();
         $ipAddress = $request->ip();
@@ -99,6 +100,9 @@ class ApartmentController extends Controller
             // Memorizza nella sessione che l'utente ha visualizzato questo appartamento
             $request->session()->put($viewKey, true);
         }
+
+        // Carica gli album relativi all'appartamento
+        $apartment->load('albums', 'services');
 
         return view('admin.apartments.show', compact('apartment', 'sponsor'));
     }
