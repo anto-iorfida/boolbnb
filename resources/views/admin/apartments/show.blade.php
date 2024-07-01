@@ -49,10 +49,10 @@
                 <div class=" p-5 mb-2 ">
 
                     @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
-                        <div class="col-12 mb-4 card d-block">
+                        <div class="col-12 mb-4 d-block">
                             <h3>Immagine di copertina</h3>
                             <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}"
-                                class="img-fluid rounded-4">
+                                class="img-fluid rounded-4" style="height: 600px;">
                         </div>
                     @else
                         <div class="mb-4 card">
@@ -61,7 +61,7 @@
                     @endif
                     <div class="row ">
                         @foreach ($apartment->albums as $album)
-                            <div class="col-4 col-md-4 card d-inline">
+                            <div class="col-4 col-md-4  d-inline">
                                 <img src="{{ asset('storage/' . $album->image) }}" alt="Immagine appartamento"
                                     class="img-fluid rounded-4">
                             </div>
