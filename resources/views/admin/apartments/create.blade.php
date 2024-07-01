@@ -59,11 +59,17 @@
                     <label for="number_baths" class="form-label">Numero di Bagni</label>
                     <input type="number" class="form-control" id="number_baths" name="number_baths"
                         value="{{ old('number_baths') }}" min="0">
+                    @error('number_baths')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="square_meters" class="form-label">Metri Quadrati</label>
                     <input type="number" class="form-control " id="square_meters" name="square_meters"
                         value="{{ old('square_meters') }}" min="0">
+                    @error('square_meters')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="thumb" class="form-label @error('thumb') is-invalid @enderror">Immagine copertina appartamento</label>
