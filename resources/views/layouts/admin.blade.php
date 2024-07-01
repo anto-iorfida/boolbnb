@@ -113,9 +113,11 @@
 
 </html>
 <style>
-    2
+ 
 
-    main{ height:100%; }
+    main{
+         height:100%; 
+        }
     .sidebar {
         position: fixed;
         top: 0;
@@ -147,7 +149,7 @@
     }
 
     .sidebar .nav-link {
-        color: #333;
+        color: #7d7979;
     }
 
     .sidebar .nav-link.active {
