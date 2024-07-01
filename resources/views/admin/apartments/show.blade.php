@@ -46,10 +46,11 @@
             <h1 class="fs-4 text-secondary">Titolo: {{ $apartment->title }}</h1>
             <div class="container">
 
-                <div class=" p-5 mb-2">
-                    <h3>Immagine di copertina</h3>
+                <div class=" p-5 mb-2 ">
+
                     @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
-                        <div class="row col-12 mb-4 card d-block">
+                        <div class="col-12 mb-4 card d-block">
+                            <h3>Immagine di copertina</h3>
                             <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}"
                                 class="img-fluid rounded-4">
                         </div>
@@ -58,7 +59,7 @@
                             <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="img-fluid rounded-4">
                         </div>
                     @endif
-                    <div class="row">
+                    <div class="row ">
                         @foreach ($apartment->albums as $album)
                             <div class="col-4 col-md-4 card d-inline">
                                 <img src="{{ asset('storage/' . $album->image) }}" alt="Immagine appartamento"
@@ -67,6 +68,8 @@
                         @endforeach
                     </div>
                 </div>
+
+
 
                 <div class="row mb-4">
                     <div class="col">
@@ -223,6 +226,16 @@
             max-width: 100%;
             height: auto;
         }
+
+        /* ---------------- */
+
+        .card img {
+            object-fit: cover;
+            height: auto;
+            width: 100%;
+        }
+
+        /* ---------------- */
     </style>
 
 @endsection
