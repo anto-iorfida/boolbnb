@@ -110,7 +110,7 @@
                     <div class="row mb-3 mt-3 p-3">
                         @foreach ($services as $service)
                             <div class="form-check col-6">
-                                <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox"
+                                <input @checked(in_array($service->id, old('services', []))) class="form-check-input @error('services') is-invalid @enderror" type="checkbox"
                                     name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
                                 <label class="form-check-label" for="service-{{ $service->id }}">
                                     {{ $service->name }}
@@ -118,7 +118,11 @@
                             </div>
                         @endforeach
                     </div>
+                    @error('services')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
+
 
                 <div class="mb-3 col-12 col-md-6">
                     <label for="visibility" class="form-label"><strong>Visibilità *</strong></label>

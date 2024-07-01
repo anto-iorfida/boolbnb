@@ -134,7 +134,7 @@ class ApartmentController extends Controller
                 'latitude' => 'required|numeric|between:-90,90',
                 'price' => 'required|numeric|min:0',
                 'visibility' => 'required|boolean',
-                'services' => 'array',
+                'services' => 'required|array|min:1',
                 'services.*' => 'integer|exists:services,id',
             ],
             [
@@ -142,26 +142,26 @@ class ApartmentController extends Controller
                 'description.required' => 'Il campo descrizione è obbligatorio',
                 'number_rooms.required' => 'Il campo numero di stanze è obbligatorio',
                 'number_beds.required' => 'Il campo numero di letti è obbligatorio',
-                // 'number_baths.required' => 'Il campo numero di bagni è obbligatorio',
-                // 'square_meters.required' => 'Il campo metri quadri è obbligatorio',
+                'number_baths.required' => 'Il campo numero di bagni è obbligatorio',
+                'square_meters.required' => 'Il campo metri quadri è obbligatorio',
                 'address.required' => 'Il campo indirizzo è obbligatorio',
                 'longitude.required' => 'Il campo longitudine è obbligatorio',
                 'longitude.between' => 'Il campo longitudine deve essere compreso tra -180 e 180',
                 'latitude.required' => 'Il campo latitudine è obbligatorio',
                 'latitude.between' => 'Il campo latitudine deve essere compreso tra -90 e 90',
                 'price.required' => 'Il campo prezzo è obbligatorio',
-                // 'thumb.required' => 'Il campo thumb è obbligatorio',
-                'thumb.image' => 'Il file deve essere un immagine',
+                'thumb.image' => 'Il file deve essere un\'immagine',
                 'thumb.max' => 'L\'immagine non può superare i 256KB',
                 'visibility.required' => 'Il campo visibilità è obbligatorio',
+                'services.required' => 'Seleziona almeno un servizio.',
                 'services.array' => 'I servizi devono essere un array',
                 'services.*.integer' => 'Il servizio deve essere un ID valido',
                 'services.*.exists' => 'Il servizio selezionato non esiste',
             ]
         );
-
+    
         $formData = $request->all();
-
+    
         if ($request->hasFile('thumb')) {
             if ($apartment->thumb) {
                 Storage::disk('public')->delete($apartment->thumb);
@@ -169,20 +169,20 @@ class ApartmentController extends Controller
             $img_path = Storage::disk('public')->put('apartment_images', $request->file('thumb'));
             $formData['thumb'] = $img_path;
         }
-
+    
         $apartment->slug = Str::slug($formData['title'], '-');
         $apartment->update($formData);
-
+    
         if ($request->has('services')) {
             $apartment->services()->sync($validatedData['services']);
         } else {
             $apartment->services()->detach();
         }
-
+    
         session()->flash('apartments_edit', true);
         return redirect()->route('admin.apartments.show', $apartment->slug);
     }
-
+    
 
     public function destroy(Apartment $apartment)
     {
@@ -209,7 +209,7 @@ class ApartmentController extends Controller
                 'latitude' => 'required|numeric|between:-90,90',
                 'price' => 'required|numeric|min:1',
                 'visibility' => 'required|boolean',
-                'services' => 'array',
+                'services' => 'required|array|min:1',
                 'services.*' => 'integer|exists:services,id',
             ],
             [
@@ -227,9 +227,10 @@ class ApartmentController extends Controller
                 'latitude.between' => 'Il campo latitudine deve essere compreso tra -90 e 90',
                 'price.required' => 'Il campo prezzo è obbligatorio',
                 'thumb.required' => 'Il campo thumb è obbligatorio',
-                'thumb.image' => 'Il file deve essere un immagine',
-                'thumb.max' => 'L\'immagine non può superare i 256KB',
+                'thumb.image' => 'Il file deve essere un\'immagine',
+                'thumb.max' => 'L\'immagine non può superare i 700KB',
                 'visibility.required' => 'Il campo visibilità è obbligatorio',
+                'services.required' => 'Seleziona almeno un servizio.',
                 'services.array' => 'I servizi devono essere un array',
                 'services.*.integer' => 'Il servizio deve essere un ID valido',
                 'services.*.exists' => 'Il servizio selezionato non esiste',
