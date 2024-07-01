@@ -10,28 +10,42 @@
     @endif
 
     <div class="card p-5 mb-2">
-        @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
-            <div class="mb-4">
-                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="img-fluid rounded-4">
+        <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                @foreach($apartment->albums as $key => $album)
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key + 1 }}" aria-label="Slide {{ $key + 2 }}"></button>
+                @endforeach
             </div>
-        @else
-            <div class="mb-4">
-                <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="img-fluid rounded-4">
-            </div>
-        @endif
-        <div class="row">
-            @foreach($apartment->albums as $album)
-                <div class="col-md-4">
-                    <img src="{{ asset('storage/' . $album->image) }}" alt="Immagine appartamento" class="img-fluid rounded-4">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
+                        <img src="{{ asset('storage/' . $apartment->thumb) }}" class="d-block w-100" alt="{{ $apartment->title }}">
+                    @else
+                        <img src="{{ $apartment->thumb }}" class="d-block w-100" alt="{{ $apartment->title }}">
+                    @endif
                 </div>
-            @endforeach
+                @foreach($apartment->albums as $album)
+                    <div class="carousel-item">
+                        <img src="{{ asset('storage/' . $album->image) }}" class="d-block w-100" alt="Immagine appartamento">
+                    </div>
+                @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
         
         <div class="card-body">
             <h2 class="fs-4 text-secondary">Titolo: {{ $apartment->title }}</h2>
             <div class="container">
 
-                <div class="row">
+                <div class="row mb-4">
                     <div class="col">
                         <div class="mb-2">
                             <strong>Slug:</strong> {{ $apartment->slug }}
@@ -56,14 +70,15 @@
                             @foreach ($sponsor as $singleSponsor)
                                 <div class="card text-center me-2 mb-2" style="min-width: 200px;">
                                     <div class="card-header">
-                                        {{ $singleSponsor->name }}
+                                        <strong>{{ $singleSponsor->name }}</strong>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Prezzo: {{ $singleSponsor->price }}</h5>
-                                        <p class="card-text">Durata: {{ $singleSponsor->duration }} ore</p>
-                                        <a href="#" class="btn btn-primary">Attiva</a>
+                                        <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore</div>
+                                        <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>                                        
                                     </div>
-                                    <div class="card-footer text-body-secondary"></div>
+                                    <div class="card-footer text-body-secondary">
+                                        <a href="#" class="btn btn-success">Attiva</a>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
