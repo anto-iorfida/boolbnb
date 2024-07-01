@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // ottenuto il valore corrente dell'input addressInput e lo assegna alla variabile query.
         const query = addressInput.value;
 
-        // controloo se la lunghezza del valore di input è maggiore di 2.
+        // controloo se la lunghezza del valore di input è maggiore di 0.
         if (query.length > 0) {
             // Esegue una richiesta fetch per ottenere suggerimenti di indirizzi dall'API di TomTom.chiave ***NON TOCCARE LA CHIAVE*****
             fetch(`https://api.tomtom.com/search/2/search/${query}.json?key=tNdeH4PSEGzxLQ1CKK0HdCagLd1BsXSc&countrySet=IT`)
