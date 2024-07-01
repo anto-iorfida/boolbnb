@@ -34,7 +34,7 @@
                                             <a href="{{ route('admin.apartments.show', ['apartment' => $apartment->slug]) }}"
                                                 class="btn btn-sm btn-success">
                                                 <i class="fas fa-eye"></i>
-                                                Vedi
+                                                Visiona
                                             </a>
                                             <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}"
                                                 class="btn btn-sm btn-warning">
