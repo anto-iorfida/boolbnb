@@ -39,22 +39,6 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3 mt-4">
-                        @if (isset($services) && $services->count() > 0)
-                            @foreach ($services as $service)
-                                <div class="form-check">
-                                    <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox"
-                                        name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
-                                    <label class="form-check-label" for="service-{{ $service->id }}">
-                                        {{ $service->name }}
-                                    </label>
-                                </div>
-                            @endforeach
-                        @else
-                            <p>Nessun servizio disponibile.</p>
-                        @endif
-                    </div>
-
                     <div class=" mb-3 col-12 ">
                         <label for="number_rooms" class="form-label"><strong>Numero di Stanze *</strong></label>
                         <input type="number" class="form-control @error('number_rooms') is-invalid @enderror"
@@ -142,6 +126,25 @@
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
+
+                    <div class="mb-3 mt-4">
+                        <label for="checkbox"><strong>Servizi</strong></label>
+                        @if (isset($services) && $services->count() > 0)
+                        <div class="row mb-3 mt-3 p-3">
+                            @foreach ($services as $service)
+                                <div class="form-check col-6">
+                                    <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox"
+                                        name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                                    <label class="form-check-label" for="service-{{ $service->id }}">
+                                        {{ $service->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @else
+                            <p>Nessun servizio disponibile.</p>
+                        @endif
                     </div>
                 </div>
 
