@@ -83,7 +83,7 @@
             </nav>
             {{-- |||||||||||||||||||||||||||||||  fine sidebar ||||||||||||||||||||||||||||||| --}}
 
-            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4 bg-white">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -116,9 +116,11 @@
 
 
 <style>
-    main{
-         height:100%; 
-        }
+    main {
+        height: 100%;
+        
+    }
+
     .sidebar {
         position: fixed;
         top: 0;
