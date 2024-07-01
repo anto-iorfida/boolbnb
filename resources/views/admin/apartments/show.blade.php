@@ -43,14 +43,14 @@
 
 
         <div class="card-body">
-            <h1 class="fs-4 text-secondary">Titolo: {{ $apartment->title }}</h1>
             <div class="container">
+                <h1 class=" text-secondary">Titolo: {{ $apartment->title }}</h1>
 
                 <div class=" p-5 mb-2 ">
+                    <h3>Immagine di copertina</h3>
 
                     @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
                         <div class="col-12 mb-4 d-block">
-                            <h3>Immagine di copertina</h3>
                             <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}"
                                 class="img-fluid rounded-4" style="height: 600px;">
                         </div>
