@@ -77,7 +77,7 @@
                     <div class="mb-3 col-12">
                         <label for="address" class="form-label"><strong>Indirizzo *</strong></label>
                         <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
-                            name="address" value="{{ old('address') }}" autocomplete="off">
+                            name="address" value="{{ $apartment->address }}" autocomplete="off">
                         <div id="addressSuggestions" class="list-group"></div>
                         @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -128,10 +128,9 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3 mt-4">
+                    {{-- <div class="mb-3 mt-4">
                         <label for="checkbox"><strong>Servizi</strong></label>
-                        @if (isset($services) && $services->count() > 0)
-                        <div class="row mb-3 mt-3 p-3">
+                
                             @foreach ($services as $service)
                                 <div class="form-check col-6">
                                     <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox"
@@ -145,7 +144,27 @@
                         @else
                             <p>Nessun servizio disponibile.</p>
                         @endif
-                    </div>
+                    </div> --}}
+                </div>
+
+                <div class="mb-3 mt-4">
+                    <h5>Servizi</h5>
+        
+                    @foreach ($services as $service)
+                        <div class="form-check">
+                            @if ($errors->any())
+                                {{-- Se cis sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}
+                                <input class="form-check-input" @checked(in_array($service->id, old('services', []))) type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                            @else
+                                {{-- Altrimenti vuol dire che stiamo caricando la pagina per la prima volta quindi controlliamo la presenza del service nella collection che ci arriva dal db --}}
+                                <input class="form-check-input" @checked($apartment->services->contains($service)) type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                            @endif
+                            
+                            <label class="form-check-label" for="service-{{ $service->id }}">
+                            {{ $service->name }}
+                            </label>
+                        </div>
+                    @endforeach
                 </div>
 
                 <input type="hidden" id="longitude" name="longitude" value="{{ $apartment->longitude }}">
