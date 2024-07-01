@@ -52,7 +52,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <a href="rou" class="btn btn-block btn-light">View all</a>
                 </div>
             </div>
         </div>

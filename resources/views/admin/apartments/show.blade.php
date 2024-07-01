@@ -45,7 +45,7 @@
             <h2 class="fs-4 text-secondary">Titolo: {{ $apartment->title }}</h2>
             <div class="container">
 
-                <div class="row">
+                <div class="row mb-4">
                     <div class="col">
                         <div class="mb-2">
                             <strong>Slug:</strong> {{ $apartment->slug }}
@@ -70,14 +70,15 @@
                             @foreach ($sponsor as $singleSponsor)
                                 <div class="card text-center me-2 mb-2" style="min-width: 200px;">
                                     <div class="card-header">
-                                        {{ $singleSponsor->name }}
+                                        <strong>{{ $singleSponsor->name }}</strong>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Prezzo: {{ $singleSponsor->price }}</h5>
-                                        <p class="card-text">Durata: {{ $singleSponsor->duration }} ore</p>
-                                        <a href="#" class="btn btn-primary">Attiva</a>
+                                        <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore</div>
+                                        <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>                                        
                                     </div>
-                                    <div class="card-footer text-body-secondary"></div>
+                                    <div class="card-footer text-body-secondary">
+                                        <a href="#" class="btn btn-success">Attiva</a>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
