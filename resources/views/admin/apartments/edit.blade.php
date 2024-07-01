@@ -77,7 +77,7 @@
                     <div class="mb-3 col-12">
                         <label for="address" class="form-label"><strong>Indirizzo *</strong></label>
                         <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
-                            name="address" value="{{ old('address') }}" autocomplete="off">
+                            name="address" value="{{ $apartment->address }}" autocomplete="off">
                         <div id="addressSuggestions" class="list-group"></div>
                         @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
