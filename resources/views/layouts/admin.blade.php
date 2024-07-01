@@ -89,6 +89,33 @@
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Overview</li>
                     </ol>
+        </header>
+
+        <div class="container-fluid ">
+            <div class="row h-100 ">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-primary navbar-dark sidebar collapse position-fixed h-100">
+                    <div class="position-sticky pt-3">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}" href="{{ route('admin.dashboard')}}">
+                                    <i class="fa-solid fa-gauge-high"></i> Dashboard Utente
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-light text-dark' : '' }}" href="{{ route('admin.apartments.index')}}">
+                                    <i class="fa-regular fa-rectangle-list"></i> I tuoi appartamenti
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link rounded {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-light text-dark' : '' }}" href="{{ route('admin.apartments.create')}}">
+                                    <i class="fa-solid fa-plus"></i> Inserisci un appartamento
+                                </a>
+                            </li>
+                            
+                        </ul>
+
+
+                    </div>
                 </nav>
                 @yield('content')
                 <footer class="pt-5 d-flex justify-content-between ">
@@ -107,6 +134,11 @@
                 </footer>
             </main>
 
+
+                <main class="col-md-9 ms-sm-auto col-lg-10 p-0 bg-white">
+                    @yield('content')
+                </main>
+            </div>
         </div>
     </div>
 </body>

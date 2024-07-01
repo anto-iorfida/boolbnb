@@ -1,20 +1,27 @@
-
 .my-wrap {
     width: 100%;
     margin: 0 auto;
-    height: calc(100vh - 86px);
     background-color: #4B53D0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 86px);
 }
-.my-container-register{
-    width: 70%;
+.my-container-register {
+    width: 60%;
     margin: 0 auto;
 }
-.color-bnb{
-    color:#5959B8 ;
+.img-logo-register img {
+    height: 150px;
+    width: 100%;
+    object-fit: contain;
+}
+.color-bnb {
+    color: #5959B8;
     font-weight: 600;
 }
-.my-btn{
-    width: 70%;
+.my-btn {
+    width: 100%;
     padding: 12px 0;
     display: flex;
     align-items: center;
@@ -26,56 +33,45 @@
     color: white;
     border-radius: 30px;
 }
-.my-btn:hover{
+.my-btn:hover {
     transition: 0.6s;
     color: black;
     background-color: #DD25AB;
 }
-.my-wrap input{
-    width: 70%;
+.my-wrap input {
+    width: 100%;
     border-radius: 30px;
     padding: 12px 10px;
 }
-.my-wrap .card{
+.my-wrap .card {
     border-radius: 40px;
-    padding: 10px;
     box-shadow: 0px 14px 30px 0px #000;
 }
-
-
-
-@media (max-width: 991.98px) { 
-
-}
-
-
-// tablet 
-@media (max-width: 767.98px) { 
-
- }
-
-
-@media (max-width: 575.98px) { 
-    .my-wrap{
-        height: auto;
-        padding-bottom: 5rem;
+@media (max-width: 991.98px) {
+    .my-wrap {
+        height: calc(100vh - 86px);
     }
 
-    .img-logo-register img{
+    .img-logo-register img {
         height: 150px;
         width: 100%;
         object-fit: contain;
     }
+}
+@media (max-width: 575.98px) {
+    .my-wrap {
+        height: calc(100vh - 86px);
+    }
+    .img-logo-register img {
+        height: 100px;
+        width: 100%;
+        object-fit: contain;
+    }
     html,
-    body{
-      width:100%;
-      overflow-x:hidden;
+    body {
+        overflow-x: hidden;
     }
     .my-container-register {
         width: 90%;
-        margin:0 auto;
-    }
-    .my-wrap input {
-        width: 100%;
     }
 }

@@ -90,3 +90,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 //  ///funzione che da risultati all'input del created.blade.php----------------------------------------
 
+
+//     funzione che fa comparirele card sponsor al click del botton in show----------------------------------------
+document.getElementById('toggleCardsButton').addEventListener('click', function () {
+    const cardsContainer = document.getElementById('cardsContainer');
+    cardsContainer.classList.toggle('d-none');
+});
+//  ///funzione che fa comparirele card sponsor al click del botton in show----------------------------------------

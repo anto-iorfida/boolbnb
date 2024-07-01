@@ -28,6 +28,7 @@ class Apartment extends Model
         'latitude',
         'price',
         'visibility',
+        'id_service'
     ];
     // public function services(){
     //     return $this->belongsToMany(Service::class);
@@ -35,7 +36,7 @@ class Apartment extends Model
 
     public function services()
     {
-        return $this->belongsToMany(Service::class, 'apartments_services', 'id_apartment', 'id_service');
+        return $this->belongsToMany(Service::class ,'apartments_services', 'id_apartment', 'id_service');
     }
 
     public function messages(){

@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\ApartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\ApartmentControllerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// http://127.0.0.1:8000/api/apartments     ritorna tutti gli appartamenti
+Route::get('/apartments', [ApartmentController::class, 'index']);
+
+// http://127.0.0.1:8000/api/apartments/slug    ritorna il singolo appartamento
+Route::get('apartments/{slug}', [ApartmentController::class, 'show']);

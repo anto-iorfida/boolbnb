@@ -12,8 +12,7 @@
     <div class="card p-5 mb-2">
         @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
             <div class="mb-4">
-                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}"
-                    class="img-fluid rounded-5">
+                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="img-fluid rounded-5">
             </div>
         @else
             <div class="mb-4">
@@ -22,132 +21,115 @@
         @endif
         <div class="card-body">
             <h2 class="card-title mb-4">Titolo: {{ $apartment->title }}</h2>
-    <div class="container p-5">
+            <div class="container">
 
-        <div class="row">
-            <h1>{{ $apartment->title }}</h1>
-
-            @if ($apartment->thumb)
-                <div class="mt-2">
-                    <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-2">
+                            <strong>Slug:</strong> {{ $apartment->slug }}
+                        </div>
+                        <div class="mb-2">
+                            <strong>Data di Creazione:</strong> {{ $apartment->created_at->format('d/m/Y H:i') }}
+                        </div>
+                        <div class="mb-2">
+                            <strong>Data di Modifica:</strong> {{ $apartment->updated_at->format('d/m/Y H:i') }}
+                        </div>
+                    </div>
                 </div>
-            @endif
 
-
-            <div class="col">
-                <div class="mb-2">
-                    <strong>Slug:</strong> {{ $apartment->slug }}
-                </div>
-                <div class="mb-2">
-                    <strong>Data di Creazione:</strong> {{ $apartment->created_at->format('d/m/Y H:i') }}
-                </div>
-                <div class="mb-2">
-                    <strong>Data di Modifica:</strong> {{ $apartment->updated_at->format('d/m/Y H:i') }}
-                </div>
-            </div>
-
-            <div class="section mb-4">
-                <div class="mb-2">
-                    <button>
-                        <i class="fa-solid fa-money-bill-trend-up"></i> Sponsorizza il tuo appartamento
-                    </button>
-                </div>
-                <div class="mb-2">
-                    <div class="d-flex">
-
-                        @foreach ($sponsor as $singleSponsor)
-                                <div class="card text-center">
+                <div class="section mb-4">
+                    <div class="mb-2">
+                        <button id="toggleCardsButton" class="btn btn-primary">
+                            <i class="fa-solid fa-money-bill-trend-up"></i> Sponsorizza il tuo appartamento
+                        </button>
+                    </div>
+                    <div class="mb-2">
+                        <div class="d-flex d-none" id="cardsContainer">
+                            @foreach ($sponsor as $singleSponsor)
+                                <div class="card text-center me-2 mb-2" style="min-width: 200px;">
                                     <div class="card-header">
-                                        {{$singleSponsor->name}}
+                                        {{ $singleSponsor->name }}
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Prezzo : {{$singleSponsor->price}}</h5>
-                                        <p class="card-text">Durata : {{$singleSponsor->duration}} ore</p>
+                                        <h5 class="card-title">Prezzo: {{ $singleSponsor->price }}</h5>
+                                        <p class="card-text">Durata: {{ $singleSponsor->duration }} ore</p>
                                         <a href="#" class="btn btn-primary">Attiva</a>
                                     </div>
-                                    <div class="card-footer text-body-secondary">
-                                        
-                                    </div>
+                                    <div class="card-footer text-body-secondary"></div>
                                 </div>
-                        @endforeach
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="section mb-4">
-                <div class="mb-2">
-                    <strong>Servizi:</strong>
-                    <br />
-                    @if (count($apartment->services) > 0)
-                        @foreach ($apartment->services as $service)
-                            {{ $service->name }}@if (!$loop->last)
-                                ,
-                            @endif
-                        @endforeach
-                    @else
-                        none
-                    @endif
-                </div>
-            </div>
-
-            @if ($apartment->description)
-                <div class="mb-2">
-                    <strong>Descrizione: </strong>
-                    <p>{{ $apartment->description }}</p>
-                </div>
-            @endif
-
-            <div class="mb-4">
-                <div class="row">
-                    <div class="col-md-6 mb-2">
-                        <strong>Visualizzazioni:</strong> {{ $apartment->views_count }}
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <strong>Numero di Camere:</strong> {{ $apartment->number_rooms }}
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <strong>Numero di Letti:</strong> {{ $apartment->number_beds }}
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <strong>Numero di Bagni:</strong> {{ $apartment->number_baths ?? 'N/A' }}
-                    </div>
-                    <div class="col-md-6 mb-2">
-                        <strong>Metri Quadrati:</strong> {{ $apartment->square_meters ?? 'N/A' }}
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mb-4">
-                <div class="pe-2">
-                    <strong>Indirizzo:</strong> {{ $apartment->address }}
+                <div class="section mb-4">
+                    <div class="mb-2">
+                        <strong>Servizi:</strong>
+                        <br />
+                        @if (count($apartment->services) > 0)
+                            @foreach ($apartment->services as $service)
+                                {{ $service->name }}@if (!$loop->last), @endif
+                            @endforeach
+                        @else
+                            nessuno
+                        @endif
+                    </div>
+                </div>
+
+                @if ($apartment->description)
+                    <div class="mb-2">
+                        <strong>Descrizione:</strong>
+                        <p>{{ $apartment->description }}</p>
+                    </div>
+                @endif
+
+                <div class="mb-4">
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <strong>Visualizzazioni:</strong> {{ $apartment->views_count }}
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <strong>Numero di Camere:</strong> {{ $apartment->number_rooms }}
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <strong>Numero di Letti:</strong> {{ $apartment->number_beds }}
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <strong>Numero di Bagni:</strong> {{ $apartment->number_baths ?? 'N/A' }}
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <strong>Metri Quadrati:</strong> {{ $apartment->square_meters ?? 'N/A' }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div class="pe-2">
+                        <strong>Indirizzo:</strong> {{ $apartment->address }}
+                    </div>
+                </div>
+
+                <!-- Mappa -->
+                <div id="map" class="rounded mb-4"></div>
+
+                <div class="me-2">
+                    <strong>Prezzo:</strong> {{ number_format($apartment->price, 2) }} €
+                </div>
+
+                <div class="me-2">
+                    <strong>Visibilità:</strong> {{ $apartment->visibility ? 'Visibile' : 'Non Visibile' }}
+                </div>
+
+                <div class="d-flex justify-content-between my-4">
+                    <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i> Indietro
+                    </a>
+                    <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}" class="btn btn-primary">
+                        <i class="fa-solid fa-pen-to-square"></i> Modifica
+                    </a>
                 </div>
             </div>
-
-            <!-- Mappa -->
-            <div id="map" class="rounded mb-4"></div>
-
-            <div class="me-2">
-                <strong>Prezzo:</strong> {{ number_format($apartment->price, 2) }} €
-            </div>
-
-            <div class="me-2">
-                <strong>Visibilità:</strong> {{ $apartment->visibility ? 'Visibile' : 'Non Visibile' }}
-            </div>
-
-            <!-- Mappa -->
-
-            <div class="d-flex justify-content-between my-4">
-                <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
-                    <i class="fa-solid fa-arrow-left"></i> Indietro
-                </a>
-                <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}" class="btn btn-primary">
-                    <i class="fa-solid fa-pen-to-square"></i> Modifica
-                </a>
-            </div>
-
         </div>
-
     </div>
 
     {{-- <style>
@@ -194,6 +176,10 @@
             margin: 0 5px;
         }
 
+        #cardsContainer {
+            display: none;
+        }
+
         #map {
             height: 400px;
             width: 100%;
@@ -215,7 +201,6 @@
     </style> --}}
 @endsection
 
-
 @section('scripts')
     <!-- Librerie di TomTom -->
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
@@ -236,5 +221,6 @@
                 .setLngLat([{{ $apartment->longitude }}, {{ $apartment->latitude }}])
                 .addTo(map);
         });
+
     </script>
 @endsection
