@@ -63,6 +63,16 @@ class ApartmentController extends Controller
             $newApartment->services()->attach($validatedData['services']);
         }
 
+        // Caricamento delle altre immagini
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $img_path = Storage::disk('public')->put('apartment_images', $file);
+
+                // Salva il percorso dell'immagine nella tabella albums
+                $newApartment->albums()->create(['image' => $img_path]);
+            }
+        }
+
         return redirect()->route('admin.apartments.show', $newApartment->slug)->with('message', $newApartment->title . ' successfully created.');
     }
 
