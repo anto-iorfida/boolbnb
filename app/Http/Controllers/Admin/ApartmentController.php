@@ -107,10 +107,10 @@ class ApartmentController extends Controller
         return view('admin.apartments.show', compact('apartment', 'sponsor'));
     }
 
-    public function edit(Apartment $apartment) //--------------------------------------------------------------------------------------------------------------------
+    public function edit(Apartment $apartment, Album $album) //--------------------------------------------------------------------------------------------------------------------
     {
-
-        return view('admin.apartments.edit', compact('apartment'));
+        $services = Service::all();
+        return view('admin.apartments.edit', compact('apartment', 'album', 'services'));
     }
 
     public function update(Request $request, Apartment $apartment)
