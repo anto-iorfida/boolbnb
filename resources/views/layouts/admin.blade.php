@@ -61,21 +61,21 @@
                             <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
                                 href="{{ route('admin.dashboard') }}">
                                 <i class="fa-solid fa-house"></i>
-                                <span class="ml-2">Dashboard</span>
+                                <span class="ml-2">Dashboard utente</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
                                 href="{{ route('admin.apartments.index') }}">
                                 <i class="fa-solid fa-building"></i>
-                                <span class="ml-2">I Miei Appartamenti</span>
+                                <span class="ml-2">I miei appartamenti</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
                                 href="{{ route('admin.apartments.create') }}">
                                 <i class="fa-solid fa-plus"></i>
-                                <span class="ml-2">Inserisci Appartamento</span>
+                                <span class="ml-2">Inserisci appartamento</span>
                             </a>
                         </li>
                     </ul>
