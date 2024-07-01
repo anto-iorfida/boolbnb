@@ -77,15 +77,9 @@
                     @enderror
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-<<<<<<< HEAD
-                    <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong> Immagine copertina
+                    <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong>Immagine copertina
                         appartamento *</strong></label>
                     <input class="form-control" type="file" id="thumb" name="thumb">
-=======
-                    <label for="thumb" class="form-label @error('thumb') is-invalid @enderror">Immagine copertina appartamento</label>
-                    <input class="form-control" type="file" id="thumb" name="thumb"
-                        value="{{ old('thumb') }}">
->>>>>>> 84f0e03c0bbb0d41de8c37913829ec3e661ac87e
                     @error('thumb')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

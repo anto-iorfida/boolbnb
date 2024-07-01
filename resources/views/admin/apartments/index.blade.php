@@ -3,7 +3,7 @@
 @section('content')
    
     <h2 class="fs-4 text-secondary">I tuoi appartamenti</h2>
-    <p>This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p>
+    <p>In questa pagina puoi visualizzare i tuoi appartamenti caricati su BoolB&B</p>
 
     <div class="row">
         <div class="col-12 col-xl-8 mb-4 mb-lg-0">
