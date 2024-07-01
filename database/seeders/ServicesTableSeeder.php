@@ -18,9 +18,9 @@ class ServicesTableSeeder extends Seeder
     {
         //
         $nameServices = [
-            "Wi-Fi gratuito",
+            "Wi-Fi",
             "Aria condizionata",
-            "Calefazione",
+            "Colazione",
             "TV a schermo piatto",
             "Cucina attrezzata",
             "Lavatrice",
