@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Carbon\Carbon;
 
 class RegisteredUserController extends Controller
 {
@@ -32,9 +33,13 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'date_birth' => ['required', 'date', 'before:today'],
+            'date_birth' => [
+                'required', 'date',
+                'before:' . Carbon::now()->subYears(18)->format('d-m-Y'),
+                'after:' . Carbon::now()->subYears(110)->format('d-m-Y')
+            ],
         ]);
 
         $user = User::create([

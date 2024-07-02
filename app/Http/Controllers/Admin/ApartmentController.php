@@ -21,9 +21,7 @@ class ApartmentController extends Controller
     public function index()
     {
         $userId = Auth::id();
-
         $apartments = Apartment::where('id_user', $userId)->get();
-
         return view('admin.apartments.index', compact('apartments'));
     }
 
@@ -36,10 +34,8 @@ class ApartmentController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $validatedData = $this->validation($request->all());
         $slug = Str::slug($validatedData['title'], '-');
-
         $validatedData['slug'] = $slug;
 
         $formData = $validatedData;
@@ -48,19 +44,13 @@ class ApartmentController extends Controller
             $img_path = Storage::disk('public')->put('apartment_images', $formData['thumb']);
             $formData['thumb'] = $img_path;
         }
-        
 
         $newApartment = new Apartment();
         $newApartment->fill($formData);
-
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->id_user = Auth::id();
         $newApartment->save();
 
-        // "Attaccare" i services scelti dall'utente all'appartamento creato
-        // if ($request->has('services')) {
-        //     $newApartment->services()->attach($validatedData['services']);
-        // }
         if ($request->has('services')) {
             $newApartment->services()->attach($validatedData['services']);
         }
@@ -68,15 +58,13 @@ class ApartmentController extends Controller
             $newApartment->albums()->attach($validatedData['albums']);
         }
 
-        // caricamento delle altre immagini
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
                 $img_path = Storage::disk('public')->put('apartment_images', $file);
-
-                // salva il percorso dell'immagine nella tabella albums
                 $newApartment->albums()->create(['image' => $img_path]);
             }
         }
+
         session()->flash('apartments_create', true);
         return redirect()->route('admin.apartments.show', $newApartment->slug);
     }
@@ -88,30 +76,24 @@ class ApartmentController extends Controller
         $currentDateTime = Carbon::now();
         $viewKey = 'viewed_apartment_' . $apartment->id;
 
-        // Controlla se l'utente ha già visualizzato questo appartamento nelle ultime 24 ore
         if (!$request->session()->has($viewKey)) {
-            // Registra una nuova visualizzazione
             View::create([
                 'apartment_id' => $apartment->id,
                 'ip_address' => $ipAddress,
                 'date_time' => $currentDateTime,
             ]);
 
-            // Incrementa il conteggio delle visualizzazioni nell'appartamento
             $apartment->views_count = $apartment->views_count + 1;
             $apartment->save();
-
-            // Memorizza nella sessione che l'utente ha visualizzato questo appartamento
             $request->session()->put($viewKey, true);
         }
 
-        // Carica gli album relativi all'appartamento
         $apartment->load('albums', 'services');
 
         return view('admin.apartments.show', compact('apartment', 'sponsor'));
     }
 
-    public function edit(Apartment $apartment, Album $album) //--------------------------------------------------------------------------------------------------------------------
+    public function edit(Apartment $apartment, Album $album)
     {
         $services = Service::all();
         return view('admin.apartments.edit', compact('apartment', 'album', 'services'));
@@ -136,7 +118,6 @@ class ApartmentController extends Controller
                 'address' => 'required|string',
                 'longitude' => 'required|numeric|between:-180,180',
                 'latitude' => 'required|numeric|between:-90,90',
-                'price' => 'required|numeric|min:0',
                 'visibility' => 'required|boolean',
                 'services' => 'required|array|min:1',
                 'services.*' => 'integer|exists:services,id',
@@ -153,7 +134,6 @@ class ApartmentController extends Controller
                 'longitude.between' => 'Il campo longitudine deve essere compreso tra -180 e 180',
                 'latitude.required' => 'Il campo latitudine è obbligatorio',
                 'latitude.between' => 'Il campo latitudine deve essere compreso tra -90 e 90',
-                'price.required' => 'Il campo prezzo è obbligatorio',
                 'thumb.image' => 'Il file deve essere un\'immagine',
                 'thumb.max' => 'L\'immagine non può superare i 256KB',
                 'visibility.required' => 'Il campo visibilità è obbligatorio',
@@ -187,11 +167,9 @@ class ApartmentController extends Controller
         return redirect()->route('admin.apartments.show', $apartment->slug);
     }
 
-
     public function destroy(Apartment $apartment)
     {
         $apartment->delete();
-
         session()->flash('apartments_deleted', true);
         return redirect()->route('admin.apartments.index');
     }
@@ -207,11 +185,10 @@ class ApartmentController extends Controller
                 'number_beds' => 'required|integer',
                 'number_baths' => 'nullable|integer',
                 'square_meters' => 'nullable|integer',
-                'thumb' => 'required',
+                'thumb' => 'required|image|max:1700',
                 'address' => 'required|string',
                 'longitude' => 'required|numeric|between:-180,180',
                 'latitude' => 'required|numeric|between:-90,90',
-                'price' => 'required|numeric|min:1',
                 'visibility' => 'required|boolean',
                 'services' => 'required|array|min:1',
                 'services.*' => 'integer|exists:services,id',
@@ -229,10 +206,9 @@ class ApartmentController extends Controller
                 'longitude.between' => 'Il campo longitudine deve essere compreso tra -180 e 180',
                 'latitude.required' => 'Il campo latitudine è obbligatorio',
                 'latitude.between' => 'Il campo latitudine deve essere compreso tra -90 e 90',
-                'price.required' => 'Il campo prezzo è obbligatorio',
                 'thumb.required' => 'Il campo thumb è obbligatorio',
                 'thumb.image' => 'Il file deve essere un\'immagine',
-                'thumb.max' => 'L\'immagine non può superare i 700KB',
+                'thumb.max' => 'L\'immagine non può superare i 1700KB',
                 'visibility.required' => 'Il campo visibilità è obbligatorio',
                 'services.required' => 'Seleziona almeno un servizio.',
                 'services.array' => 'I servizi devono essere un array',
