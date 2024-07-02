@@ -90,3 +90,12 @@
     </div>
 </div>
 @endsection
+
+<script>
+    setTimeout(function () {
+        let messageElement = document.querySelectorAll('.mess-info');
+        messageElement.forEach(function(element) {
+            element.classList.add('fade-out');
+        });
+    }, 3000); // 3 secondi
+</script>
