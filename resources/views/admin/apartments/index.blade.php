@@ -9,7 +9,7 @@
     <p>In questa pagina puoi visualizzare i tuoi appartamenti caricati su BoolB&B</p>
 
     <div class="row">
-        <div class="col-12 col-xl-9 mb-4 mb-lg-0">
+        <div class="col-10 mb-4 mb-lg-0">
             <div class="card">
                 <h5 class="card-header">Appartamenti inseriti</h5>
                 <div class="card-body">
