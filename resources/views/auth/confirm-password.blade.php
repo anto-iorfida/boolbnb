@@ -10,14 +10,14 @@
                 <div class="card-body">
                     {{ __('Please confirm your password before continuing.') }}
 
-                    <form method="POST" action="{{ route('password.confirm') }}">
+                    <form id="password-confirm-form" method="POST" action="{{ route('password.confirm') }}">
                         @csrf
 
                         <div class="mb-4 row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" pattern=".{8,}" title="Password must be at least 8 characters long">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -46,4 +46,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    // JavaScript per validazione aggiuntiva
+    document.getElementById('password-confirm-form').addEventListener('submit', function(event) {
+        var passwordField = document.getElementById('password');
+        if (passwordField.value.length < 8) {
+            alert('Password must be at least 8 characters long.');
+            event.preventDefault();
+        }
+    });
+</script>
 @endsection

@@ -14,7 +14,7 @@
                     </div>
                     @endif
 
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form id="reset-password-form" method="POST" action="{{ route('password.email') }}">
                         @csrf
 
                         <div class="mb-4 row">
@@ -44,4 +44,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    // JavaScript per validazione aggiuntiva
+    document.getElementById('reset-password-form').addEventListener('submit', function(event) {
+        var emailField = document.getElementById('email');
+
+        // Validazione email
+        if (!isValidEmail(emailField.value)) {
+            alert('Please enter a valid email address.');
+            emailField.focus();
+            event.preventDefault();
+            return false;
+        }
+
+        return true;
+    });
+
+    // Funzione per la validazione dell'email (se necessario)
+    function isValidEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+</script>
 @endsection
