@@ -110,14 +110,14 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         // Quando il documento è caricato completamente
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Seleziona il form con l'ID 'apartmentForm'
             const form = document.getElementById('apartmentForm');
             // Seleziona il bottone con l'ID 'validateBtn'
             const validateBtn = document.getElementById('validateBtn');
 
             // Aggiunge un evento di click al bottone 'validateBtn'
-            validateBtn.addEventListener('click', function() {
+            validateBtn.addEventListener('click', function () {
                 // Chiama la funzione per pulire eventuali errori di validazione visualizzati
                 clearValidationErrors();
 
@@ -146,7 +146,6 @@
                         }
                     });
             });
-    });
 
             // Funzione per pulire gli errori di validazione visualizzati
             function clearValidationErrors() {
@@ -164,26 +163,40 @@
             function displayValidationErrors(errors) {
                 // Per ogni campo con errori
                 Object.keys(errors).forEach(field => {
-                    // Ottieni il messaggio di errore per il campo
-                    const errorMessage = errors[field][0];
-                    // Trova l'elemento di feedback degli errori corrispondente
-                    const errorFeedback = document.getElementById(`${field}Error`);
-                    // Se esiste un elemento di feedback degli errori
-                    if (errorFeedback) {
-                        // Imposta il testo dell'elemento di feedback degli errori
-                        errorFeedback.textContent = errorMessage;
-                        // Trova il campo di input corrispondente
-                        const inputField = document.getElementById(field);
-                        // Se esiste un campo di input
-                        if (inputField) {
-                            // Aggiungi la classe 'is-invalid' al campo di input
-                            inputField.classList.add('is-invalid');
+                    // Se il campo è 'services', gestisci l'errore in modo personalizzato
+                    if (field === 'services') {
+                        const errorMessage = 'Seleziona almeno un servizio.';
+                        const errorFeedback = document.getElementById(`${field}Error`);
+                        // Se esiste un elemento di feedback degli errori
+                        if (errorFeedback) {
+                            // Imposta il testo dell'elemento di feedback degli errori
+                            errorFeedback.textContent = errorMessage;
+                        }
+                        // Trova tutti gli input di tipo checkbox per i servizi e aggiungi loro la classe 'is-invalid'
+                        const serviceCheckboxes = form.querySelectorAll('input[name="services[]"]');
+                        serviceCheckboxes.forEach(checkbox => {
+                            checkbox.classList.add('is-invalid');
+                        });
+                    } else {
+                        // Altrimenti, gestisci l'errore come di consueto
+                        const errorMessage = errors[field][0];
+                        const errorFeedback = document.getElementById(`${field}Error`);
+                        // Se esiste un elemento di feedback degli errori
+                        if (errorFeedback) {
+                            // Imposta il testo dell'elemento di feedback degli errori
+                            errorFeedback.textContent = errorMessage;
+                            // Trova il campo di input corrispondente
+                            const inputField = document.getElementById(field);
+                            // Se esiste un campo di input
+                            if (inputField) {
+                                // Aggiungi la classe 'is-invalid' al campo di input
+                                inputField.classList.add('is-invalid');
+                            }
                         }
                     }
-                }
+                });
             }
         });
-    }
-});
-</script>
+    </script>
 @endsection
+
