@@ -46,8 +46,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // ottenuto il valore corrente dell'input addressInput e lo assegna alla variabile query.
         const query = addressInput.value;
 
-        // controloo se la lunghezza del valore di input è maggiore di 2.
-        if (query.length > 2) {
+        // controloo se la lunghezza del valore di input è maggiore di 0.
+        if (query.length > 0) {
             // Esegue una richiesta fetch per ottenere suggerimenti di indirizzi dall'API di TomTom.chiave ***NON TOCCARE LA CHIAVE*****
             fetch(`https://api.tomtom.com/search/2/search/${query}.json?key=tNdeH4PSEGzxLQ1CKK0HdCagLd1BsXSc&countrySet=IT`)
                 .then(response => response.json()) // Converte la risposta in formato JSON.
@@ -97,3 +97,12 @@ document.getElementById('toggleCardsButton').addEventListener('click', function 
     cardsContainer.classList.toggle('d-none');
 });
 //  ///funzione che fa comparirele card sponsor al click del botton in show----------------------------------------
+// -------------------------------------------FAR COMPARIRE PER 4 SECONDI MESSAGGIO SESSIONE------------------------------
+// messaggio che compare per 3 secondi con conferma eliminazione 
+setTimeout(function () {
+    let messageElement = document.querySelector('.mess-info');
+    if (messageElement) {
+        messageElement.classList.add('fade-out');
+    }
+}, 3000); //  3 secondi
+// ------------------------------------------/FAR COMPARIRE PER 4 SECONDI MESSAGGIO SESSIONE------------------------------

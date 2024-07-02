@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <div class="col">
             <div class="card">
-                <div class="card-header">{{ __('User Dashboard') }}</div>
+                <div class="card-header">{{ __('Dashboard Utente') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -17,11 +17,11 @@
                     </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Sei loggato!') }}
 
-                    <div>Benvenuto 🤗{{ $user->name}}</div>
+                    <div>Benvenuto {{ $user->name}}</div>
 
-                    <p>Ti sei registrato correttamente con la email: {{ $user->email }}</p>
+                    <p>Ti sei registrato correttamente con la email: <strong>{{ $user->email }}</strong></p>
                 </div>
             </div>
         </div>

@@ -2,7 +2,11 @@
 
 @section('content')
     <div class="container p-3">
-        <h2 class="text-center mb-5">Modifica Appartamento</h2>
+        <h2 class="fs-4 text-secondary">Modifica appartamento</h2>
+
+        <div class="alert alert-light" role="alert">
+            I campi con * vicino sono obbligatori
+        </div>
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -27,7 +31,7 @@
             <div class="row ">
                 <div class="col-12 col-md-6">
                     <div class=" mb-3 col-12 ">
-                        <label for="title" class="form-label">Titolo</label>
+                        <label for="title" class="form-label"><strong>Titolo appartamento*</strong></label>
                         <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
                             name="title" value="{{ $apartment->title }}">
                         @error('title')
@@ -36,45 +40,51 @@
                     </div>
 
                     <div class=" mb-3 col-12 ">
-                        <label for="number_rooms" class="form-label">Numero di Stanze</label>
+                        <label for="number_rooms" class="form-label"><strong>Numero di Stanze *</strong></label>
                         <input type="number" class="form-control @error('number_rooms') is-invalid @enderror"
-                            id="number_rooms" name="number_rooms" value="{{ $apartment->number_rooms }}">
+                            id="number_rooms" name="number_rooms" value="{{ $apartment->number_rooms }}" min="0">
                         @error('number_rooms')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class=" mb-3 col-12 ">
-                        <label for="number_beds" class="form-label">Numero di Letti</label>
+                        <label for="number_beds" class="form-label"><strong>Numero di Letti *</strong></label>
                         <input type="number" class="form-control @error('number_beds') is-invalid @enderror"
-                            id="number_beds" name="number_beds" value="{{ $apartment->number_beds }}">
+                            id="number_beds" name="number_beds" value="{{ $apartment->number_beds }}" min="0">
                         @error('number_beds')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class=" mb-3 col-12 ">
-                        <label for="number_baths" class="form-label">Numero di Bagni</label>
+                        <label for="number_baths" class="form-label"><strong>Numero di Bagni </strong></label>
                         <input type="number" class="form-control " id="number_baths" name="number_baths"
-                            value="{{ $apartment->number_baths }}">
+                            value="{{ $apartment->number_baths }}" min="0">
+                        @error('number_baths')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class=" mb-3 col-12 ">
-                        <label for="square_meters" class="form-label">Metri Quadrati</label>
+                        <label for="square_meters" class="form-label"><strong>Metri Quadrati </strong></label>
                         <input type="number" class="form-control " id="square_meters" name="square_meters"
-                            value="{{ $apartment->square_meters }}">
+                            value="{{ $apartment->square_meters }}" min="0">
+                        @error('square_meters')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3 col-12">
-                        <label for="address" class="form-label">Indirizzo</label>
+                        <label for="address" class="form-label"><strong>Indirizzo *</strong></label>
                         <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
-                            name="address" value="{{ old('address') }}" autocomplete="off">
+                            name="address" value="{{ $apartment->address }}" autocomplete="off">
                         <div id="addressSuggestions" class="list-group"></div>
                         @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class=" mb-3 col-12 ">
-                        <label for="visibility" class="form-label">Visibilità</label>
+                        <label for="visibility" class="form-label"><strong>Visibilità *</strong></label>
                         <select class="form-control @error('visibility') is-invalid @enderror" id="visibility"
                             name="visibility">
                             <option value="1" {{ $apartment->visibility == '1' ? 'selected' : '' }}>Visibile</option>
@@ -89,8 +99,9 @@
 
                 <div class="col-12 col-md-6">
                     <div class="mb-3 col-12 ">
-                        <label for="thumb" class="form-label @error('thumb') is-invalid @enderror">Immagine copertina
-                            appartamento</label>
+                        <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong>Immagine
+                                copertina
+                                appartamento *</strong></label>
                         <input class="form-control" type="file" id="thumb" name="thumb">
                         @if ($apartment->thumb)
                             <div class="mt-2 image-edit">
@@ -102,19 +113,61 @@
                         @enderror
                     </div>
                     <div class=" mb-3 col-12 ">
-                        <label for="price" class="form-label">Prezzo</label>
+                        <label for="price" class="form-label"><strong>Prezzo *</strong></label>
                         <input type="text" class="form-control @error('price') is-invalid @enderror" id="price"
-                            name="price" value="{{ $apartment->price }}">
+                            name="price" value="{{ $apartment->price }}" min="0">
                         @error('price')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class=" mb-3 col-12 ">
-                        <label for="description" class="form-label">Descrizione</label>
+                        <label for="description" class="form-label"><strong>Descrizione *</strong></label>
                         <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ $apartment->description }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
+
+                    {{-- <div class="mb-3 mt-4">
+                        <label for="checkbox"><strong>Servizi</strong></label>
+                
+                            @foreach ($services as $service)
+                                <div class="form-check col-6">
+                                    <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox"
+                                        name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                                    <label class="form-check-label" for="service-{{ $service->id }}">
+                                        {{ $service->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @else
+                            <p>Nessun servizio disponibile.</p>
+                        @endif
+                    </div> --}}
+                </div>
+
+                <div class="mb-3 mt-4">
+                    <h5>Servizi</h5>
+                    <div class="row mb-3 mt-3 p-3">
+                        @foreach ($services as $service)
+                            <div class="form-check col-6 ">
+                                @if ($errors->any())
+                                    {{-- Se cis sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}
+                                    <input class="form-check-input" @checked(in_array($service->id, old('services', []))) type="checkbox"
+                                        name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                                @else
+                                    {{-- Altrimenti vuol dire che stiamo caricando la pagina per la prima volta quindi controlliamo la presenza del service nella collection che ci arriva dal db --}}
+                                    <input class="form-check-input" @checked($apartment->services->contains($service)) type="checkbox"
+                                        name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                                @endif
+
+                                <label class="form-check-label" for="service-{{ $service->id }}">
+                                    {{ $service->name }}
+                                </label>
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
 

@@ -2,11 +2,14 @@
 
 @section('content')
    
-    <h1 class="h2">I tuoi appartamenti</h1>
-    <p>This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p>
+    <h2 class="fs-4 text-secondary">I tuoi appartamenti</h2>
+    @if (session('apartments_deleted'))
+        <div class="mess-info">Progetto eliminato con successo!</div>
+    @endif
+    <p>In questa pagina puoi visualizzare i tuoi appartamenti caricati su BoolB&B</p>
 
     <div class="row">
-        <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+        <div class="col-12 col-xl-9 mb-4 mb-lg-0">
             <div class="card">
                 <h5 class="card-header">Appartamenti inseriti</h5>
                 <div class="card-body">
@@ -52,7 +55,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <a href="rou" class="btn btn-block btn-light">View all</a>
                 </div>
             </div>
         </div>

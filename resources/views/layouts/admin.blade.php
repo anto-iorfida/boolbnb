@@ -32,20 +32,37 @@
 </head>
 
 <body>
-    {{-- |||||||||||||||||||||||||||||||  inizio header ||||||||||||||||||||||||||||||| --}}
-    <header class="sticky-top">
-        <nav class="navbar navbar-light bg-light p-3 ">
+    {{-- ||||||||||||||||||||||||||||||||  inizio header ||||||||||||||||||||||||||||||| --}}
+    <header class="sticky-top ms-bg-header">
+        <nav class="navbar navbar-light p-3">
             <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
-                <a class="navbar-brand" href="#">
-                    Simple Dashboard
+                <a class="navbar-brand" href="/">
+                    <img src="{{ Vite::asset('resources/img/logo-dashboard.png') }}" alt="BoolB&B" class="ms-logo">
                 </a>
                 <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse"
                     data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
+
             <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
-                {{-- \\\\\\\\\\\\\\\\\\\\ fare dropdown nuovo ///////////////////// --}}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Ciao, {{ Auth::user()->name }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                {{ __('Logout') }}
+                            </a>
+                        </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
@@ -57,25 +74,25 @@
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky">
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
+                        <li class="nav-item p-2">
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
                                 href="{{ route('admin.dashboard') }}">
                                 <i class="fa-solid fa-house"></i>
-                                <span class="ml-2">Dashboard utente</span>
+                                <small>Dashboard utente</small>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
+                        <li class="nav-item p-2">
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' || Route::currentRouteName() == 'admin.apartments.show' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
                                 href="{{ route('admin.apartments.index') }}">
                                 <i class="fa-solid fa-building"></i>
-                                <span class="ml-2">I miei appartamenti</span>
+                                <small>I miei appartamenti</small>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link  {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-light text-dark' : '' }}"
+                        <li class="nav-item p-2">
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
                                 href="{{ route('admin.apartments.create') }}">
                                 <i class="fa-solid fa-plus"></i>
-                                <span class="ml-2">Inserisci appartamento</span>
+                                <small>Inserisci appartamento</small>
                             </a>
                         </li>
                     </ul>
@@ -84,30 +101,33 @@
             {{-- |||||||||||||||||||||||||||||||  fine sidebar ||||||||||||||||||||||||||||||| --}}
 
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4 bg-white">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Overview</li>
-                    </ol>
-                </nav>
+                <div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Overview</li>
+                        </ol>
+                    </nav>
 
-                @yield('content')
+                    @yield('content')
+                </div>
 
-                <footer class="pt-5 d-flex justify-content-between ">
-                    <span>Copyright © 2019-2020 <a href="https://themesberg.com">Themesberg</a></span>
+                <footer class="pt-5 d-flex justify-content-between">
+                    <span>Copyright © 2024-2025 <a href="/">BoolB&B</a></span>
                     <ul class="nav m-0">
                         <li class="nav-item">
                             <a class="nav-link text-secondary" aria-current="page" href="#">Privacy Policy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">Terms and conditions</a>
+                            <a class="nav-link text-secondary" href="#">Termini e condizioni</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">Contact</a>
+                            <a class="nav-link text-secondary" href="#">Contatti</a>
                         </li>
                     </ul>
                 </footer>
             </main>
+
         </div>
     </div>
 </body>
@@ -116,9 +136,33 @@
 
 
 <style>
+    /* width */
+    body::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    /* Track */
+    body::-webkit-scrollbar-track {
+        background-color: #gray;
+    }
+
+    /* Handle */
+    body::-webkit-scrollbar-thumb {
+        background-color: gray;
+        border-radius: 6px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+        background-color: #0D6EFD;
+    }
+
+    .ms-bg-header {
+        background-color: #0d6efd;
+    }
+
     main {
         height: 100%;
-        
+
     }
 
     .sidebar {

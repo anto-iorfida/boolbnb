@@ -2,28 +2,76 @@
 
 @section('content')
     @if (session('apartments_create'))
-        <div class="alert alert-success">Progetto creato con successo!</div>
+        <div class="mess-info">Progetto creato con successo!</div>
     @endif
 
     @if (session('apartments_edit'))
-        <div class="alert alert-success">Progetto modificato con successo!</div>
+        <div class="mess-info">Progetto modificato con successo!</div>
     @endif
 
     <div class="card p-5 mb-2">
-        @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
-            <div class="mb-4">
-                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}" class="img-fluid rounded-5">
+        {{-- <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                @foreach ($apartment->albums as $key => $album)
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key + 1 }}" aria-label="Slide {{ $key + 2 }}"></button>
+                @endforeach
             </div>
-        @else
-            <div class="mb-4">
-                <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="img-fluid rounded-5">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
+                        <img src="{{ asset('storage/' . $apartment->thumb) }}" class="d-block w-100" alt="{{ $apartment->title }}">
+                    @else
+                        <img src="{{ $apartment->thumb }}" class="d-block w-100" alt="{{ $apartment->title }}">
+                    @endif
+                </div>
+                @foreach ($apartment->albums as $album)
+                    <div class="carousel-item">
+                        <img src="{{ asset('storage/' . $album->image) }}" class="d-block w-100" alt="Immagine appartamento">
+                    </div>
+                @endforeach
             </div>
-        @endif
-        <div class="card-body">
-            <h2 class="card-title mb-4">Titolo: {{ $apartment->title }}</h2>
-            <div class="container">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div> --}}
 
-                <div class="row">
+
+        <div class="card-body">
+            <div class="container">
+                <h1 class=" text-secondary">Titolo: {{ $apartment->title }}</h1>
+
+                <div class=" p-5 mb-2 ">
+                    <h3>Immagine di copertina</h3>
+
+                    @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
+                        <div class="col-12 mb-4 d-block">
+                            <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}"
+                                class="img-fluid rounded-4" style="height: 600px;">
+                        </div>
+                    @else
+                        <div class="mb-4 card">
+                            <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="img-fluid rounded-4">
+                        </div>
+                    @endif
+                    <div class="row ">
+                        @foreach ($apartment->albums as $album)
+                            <div class="col-4 col-md-4  d-inline">
+                                <img src="{{ asset('storage/' . $album->image) }}" alt="Immagine appartamento"
+                                    class="img-fluid rounded-4">
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+
+
+                <div class="row mb-4">
                     <div class="col">
                         <div class="mb-2">
                             <strong>Slug:</strong> {{ $apartment->slug }}
@@ -48,14 +96,15 @@
                             @foreach ($sponsor as $singleSponsor)
                                 <div class="card text-center me-2 mb-2" style="min-width: 200px;">
                                     <div class="card-header">
-                                        {{ $singleSponsor->name }}
+                                        <strong>{{ $singleSponsor->name }}</strong>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Prezzo: {{ $singleSponsor->price }}</h5>
-                                        <p class="card-text">Durata: {{ $singleSponsor->duration }} ore</p>
-                                        <a href="#" class="btn btn-primary">Attiva</a>
+                                        <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore</div>
+                                        <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>
                                     </div>
-                                    <div class="card-footer text-body-secondary"></div>
+                                    <div class="card-footer text-body-secondary">
+                                        <a href="#" class="btn btn-success">Attiva</a>
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
@@ -68,7 +117,9 @@
                         <br />
                         @if (count($apartment->services) > 0)
                             @foreach ($apartment->services as $service)
-                                {{ $service->name }}@if (!$loop->last), @endif
+                                {{ $service->name }}@if (!$loop->last)
+                                    ,
+                                @endif
                             @endforeach
                         @else
                             nessuno
@@ -124,7 +175,8 @@
                     <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
                         <i class="fa-solid fa-arrow-left"></i> Indietro
                     </a>
-                    <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}" class="btn btn-primary">
+                    <a href="{{ route('admin.apartments.edit', ['apartment' => $apartment->slug]) }}"
+                        class="btn btn-primary">
                         <i class="fa-solid fa-pen-to-square"></i> Modifica
                     </a>
                 </div>
@@ -132,27 +184,7 @@
         </div>
     </div>
 
-    {{-- <style>
-        /* width */
-        body::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        /* Track */
-        body::-webkit-scrollbar-track {
-            background-color: #gray;
-        }
-
-        /* Handle */
-        body::-webkit-scrollbar-thumb {
-            background-color: gray;
-            border-radius: 6px;
-        }
-
-        body::-webkit-scrollbar-thumb:hover {
-            background-color: #0D6EFD;
-        }
-
+    <style>
         .card-title {
             font-size: 1.75rem;
             font-weight: bold;
@@ -195,10 +227,17 @@
             height: auto;
         }
 
-        .rounded {
-            border-radius: 0.25rem;
+        /* ---------------- */
+
+        .card img {
+            object-fit: cover;
+            height: auto;
+            width: 100%;
         }
-    </style> --}}
+
+        /* ---------------- */
+    </style>
+
 @endsection
 
 @section('scripts')
@@ -221,6 +260,5 @@
                 .setLngLat([{{ $apartment->longitude }}, {{ $apartment->latitude }}])
                 .addTo(map);
         });
-
     </script>
 @endsection
