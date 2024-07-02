@@ -146,6 +146,7 @@
                         }
                     });
             });
+    });
 
             // Funzione per pulire gli errori di validazione visualizzati
             function clearValidationErrors() {
@@ -179,8 +180,10 @@
                             inputField.classList.add('is-invalid');
                         }
                     }
-                });
+                }
             }
         });
-    </script>
+    }
+});
+</script>
 @endsection
