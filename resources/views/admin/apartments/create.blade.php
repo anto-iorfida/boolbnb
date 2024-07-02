@@ -54,12 +54,10 @@
                     <div id="addressSuggestions" class="list-group"></div>
                     <div class="invalid-feedback" id="addressError"></div>
                 </div>
-                 <div class="mb-3 col-12 col-md-6">
+                <div class="mb-3 col-12 col-md-6">
                     <label for="images" class="form-label"><strong>Altre immagini dell'appartamento</strong></label>
                     <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" name="images[]" multiple>
-                    @error('images')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <div class="invalid-feedback" id="imagesError"></div>
                 </div>
                 <div class="mb-3 col-12">
                     <label for="description" class="form-label"><strong>Descrizione *</strong></label>
