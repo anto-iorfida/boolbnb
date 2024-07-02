@@ -89,14 +89,6 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="mb-3 col-12 col-md-6">
-                    <label for="price" class="form-label"><strong>Prezzo *</strong></label>
-                    <input type="text" class="form-control @error('price') is-invalid @enderror" id="price"
-                        name="price" value="{{ old('price') }}" min="0">
-                    @error('price')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
                 <div class="mb-3 col-12">
                     <label for="description" class="form-label"><strong>Descrizione *</strong></label>
                     <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
