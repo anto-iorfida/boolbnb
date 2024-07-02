@@ -2,28 +2,39 @@
 
 @section('content')
 
-    <h2 class="fs-4 text-secondary">I tuoi appartamenti</h2>
-    @if (session('apartments_deleted'))
-        <div class="mess-info">Progetto eliminato con successo!</div>
-    @endif
-    <p>In questa pagina puoi visualizzare i tuoi appartamenti caricati su BoolB&B</p>
+<h2 class="fs-4 text-secondary">I tuoi appartamenti</h2>
+@if (session('apartments_deleted'))
+    <div class="mess-info">Progetto eliminato con successo!</div>
+@endif
+<p>In questa pagina puoi visualizzare i tuoi appartamenti caricati su BoolB&B</p>
 
-    <div class="row">
-        <div class="col-12 col-xl-9 mb-4 mb-lg-0">
-            <div class="card">
-                <h5 class="card-header">Appartamenti inseriti</h5>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        @if ($apartments->isEmpty())
-                            <div class="text-center">
-                                <p class="mb-4">Non hai ancora inserito alcun appartamento.</p>
-                                <a href="{{ route('admin.apartments.create') }}" class="btn btn-primary">
-                                    <i class="fas fa-plus"></i> Crea subito un annuncio ed entra nel mondo BoolB&B
-                                </a>
-                            </div>
-                        @else
-                            <table class="table">
-                                <thead>
+<div class="row">
+    <div class="col-12 col-xl-9 mb-4 mb-lg-0">
+        <div class="card">
+            <h5 class="card-header">Appartamenti inseriti</h5>
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if ($apartments->isEmpty())
+                        <div class="text-center">
+                            <p class="mb-4">Non hai ancora inserito alcun appartamento.</p>
+                            <a href="{{ route('admin.apartments.create') }}" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Crea subito un annuncio ed entra nel mondo BoolB&B
+                            </a>
+                        </div>
+                    @else
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Titolo</th>
+                                    <th scope="col">Indirizzo</th>
+                                    <th scope="col">Prezzo</th>
+                                    <th scope="col">Visibilità</th>
+                                    <th scope="col">Visualizzazioni</th>
+                                    <th scope="col">Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($apartments as $apartment)
                                     <tr>
                                         <th scope="col">Titolo</th>
                                         <th scope="col">Indirizzo</th>
