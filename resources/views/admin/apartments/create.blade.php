@@ -35,7 +35,6 @@
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="number_baths" class="form-label"><strong>Numero di Bagni</strong></label>
-
                     <input type="number" class="form-control" id="number_baths" name="number_baths" value="{{ old('number_baths') }}" min="0">
                     <div class="invalid-feedback" id="number_bathsError"></div>
                 </div>
@@ -46,28 +45,8 @@
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="thumb" class="form-label"><strong>Immagine copertina appartamento</strong></label>
-                    <input class="form-control" type="file" id="thumb" name="thumb">
+                    <input type="file" class="form-control" id="thumb" name="thumb">
                     <div class="invalid-feedback" id="thumbError"></div>
-
-                    <input type="number" class="form-control @error('number_baths') is-invalid @enderror" id="number_baths" name="number_baths" value="{{ old('number_baths') }}" min="1">
-                    @error('number_baths')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3 col-12 col-md-6">
-                    <label for="square_meters" class="form-label"><strong>Metri Quadrati</strong></label>
-                    <input type="number" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters') }}" min="0">
-                    @error('square_meters')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3 col-12 col-md-6">
-                    <label for="thumb" class="form-label"><strong>Immagine copertina appartamento</strong></label>
-                    <input type="file" class="form-control @error('thumb') is-invalid @enderror" id="thumb" name="thumb">
-                    @error('thumb')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="address" class="form-label"><strong>Indirizzo *</strong></label>
@@ -75,17 +54,12 @@
                     <div id="addressSuggestions" class="list-group"></div>
                     <div class="invalid-feedback" id="addressError"></div>
                 </div>
-                <div class="mb-3 col-12 col-md-6">
+                 <div class="mb-3 col-12 col-md-6">
                     <label for="images" class="form-label"><strong>Altre immagini dell'appartamento</strong></label>
-
-                    <input class="form-control" type="file" id="images" name="images[]" multiple>
-                    <div class="invalid-feedback" id="imagesError"></div>
-
                     <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" name="images[]" multiple>
                     @error('images')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-
                 </div>
                 <div class="mb-3 col-12">
                     <label for="description" class="form-label"><strong>Descrizione *</strong></label>
@@ -130,83 +104,53 @@
     {{-- axios cdn --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        // Aspetta che il documento sia completamente caricato prima di eseguire il codice.
-document.addEventListener('DOMContentLoaded', function () {
-    
-    // Seleziona il modulo con l'ID 'apartmentForm' e lo assegna alla costante 'form'.
-    const form = document.getElementById('apartmentForm');
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('apartmentForm');
+            const validateBtn = document.getElementById('validateBtn');
 
-    // Seleziona il pulsante con l'ID 'validateBtn' e lo assegna alla costante 'validateBtn'.
-    const validateBtn = document.getElementById('validateBtn');
+            validateBtn.addEventListener('click', function () {
+                clearValidationErrors();
 
-    // Aggiunge un gestore di eventi 'click' al pulsante 'validateBtn'.
-    validateBtn.addEventListener('click', function () {
-        
-        // Chiama la funzione per rimuovere eventuali messaggi di errore di validazione esistenti.
-        clearValidationErrors();
+                axios.post('{{ route('api.validate.apartment') }}', new FormData(form))
+                    .then(response => {
+                        console.log('Dati del form validati con successo.');
 
-        // Invia una richiesta POST asincrona al percorso definito per validare i dati del form.
-        axios.post('{{ route('api.validate.apartment') }}', new FormData(form))
-            .then(response => {
-                // Se la validazione ha successo, mostra un messaggio nella console.
-                console.log('Dati del form validati con successo.');
-
-                // Imposta l'azione del modulo al percorso di memorizzazione degli appartamenti.
-                form.action = '{{ route('admin.apartments.store') }}';
-
-                // Imposta il metodo del modulo su 'POST'.
-                form.method = 'POST';
-
-                // Invia il modulo.
-                form.submit();
-            })
-            .catch(error => {
-                // Se la risposta dell'errore ha un codice di stato 422 (errore di validazione),
-                if (error.response.status === 422) {
-                    // Estrae gli errori dalla risposta e chiama la funzione per mostrarli.
-                    const errors = error.response.data.errors;
-                    displayValidationErrors(errors);
-                } else {
-                    // Se c'è un altro tipo di errore, lo mostra nella console.
-                    console.error('Errore durante la validazione dei dati:', error);
-                }
+                        form.action = '{{ route('admin.apartments.store') }}';
+                        form.method = 'POST';
+                        form.submit();
+                    })
+                    .catch(error => {
+                        if (error.response.status === 422) {
+                            const errors = error.response.data.errors;
+                            displayValidationErrors(errors);
+                        } else {
+                            console.error('Errore durante la validazione dei dati:', error);
+                        }
+                    });
             });
-    });
 
-    // Funzione per rimuovere i messaggi di errore di validazione esistenti dal modulo.
-    function clearValidationErrors() {
-        // Seleziona tutti gli input con la classe 'is-invalid' e rimuove questa classe.
-        form.querySelectorAll('.is-invalid').forEach(input => {
-            input.classList.remove('is-invalid');
-        });
-        // Seleziona tutti gli elementi con la classe 'invalid-feedback' e svuota il loro contenuto di testo.
-        form.querySelectorAll('.invalid-feedback').forEach(errorFeedback => {
-            errorFeedback.textContent = '';
-        });
-    }
+            function clearValidationErrors() {
+                form.querySelectorAll('.is-invalid').forEach(input => {
+                    input.classList.remove('is-invalid');
+                });
+                form.querySelectorAll('.invalid-feedback').forEach(errorFeedback => {
+                    errorFeedback.textContent = '';
+                });
+            }
 
-    // Funzione per mostrare i messaggi di errore di validazione.
-    function displayValidationErrors(errors) {
-        // Itera attraverso gli errori e mostra il messaggio di errore per ciascun campo.
-        Object.keys(errors).forEach(field => {
-            // Ottiene il primo messaggio di errore per il campo.
-            const errorMessage = errors[field][0];
-            
-            // Trova l'elemento di feedback dell'errore corrispondente al campo.
-            const errorFeedback = document.getElementById(`${field}Error`);
-            if (errorFeedback) {
-                // Imposta il messaggio di errore nell'elemento di feedback.
-                errorFeedback.textContent = errorMessage;
-                
-                // Trova l'input corrispondente al campo e aggiunge la classe 'is-invalid'.
-                const inputField = document.getElementById(field);
-                if (inputField) {
-                    inputField.classList.add('is-invalid');
-                }
+            function displayValidationErrors(errors) {
+                Object.keys(errors).forEach(field => {
+                    const errorMessage = errors[field][0];
+                    const errorFeedback = document.getElementById(`${field}Error`);
+                    if (errorFeedback) {
+                        errorFeedback.textContent = errorMessage;
+                        const inputField = document.getElementById(field);
+                        if (inputField) {
+                            inputField.classList.add('is-invalid');
+                        }
+                    }
+                });
             }
         });
-    }
-});
-
     </script>
 @endsection
