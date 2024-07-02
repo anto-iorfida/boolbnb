@@ -104,53 +104,66 @@
     {{-- axios cdn --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('apartmentForm');
-            const validateBtn = document.getElementById('validateBtn');
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('apartmentForm');
+    const validateBtn = document.getElementById('validateBtn');
 
-            validateBtn.addEventListener('click', function () {
-                clearValidationErrors();
+    validateBtn.addEventListener('click', function () {
+        clearValidationErrors();
 
-                axios.post('{{ route('api.validate.apartment') }}', new FormData(form))
-                    .then(response => {
-                        console.log('Dati del form validati con successo.');
+        axios.post('{{ route('api.validate.apartment') }}', new FormData(form))
+            .then(response => {
+                console.log('Dati del form validati con successo.');
 
-                        form.action = '{{ route('admin.apartments.store') }}';
-                        form.method = 'POST';
-                        form.submit();
-                    })
-                    .catch(error => {
-                        if (error.response.status === 422) {
-                            const errors = error.response.data.errors;
-                            displayValidationErrors(errors);
-                        } else {
-                            console.error('Errore durante la validazione dei dati:', error);
-                        }
-                    });
+                form.action = '{{ route('admin.apartments.store') }}';
+                form.method = 'POST';
+                form.submit();
+            })
+            .catch(error => {
+                if (error.response.status === 422) {
+                    const errors = error.response.data.errors;
+                    displayValidationErrors(errors);
+                } else {
+                    console.error('Errore durante la validazione dei dati:', error);
+                }
             });
+    });
 
-            function clearValidationErrors() {
-                form.querySelectorAll('.is-invalid').forEach(input => {
-                    input.classList.remove('is-invalid');
-                });
-                form.querySelectorAll('.invalid-feedback').forEach(errorFeedback => {
-                    errorFeedback.textContent = '';
-                });
-            }
+    function clearValidationErrors() {
+        form.querySelectorAll('.is-invalid').forEach(input => {
+            input.classList.remove('is-invalid');
+        });
+        form.querySelectorAll('.invalid-feedback').forEach(errorFeedback => {
+            errorFeedback.textContent = '';
+        });
+    }
 
-            function displayValidationErrors(errors) {
-                Object.keys(errors).forEach(field => {
-                    const errorMessage = errors[field][0];
-                    const errorFeedback = document.getElementById(`${field}Error`);
-                    if (errorFeedback) {
-                        errorFeedback.textContent = errorMessage;
-                        const inputField = document.getElementById(field);
-                        if (inputField) {
-                            inputField.classList.add('is-invalid');
-                        }
+    function displayValidationErrors(errors) {
+        Object.keys(errors).forEach(field => {
+            if (field === 'services') {
+                const errorMessage = 'Seleziona almeno un servizio.';
+                const errorFeedback = document.getElementById(`${field}Error`);
+                if (errorFeedback) {
+                    errorFeedback.textContent = errorMessage;
+                }
+                // Find all checkbox inputs for services and mark them as invalid
+                const serviceCheckboxes = form.querySelectorAll('input[name="services[]"]');
+                serviceCheckboxes.forEach(checkbox => {
+                    checkbox.classList.add('is-invalid');
+                });
+            } else {
+                const errorMessage = errors[field][0];
+                const errorFeedback = document.getElementById(`${field}Error`);
+                if (errorFeedback) {
+                    errorFeedback.textContent = errorMessage;
+                    const inputField = document.getElementById(field);
+                    if (inputField) {
+                        inputField.classList.add('is-invalid');
                     }
-                });
+                }
             }
         });
-    </script>
+    }
+});
+</script>
 @endsection
