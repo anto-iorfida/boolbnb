@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Album;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -26,10 +27,11 @@ class ApartmentController extends Controller
         return view('admin.apartments.index', compact('apartments'));
     }
 
-    public function create(Service $services) //----------------------------------------------------------------------------------------------------------------------------------
+    public function create(Service $services,Album $albums) //----------------------------------------------------------------------------------------------------------------------------------
     {
         $services = Service::all();
-        return view('admin.apartments.create', compact('services'));
+        $albums = Album::all();
+        return view('admin.apartments.create', compact('services','albums'));
     }
 
     public function store(Request $request) //---------------------------------------------------------------------------------------------------------------------
@@ -52,7 +54,6 @@ class ApartmentController extends Controller
 
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->id_user = Auth::id();
-        // dd($request->all());
         $newApartment->save();
 
         // "Attaccare" i services scelti dall'utente all'appartamento creato
@@ -61,6 +62,9 @@ class ApartmentController extends Controller
         // }
         if ($request->has('services')) {
             $newApartment->services()->attach($validatedData['services']);
+        }
+        if ($request->has('albums')) {
+            $newApartment->albums()->attach($validatedData['albums']);
         }
 
         return redirect()->route('admin.apartments.show', $newApartment->slug)->with('message', $newApartment->title . ' successfully created.');
@@ -183,7 +187,7 @@ class ApartmentController extends Controller
                 'number_beds' => 'required|integer',
                 'number_baths' => 'nullable|integer',
                 'square_meters' => 'nullable|integer',
-                'thumb' => 'required|image|max:256',
+                'thumb' => 'required',
                 'address' => 'required|string',
                 'longitude' => 'required|numeric|between:-180,180',
                 'latitude' => 'required|numeric|between:-90,90',
