@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Album;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -11,15 +12,13 @@ use App\Models\Apartment;
 use App\Models\View;
 use App\Models\Service;
 use App\Models\Sponsor;
-use App\Models\Album;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class ApartmentController extends Controller
 {
-    public function index() //----------------------------------------------------------------------------------------------------------------------------------
-    {
+    public function index() {
         $userId = Auth::id();
 
         $apartments = Apartment::where('id_user', $userId)->get();
@@ -27,13 +26,14 @@ class ApartmentController extends Controller
         return view('admin.apartments.index', compact('apartments'));
     }
 
-    public function create(Service $services) //----------------------------------------------------------------------------------------------------------------------------------
+    public function create(Service $services,Album $albums) 
     {
         $services = Service::all();
-        return view('admin.apartments.create', compact('services'));
+        $albums = Album::all();
+        return view('admin.apartments.create', compact('services','albums'));
     }
 
-    public function store(Request $request) //---------------------------------------------------------------------------------------------------------------------
+    public function store(Request $request) 
     {
         // dd($request->all());
         $validatedData = $this->validation($request->all());
@@ -53,7 +53,6 @@ class ApartmentController extends Controller
 
         $newApartment->slug = Str::slug($newApartment->title, '-');
         $newApartment->id_user = Auth::id();
-        // dd($request->all());
         $newApartment->save();
 
         // "Attaccare" i services scelti dall'utente all'appartamento creato
@@ -62,6 +61,9 @@ class ApartmentController extends Controller
         // }
         if ($request->has('services')) {
             $newApartment->services()->attach($validatedData['services']);
+        }
+        if ($request->has('albums')) {
+            $newApartment->albums()->attach($validatedData['albums']);
         }
 
         // Caricamento delle altre immagini
@@ -199,11 +201,11 @@ class ApartmentController extends Controller
             [
                 'title' => 'required|string|max:255',
                 'description' => 'required|string',
-                'number_rooms' => 'required|integer|min:1',
-                'number_beds' => 'required|integer|min:1',
-                'number_baths' => 'nullable|integer|min:1',
-                'square_meters' => 'nullable|integer|min:0',
-                'thumb' => 'required|image|max:256',
+                'number_rooms' => 'required|integer',
+                'number_beds' => 'required|integer',
+                'number_baths' => 'nullable|integer',
+                'square_meters' => 'nullable|integer',
+                'thumb' => 'required',
                 'address' => 'required|string',
                 'longitude' => 'required|numeric|between:-180,180',
                 'latitude' => 'required|numeric|between:-90,90',
