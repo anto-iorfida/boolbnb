@@ -68,7 +68,7 @@
                 <div class="mb-3 col-12 col-md-6">
                     <label for="thumb" class="form-label @error('thumb') is-invalid @enderror">Immagine copertina
                         appartamento</label>
-                    <input class="form-control" type="file" id="thumb" name="thumb[]" multiple>
+                    <input class="form-control" type="file" id="thumb" name="thumb">
                     @error('thumb')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
