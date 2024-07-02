@@ -66,15 +66,9 @@
                     @enderror
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-<<<<<<< HEAD
                     <label for="thumb" class="form-label @error('thumb') is-invalid @enderror">Immagine copertina
                         appartamento</label>
                     <input class="form-control" type="file" id="thumb" name="thumb[]" multiple>
-=======
-                    <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong>Immagine copertina
-                            appartamento *</strong></label>
-                    <input class="form-control" type="file" id="thumb" name="thumb">
->>>>>>> 6e4044dd1cf5df2a3b3cd509fdfcedf63c64339d
                     @error('thumb')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
