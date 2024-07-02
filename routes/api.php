@@ -24,3 +24,6 @@ Route::get('/apartments', [ApartmentController::class, 'index']);
 
 // http://127.0.0.1:8000/api/apartments/slug    ritorna il singolo appartamento
 Route::get('apartments/{slug}', [ApartmentController::class, 'show']);
+
+// rotta per la validazione
+Route::post('/validate-apartment', [ApartmentController::class, 'validateApartment'])->name('api.validate.apartment');
