@@ -12,15 +12,13 @@ use App\Models\Apartment;
 use App\Models\View;
 use App\Models\Service;
 use App\Models\Sponsor;
-use App\Models\Album;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class ApartmentController extends Controller
 {
-    public function index() //----------------------------------------------------------------------------------------------------------------------------------
-    {
+    public function index() {
         $userId = Auth::id();
 
         $apartments = Apartment::where('id_user', $userId)->get();
@@ -28,14 +26,14 @@ class ApartmentController extends Controller
         return view('admin.apartments.index', compact('apartments'));
     }
 
-    public function create(Service $services,Album $albums) //----------------------------------------------------------------------------------------------------------------------------------
+    public function create(Service $services,Album $albums) 
     {
         $services = Service::all();
         $albums = Album::all();
         return view('admin.apartments.create', compact('services','albums'));
     }
 
-    public function store(Request $request) //---------------------------------------------------------------------------------------------------------------------
+    public function store(Request $request) 
     {
         // dd($request->all());
         $validatedData = $this->validation($request->all());
