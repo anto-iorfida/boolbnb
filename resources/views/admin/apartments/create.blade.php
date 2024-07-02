@@ -115,7 +115,6 @@
                     @enderror
                 </div>
 
-
                 <div class="mb-3 col-12 col-md-6">
                     <label for="visibility" class="form-label"><strong>Visibilità *</strong></label>
                     <select class="form-control @error('visibility') is-invalid @enderror" id="visibility"
