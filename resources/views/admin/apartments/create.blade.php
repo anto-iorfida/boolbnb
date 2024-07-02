@@ -25,22 +25,26 @@
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="number_rooms" class="form-label"><strong>Numero di Stanze *</strong></label>
-                    <input type="number" class="form-control" id="number_rooms" name="number_rooms" value="{{ old('number_rooms') }}" min="0">
+                    <input type="number" class="form-control" id="number_rooms" name="number_rooms"
+                        value="{{ old('number_rooms') }}" min="0">
                     <div class="invalid-feedback" id="number_roomsError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="number_beds" class="form-label"><strong>Numero di Letti *</strong></label>
-                    <input type="number" class="form-control" id="number_beds" name="number_beds" value="{{ old('number_beds') }}" min="0">
+                    <input type="number" class="form-control" id="number_beds" name="number_beds"
+                        value="{{ old('number_beds') }}" min="0">
                     <div class="invalid-feedback" id="number_bedsError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="number_baths" class="form-label"><strong>Numero di Bagni</strong></label>
-                    <input type="number" class="form-control" id="number_baths" name="number_baths" value="{{ old('number_baths') }}" min="0">
+                    <input type="number" class="form-control" id="number_baths" name="number_baths"
+                        value="{{ old('number_baths') }}" min="0">
                     <div class="invalid-feedback" id="number_bathsError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="square_meters" class="form-label"><strong>Metri Quadrati</strong></label>
-                    <input type="number" class="form-control" id="square_meters" name="square_meters" value="{{ old('square_meters') }}" min="0">
+                    <input type="number" class="form-control" id="square_meters" name="square_meters"
+                        value="{{ old('square_meters') }}" min="0">
                     <div class="invalid-feedback" id="square_metersError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
@@ -50,13 +54,15 @@
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="address" class="form-label"><strong>Indirizzo *</strong></label>
-                    <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" autocomplete="off">
+                    <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}"
+                        autocomplete="off">
                     <div id="addressSuggestions" class="list-group"></div>
                     <div class="invalid-feedback" id="addressError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="images" class="form-label"><strong>Altre immagini dell'appartamento</strong></label>
-                    <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" name="images[]" multiple>
+                    <input type="file" class="form-control @error('images') is-invalid @enderror" id="images"
+                        name="images[]" multiple>
                     <div class="invalid-feedback" id="imagesError"></div>
                 </div>
                 <div class="mb-3 col-12">
@@ -65,11 +71,12 @@
                     <div class="invalid-feedback" id="descriptionError"></div>
                 </div>
                 <div class="mb-3 mt-4">
-                    <label  for="checkbox"><strong>Servizi *</strong></label>
+                    <label for="checkbox"><strong>Servizi *</strong></label>
                     <div class="row mb-3 mt-3 p-3">
                         @foreach ($services as $service)
                             <div class="form-check col-6">
-                                <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                                <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox"
+                                    name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
                                 <label class="form-check-label" for="service-{{ $service->id }}">
                                     {{ $service->name }}
                                 </label>
@@ -87,7 +94,7 @@
                     <div class="invalid-feedback" id="visibilityError"></div>
                 </div>
             </div>
-            <!-- Hidden fields for latitude and longitude -->
+
             <input type="hidden" id="longitude" name="longitude" value="{{ old('longitude') }}">
             <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude') }}">
             <button type="button" id="validateBtn" class="btn btn-primary mb-5">Crea Appartamento</button>
@@ -102,61 +109,76 @@
     {{-- axios cdn --}}
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('apartmentForm');
-    const validateBtn = document.getElementById('validateBtn');
+        // Quando il documento è caricato completamente
+        document.addEventListener('DOMContentLoaded', function() {
+            // Seleziona il form con l'ID 'apartmentForm'
+            const form = document.getElementById('apartmentForm');
+            // Seleziona il bottone con l'ID 'validateBtn'
+            const validateBtn = document.getElementById('validateBtn');
 
-    validateBtn.addEventListener('click', function () {
-        clearValidationErrors();
+            // Aggiunge un evento di click al bottone 'validateBtn'
+            validateBtn.addEventListener('click', function() {
+                // Chiama la funzione per pulire eventuali errori di validazione visualizzati
+                clearValidationErrors();
 
-        axios.post('{{ route('api.validate.apartment') }}', new FormData(form))
-            .then(response => {
-                console.log('Dati del form validati con successo.');
+                // Invia i dati del form all'endpoint di validazione usando Axios
+                axios.post('{{ route('api.validate.apartment') }}', new FormData(form))
+                    .then(response => {
+                        // Se la validazione ha successo, logga un messaggio di conferma
+                        console.log('Dati del form validati con successo.');
 
-                form.action = '{{ route('admin.apartments.store') }}';
-                form.method = 'POST';
-                form.submit();
-            })
-            .catch(error => {
-                if (error.response.status === 422) {
-                    const errors = error.response.data.errors;
-                    displayValidationErrors(errors);
-                } else {
-                    console.error('Errore durante la validazione dei dati:', error);
-                }
+                        // Imposta l'azione del form per inviare i dati all'endpoint di salvataggio
+                        form.action = '{{ route('admin.apartments.store') }}';
+                        form.method = 'POST';
+                        // Invia il form
+                        form.submit();
+                    })
+                    .catch(error => {
+                        // Se la risposta ha uno status 422, significa che ci sono errori di validazione
+                        if (error.response.status === 422) {
+                            // Ottieni gli errori di validazione dal server
+                            const errors = error.response.data.errors;
+                            // Chiama la funzione per visualizzare gli errori di validazione
+                            displayValidationErrors(errors);
+                        } else {
+                            // Se c'è un altro tipo di errore, logga l'errore nella console
+                            console.error('Errore durante la validazione dei dati:', error);
+                        }
+                    });
             });
     });
 
-    function clearValidationErrors() {
-        form.querySelectorAll('.is-invalid').forEach(input => {
-            input.classList.remove('is-invalid');
-        });
-        form.querySelectorAll('.invalid-feedback').forEach(errorFeedback => {
-            errorFeedback.textContent = '';
-        });
-    }
-
-    function displayValidationErrors(errors) {
-        Object.keys(errors).forEach(field => {
-            if (field === 'services') {
-                const errorMessage = 'Seleziona almeno un servizio.';
-                const errorFeedback = document.getElementById(`${field}Error`);
-                if (errorFeedback) {
-                    errorFeedback.textContent = errorMessage;
-                }
-                // Find all checkbox inputs for services and mark them as invalid
-                const serviceCheckboxes = form.querySelectorAll('input[name="services[]"]');
-                serviceCheckboxes.forEach(checkbox => {
-                    checkbox.classList.add('is-invalid');
+            // Funzione per pulire gli errori di validazione visualizzati
+            function clearValidationErrors() {
+                // Rimuove la classe 'is-invalid' da tutti gli input che la contengono
+                form.querySelectorAll('.is-invalid').forEach(input => {
+                    input.classList.remove('is-invalid');
                 });
-            } else {
-                const errorMessage = errors[field][0];
-                const errorFeedback = document.getElementById(`${field}Error`);
-                if (errorFeedback) {
-                    errorFeedback.textContent = errorMessage;
-                    const inputField = document.getElementById(field);
-                    if (inputField) {
-                        inputField.classList.add('is-invalid');
+                // Pulisce il testo di tutti gli elementi con la classe 'invalid-feedback'
+                form.querySelectorAll('.invalid-feedback').forEach(errorFeedback => {
+                    errorFeedback.textContent = '';
+                });
+            }
+
+            // Funzione per visualizzare gli errori di validazione
+            function displayValidationErrors(errors) {
+                // Per ogni campo con errori
+                Object.keys(errors).forEach(field => {
+                    // Ottieni il messaggio di errore per il campo
+                    const errorMessage = errors[field][0];
+                    // Trova l'elemento di feedback degli errori corrispondente
+                    const errorFeedback = document.getElementById(`${field}Error`);
+                    // Se esiste un elemento di feedback degli errori
+                    if (errorFeedback) {
+                        // Imposta il testo dell'elemento di feedback degli errori
+                        errorFeedback.textContent = errorMessage;
+                        // Trova il campo di input corrispondente
+                        const inputField = document.getElementById(field);
+                        // Se esiste un campo di input
+                        if (inputField) {
+                            // Aggiungi la classe 'is-invalid' al campo di input
+                            inputField.classList.add('is-invalid');
+                        }
                     }
                 }
             }
