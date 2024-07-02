@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('address');
             $table->double('longitude', 15, 8);
             $table->double('latitude', 15, 8);
-            $table->decimal('price', 10, 2);
             $table->boolean('visibility')->nullable();
             $table->timestamps();
 

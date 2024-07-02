@@ -89,7 +89,6 @@ class ApartmentsTableSeeder extends Seeder
                 'address' => $faker->address,
                 'longitude' => $longitude,
                 'latitude' => $latitude,
-                'price' => $faker->randomFloat(2, 50, 500),
                 'visibility' => $faker->boolean,
             ]);
         }
