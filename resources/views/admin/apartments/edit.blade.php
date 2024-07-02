@@ -145,6 +145,9 @@
                             <p>Nessun servizio disponibile.</p>
                         @endif
                     </div> --}}
+                    @error('services')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3 mt-4">
