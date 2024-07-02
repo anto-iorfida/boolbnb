@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
+
 class ApartmentController extends Controller
 {
     public function index()

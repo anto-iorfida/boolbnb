@@ -8,11 +8,15 @@ use App\Models\Service;
 use App\Models\View;
 use App\Models\User;
 use App\Models\Album;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Apartment extends Model
 {
     use HasFactory;
+    
+    use SoftDeletes;
+
     protected $fillable = [
         'id_user',
         'title',
