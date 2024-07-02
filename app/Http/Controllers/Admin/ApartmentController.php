@@ -18,7 +18,8 @@ use Illuminate\Validation\Rule;
 
 class ApartmentController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $userId = Auth::id();
 
         $apartments = Apartment::where('id_user', $userId)->get();
@@ -26,14 +27,14 @@ class ApartmentController extends Controller
         return view('admin.apartments.index', compact('apartments'));
     }
 
-    public function create(Service $services,Album $albums) 
+    public function create(Service $services, Album $albums)
     {
         $services = Service::all();
         $albums = Album::all();
-        return view('admin.apartments.create', compact('services','albums'));
+        return view('admin.apartments.create', compact('services', 'albums'));
     }
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         // dd($request->all());
         $validatedData = $this->validation($request->all());
@@ -47,6 +48,7 @@ class ApartmentController extends Controller
             $img_path = Storage::disk('public')->put('apartment_images', $formData['thumb']);
             $formData['thumb'] = $img_path;
         }
+        
 
         $newApartment = new Apartment();
         $newApartment->fill($formData);
@@ -161,9 +163,9 @@ class ApartmentController extends Controller
                 'services.*.exists' => 'Il servizio selezionato non esiste',
             ]
         );
-    
+
         $formData = $request->all();
-    
+
         if ($request->hasFile('thumb')) {
             if ($apartment->thumb) {
                 Storage::disk('public')->delete($apartment->thumb);
@@ -171,20 +173,20 @@ class ApartmentController extends Controller
             $img_path = Storage::disk('public')->put('apartment_images', $request->file('thumb'));
             $formData['thumb'] = $img_path;
         }
-    
+
         $apartment->slug = Str::slug($formData['title'], '-');
         $apartment->update($formData);
-    
+
         if ($request->has('services')) {
             $apartment->services()->sync($validatedData['services']);
         } else {
             $apartment->services()->detach();
         }
-    
+
         session()->flash('apartments_edit', true);
         return redirect()->route('admin.apartments.show', $apartment->slug);
     }
-    
+
 
     public function destroy(Apartment $apartment)
     {
