@@ -127,24 +127,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
-                    {{-- <div class="mb-3 mt-4">
-                        <label for="checkbox"><strong>Servizi</strong></label>
-                
-                            @foreach ($services as $service)
-                                <div class="form-check col-6">
-                                    <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox"
-                                        name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
-                                    <label class="form-check-label" for="service-{{ $service->id }}">
-                                        {{ $service->name }}
-                                    </label>
-                                </div>
-                            @endforeach
-                        </div>
-                        @else
-                            <p>Nessun servizio disponibile.</p>
-                        @endif
-                    </div> --}}
                 </div>
 
                 <div class="mb-3 mt-4">
