@@ -47,24 +47,21 @@
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="number_baths" class="form-label"><strong>Numero di Bagni</strong></label>
-                    <input type="number" class="form-control" id="number_baths" name="number_baths"
-                        value="{{ old('number_baths') }}" min="0">
+                    <input type="number" class="form-control @error('number_baths') is-invalid @enderror" id="number_baths" name="number_baths" value="{{ old('number_baths') }}" min="1">
                     @error('number_baths')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="square_meters" class="form-label"><strong>Metri Quadrati</strong></label>
-                    <input type="number" class="form-control " id="square_meters" name="square_meters"
-                        value="{{ old('square_meters') }}" min="0">
+                    <input type="number" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters" name="square_meters" value="{{ old('square_meters') }}" min="0">
                     @error('square_meters')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong>Immagine copertina
-                        appartamento</strong></label>
-                    <input class="form-control" type="file" id="thumb" name="thumb">
+                    <label for="thumb" class="form-label"><strong>Immagine copertina appartamento</strong></label>
+                    <input type="file" class="form-control @error('thumb') is-invalid @enderror" id="thumb" name="thumb">
                     @error('thumb')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -79,8 +76,8 @@
                     @enderror
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="images" class="form-label @error('images') is-invalid @enderror"><strong>Altre immagini dell'appartamento</strong></label>
-                    <input class="form-control" type="file" id="images" name="images[]" multiple>
+                    <label for="images" class="form-label"><strong>Altre immagini dell'appartamento</strong></label>
+                    <input type="file" class="form-control @error('images') is-invalid @enderror" id="images" name="images[]" multiple>
                     @error('images')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
