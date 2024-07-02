@@ -164,10 +164,6 @@
                 <div id="map" class="rounded mb-4"></div>
 
                 <div class="me-2">
-                    <strong>Prezzo:</strong> {{ number_format($apartment->price, 2) }} €
-                </div>
-
-                <div class="me-2">
                     <strong>Visibilità:</strong> {{ $apartment->visibility ? 'Visibile' : 'Non Visibile' }}
                 </div>
 
