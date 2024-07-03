@@ -7,6 +7,8 @@ use App\Models\Apartment;
 use App\Models\Service;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Models\Message;
+use Illuminate\Support\Facades\Log;
 
 
 class ApartmentController extends Controller
@@ -157,5 +159,49 @@ public function searchApartments(Request $request)
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         }
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            // Validazione dei campi obbligatori
+            $validatedData = $request->validate([
+                'apartment_id' => 'required|exists:apartments,id',
+                'name_lastname' => 'required|string|max:255',
+                'email_sender' => 'required|email|max:255',
+                'body' => 'required|string',
+            ]);
+    
+            Log::info('Validated Data: ' . json_encode($validatedData));
+    
+            // Recupera l'appartamento tramite l'ID passato nel payload della richiesta
+            $apartment = Apartment::findOrFail($validatedData['apartment_id']);
+    
+            Log::info('Apartment found: ' . json_encode($apartment));
+    
+            // Crea e salva il messaggio
+            $message = new Message();
+            $message->apartment_id = $apartment->id;
+            $message->name_lastname = $validatedData['name_lastname'];
+            $message->email_sender = $validatedData['email_sender'];
+            $message->body = $validatedData['body'];
+            $message->save();
+    
+            // Risposta JSON con conferma di successo
+            return response()->json(['message' => 'Messaggio inviato con successo'], 200);
+        } catch (\Exception $e) {
+            // Gestione degli errori e risposta JSON con errore
+            Log::error('Errore durante il salvataggio del messaggio: ' . $e->getMessage());
+            return response()->json(['error' => 'Errore durante il salvataggio del messaggio'], 500);
+        }
+    }
+    
+    public function showMessages($slug)
+    {
+        $apartment = Apartment::where('slug', $slug)->firstOrFail();
+
+        $messages = $apartment->messages()->get(); 
+
+        return view('messages.index', compact('messages'));
     }
 }

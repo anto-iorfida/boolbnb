@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ApartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApartmentControllerController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,3 +31,7 @@ Route::get('/apartment/search', [ApartmentController::class, 'searchApartments']
 
 // rotta per la validazione
 Route::post('/validate-apartment', [ApartmentController::class, 'validateApartment'])->name('api.validate.apartment');
+
+// ROTTA PER MESSAGGI
+Route::post('/apartment/messages', [ApartmentController::class, 'store'])->name('apartment.messages.store');
+
