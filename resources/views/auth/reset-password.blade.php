@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
+                    <form id="reset-password-form" method="POST" action="{{ route('password.update') }}">
                         @csrf
 
                         <!-- Password Reset Token -->
@@ -63,4 +63,57 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('reset-password-form');
+        form.addEventListener('submit', function(event) {
+            // Reset error messages
+            const errorMessages = document.querySelectorAll('.invalid-feedback');
+            errorMessages.forEach(function(errorMessage) {
+                errorMessage.remove();
+            });
+
+            // Validate email
+            const emailInput = document.getElementById('email');
+            if (!isValidEmail(emailInput.value)) {
+                showError(emailInput, 'Inserisci un indirizzo email valido.');
+                event.preventDefault();
+                return;
+            }
+
+            // Validate password
+            const passwordInput = document.getElementById('password');
+            if (passwordInput.value.length < 8) {
+                showError(passwordInput, 'La password deve contenere almeno 8 caratteri.');
+                event.preventDefault();
+                return;
+            }
+
+            // Validate password confirmation
+            const passwordConfirmInput = document.getElementById('password-confirm');
+            if (passwordInput.value !== passwordConfirmInput.value) {
+                showError(passwordConfirmInput, 'Le password non corrispondono.');
+                event.preventDefault();
+                return;
+            }
+        });
+
+        // Helper function to display error message
+        function showError(input, message) {
+            const errorElement = document.createElement('div');
+            errorElement.className = 'invalid-feedback';
+            errorElement.innerText = message;
+            input.classList.add('is-invalid');
+            input.parentNode.appendChild(errorElement);
+        }
+
+        // Helper function to validate email format
+        function isValidEmail(email) {
+            // Regular expression for email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    });
+</script>
 @endsection
