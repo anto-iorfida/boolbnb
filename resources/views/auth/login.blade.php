@@ -23,7 +23,7 @@
                                     <div class="col-md-6">
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
-                                            placeholder="E-Mail Address"
+                                            placeholder="Indirizzo E-Mail"
                                             value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                         @error('email')
@@ -31,6 +31,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                        <div id="email-error" class="invalid-feedback"></div>
                                     </div>
                                 </div>
 
@@ -46,6 +47,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                        <div id="password-error" class="invalid-feedback"></div>
                                     </div>
                                 </div>
 
@@ -86,31 +88,41 @@
     <script>
         // JavaScript per validazione aggiuntiva
         document.getElementById('login-form').addEventListener('submit', function(event) {
-            var emailField = document.getElementById('email');
-            var passwordField = document.getElementById('password');
+            const emailField = document.getElementById('email');
+            const passwordField = document.getElementById('password');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+
+            let valid = true;
+
+            // Reset dei messaggi di errore
+            emailError.innerHTML = '';
+            passwordError.innerHTML = '';
+            emailField.classList.remove('is-invalid');
+            passwordField.classList.remove('is-invalid');
 
             // Validazione email
             if (!isValidEmail(emailField.value)) {
-                alert('Please enter a valid email address.');
-                emailField.focus();
-                event.preventDefault();
-                return false;
+                emailError.innerHTML = '<strong>Per favore, inserisci un indirizzo email valido.</strong>';
+                emailField.classList.add('is-invalid');
+                valid = false;
             }
 
             // Validazione password
-            if (passwordField.value.length < 6) { // Esempio: almeno 6 caratteri
-                alert('Password must be at least 6 characters long.');
-                passwordField.focus();
-                event.preventDefault();
-                return false;
+            if (passwordField.value.length < 8) { // Almeno 8 caratteri
+                passwordError.innerHTML = '<strong>La password deve contenere almeno 8 caratteri.</strong>';
+                passwordField.classList.add('is-invalid');
+                valid = false;
             }
 
-            return true;
+            if (!valid) {
+                event.preventDefault();
+            }
         });
 
-        // Funzione per la validazione dell'email (se necessario)
+        // Funzione per la validazione dell'email
         function isValidEmail(email) {
-            var re = /\S+@\S+\.\S+/;
+            const re = /\S+@\S+\.\S+/;
             return re.test(email);
         }
     </script>
