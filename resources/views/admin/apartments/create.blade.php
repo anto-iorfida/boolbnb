@@ -36,19 +36,19 @@
                     <div class="invalid-feedback" id="number_bedsError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="number_baths" class="form-label"><strong>Numero di Bagni</strong></label>
+                    <label for="number_baths" class="form-label"><strong>Numero di Bagni *</strong></label>
                     <input type="number" class="form-control" id="number_baths" name="number_baths"
                         value="{{ old('number_baths') }}" min="0">
                     <div class="invalid-feedback" id="number_bathsError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="square_meters" class="form-label"><strong>Metri Quadrati</strong></label>
+                    <label for="square_meters" class="form-label"><strong>Metri Quadrati *</strong></label>
                     <input type="number" class="form-control" id="square_meters" name="square_meters"
                         value="{{ old('square_meters') }}" min="0">
                     <div class="invalid-feedback" id="square_metersError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="thumb" class="form-label"><strong>Immagine copertina appartamento</strong></label>
+                    <label for="thumb" class="form-label"><strong>Immagine copertina appartamento *</strong></label>
                     <input type="file" class="form-control" id="thumb" name="thumb">
                     <div class="invalid-feedback" id="thumbError"></div>
                 </div>
@@ -60,7 +60,7 @@
                     <div class="invalid-feedback" id="addressError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="images" class="form-label"><strong>Altre immagini dell'appartamento</strong></label>
+                    <label for="images" class="form-label"><strong>Altre immagini dell'appartamento *</strong></label>
                     <input type="file" class="form-control @error('images') is-invalid @enderror" id="images"
                         name="images[]" multiple>
                     <div class="invalid-feedback" id="imagesError"></div>
