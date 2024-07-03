@@ -28,6 +28,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <div id="email-error" class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -48,22 +49,30 @@
 <script>
     // JavaScript per validazione aggiuntiva
     document.getElementById('reset-password-form').addEventListener('submit', function(event) {
-        var emailField = document.getElementById('email');
+        const emailField = document.getElementById('email');
+        const emailError = document.getElementById('email-error');
+
+        let valid = true;
+
+        // Reset dei messaggi di errore
+        emailError.innerHTML = '';
+        emailField.classList.remove('is-invalid');
 
         // Validazione email
         if (!isValidEmail(emailField.value)) {
-            alert('Please enter a valid email address.');
-            emailField.focus();
-            event.preventDefault();
-            return false;
+            emailError.innerHTML = '<strong>Per favore, inserisci un indirizzo email valido.</strong>';
+            emailField.classList.add('is-invalid');
+            valid = false;
         }
 
-        return true;
+        if (!valid) {
+            event.preventDefault();
+        }
     });
 
-    // Funzione per la validazione dell'email (se necessario)
+    // Funzione per la validazione dell'email
     function isValidEmail(email) {
-        var re = /\S+@\S+\.\S+/;
+        const re = /\S+@\S+\.\S+/;
         return re.test(email);
     }
 </script>
