@@ -21,6 +21,9 @@ class ApartmentController extends Controller
             'result' => $apartments
         ]);
     }
+    
+
+
 
     public function show($slug)
     {
@@ -40,6 +43,66 @@ class ApartmentController extends Controller
 
         return response()->json($data);
     }
+
+
+//     public function searchApartment()
+// {
+//     // Codice per recuperare gli appartamenti con i servizi
+//     $apartments = Apartment::with('services')->get();
+
+//         return response()->json([
+//             'success' => true,
+//             'result' => $apartments
+//         ]);
+// }
+
+public function searchApartments(Request $request)
+{
+    // Ottiene la latitudine convertendola in float dal parametro 'latitude' della query
+    $latitude = floatval($request->query('latitude'));
+
+    // Ottiene la longitudine convertendola in float dal parametro 'longitude' della query
+    $longitude = floatval($request->query('longitude'));
+
+    // Ottiene il raggio convertendolo in float dal parametro 'radius' della query, con default a 1000 km se non specificato
+    $radius = floatval($request->query('radius', 1000));
+
+    // Valida i parametri della richiesta
+    $request->validate([
+        'latitude' => 'required|numeric',
+        'longitude' => 'required|numeric',
+        'radius' => 'required|numeric|min:1'
+    ]);
+
+    try {
+        // Esegue una query per selezionare gli appartamenti e calcolare la distanza in base alle coordinate fornite
+        $apartments = Apartment::selectRaw(
+            "*, 
+            ( 6371 * acos( 
+                cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) 
+                + sin( radians(?) ) * sin( radians( latitude ) ) 
+            ) ) AS distance",
+            [$latitude, $longitude, $latitude]
+        )
+            // Filtra i risultati per distanza, includendo solo quelli entro il raggio specificato
+            ->having("distance", "<", $radius)
+            // Ordina i risultati per distanza in ordine ascendente
+            ->orderBy("distance", 'asc')
+            // Carica anche le relazioni di servizi degli appartamenti, se necessario
+            ->with('services')
+            // Esegue la query e ottiene tutti i risultati
+            ->get();
+
+        // Restituisce una risposta JSON con i risultati degli appartamenti trovati
+        return response()->json(['success' => true, 'result' => $apartments]);
+    } catch (\Exception $e) {
+        // Se si verifica un'eccezione durante l'esecuzione della query, restituisce un errore con codice 500
+        return response()->json(['success' => false, 'error' => 'An error occurred while fetching apartments.'], 500);
+    }
+}
+
+
+
 
     private function validation($data)
     {
