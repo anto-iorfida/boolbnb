@@ -13,7 +13,8 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::with('services')->paginate(3);
+        // $apartments = Apartment::with('services')->paginate(3);
+        $apartments = Apartment::with('services')->get();
 
         return response()->json([
             'success' => true,
