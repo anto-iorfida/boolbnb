@@ -25,7 +25,7 @@ Route::get('/apartments', [ApartmentController::class, 'index']);
 // http://127.0.0.1:8000/api/apartments/slug    ritorna il singolo appartamento
 Route::get('/apartments/{slug}', [ApartmentController::class, 'show']);
 
-// http://127.0.0.1:8000/api/apartment/search    ricerca appartamenti per coordinate e raggio
+// http://127.0.0.1:8000/api/apartment/search  + params = latitude + longitude + radius   ricerca appartamenti per coordinate e raggio
 Route::get('/apartment/search', [ApartmentController::class, 'searchApartments']);
 
 // rotta per la validazione
