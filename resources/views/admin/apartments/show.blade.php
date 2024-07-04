@@ -60,7 +60,7 @@
                         </div>
                     @endif
                     <div class="row ">
-                        @foreach ($apartment->albums as $album)
+                        @foreach ($album->images as $image)
                             <div class="col-4 col-md-4  d-inline">
                                 <img src="{{ asset('storage/' . $album->image) }}" alt="Immagine appartamento"
                                     class="img-fluid rounded-4">
