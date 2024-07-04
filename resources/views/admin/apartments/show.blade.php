@@ -59,15 +59,19 @@
                             <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="img-fluid rounded-4">
                         </div>
                     @endif
-                    <div class="row ">
-                        @foreach ($album->images as $image)
-                            <div class="col-4 col-md-4  d-inline">
-                                <img src="{{ asset('storage/' . $album->image) }}" alt="Immagine appartamento"
-                                    class="img-fluid rounded-4">
-                            </div>
+
+                    <div class="row">
+                        @foreach ($apartment->albums as $album)
+                            @foreach ($album->images as $image)
+                                <div class="col-4 col-md-4">
+                                    <img src="{{ asset('storage/' . $image->image) }}" alt="Immagine appartamento"
+                                        class="img-fluid rounded-4">
+                                </div>
+                            @endforeach
                         @endforeach
                     </div>
                 </div>
+
                 <div class="row mb-4">
                     <div class="col">
                         <div class="mb-2">
