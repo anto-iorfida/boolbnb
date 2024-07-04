@@ -2,7 +2,16 @@
 @section('content')
 <h2 class="fs-4 text-secondary">I tuoi appartamenti</h2>
 @if (session('apartments_deleted'))
-    <div class="mess-info">Progetto eliminato con successo!</div>
+    <div class="mess-info">Appartamento eliminato con successo!</div>
+@endif
+@if (session('apartments_restore'))
+    <div class="mess-info">Appartamento recuperato con successo!</div>
+@endif
+@if (session('apartments_forceDelete'))
+    <div class="mess-info">Appartamento eliminato con successo!</div>
+@endif
+@if (session('apartments_restoreAll'))
+    <div class="mess-info">Appartamenti recuperati con successo!</div>
 @endif
 <p>In questa pagina puoi visualizzare i tuoi appartamenti caricati su BoolB&B</p>
 <div class="row">
@@ -73,7 +82,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Sei sicuro di voler eliminare l'appartamento: <strong id="apartment-title"></strong>?
+               Sei sicuro di cestinare questo appartamento: <strong id="apartment-title"></strong>?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>

@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +25,12 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
+        Route::get('/garbage',[ApartmentController::class, 'indexDeleted'])->name('garbage');
+        Route::group(['prefix' => 'garbage'], function() {
+            Route::post('/{apartment}/restore', [ApartmentController::class, 'restore'])->name('garbages.restore');
+            Route::delete('/{apartment}/force', [ApartmentController::class, 'forceDelete'])->name('garbages.forcedelete');
+            Route::post('/restore-all', [ApartmentController::class, 'restoreAll'])->name('garbages.restoreall');
+        });
     });
 
 Route::middleware('auth')->group(function () {

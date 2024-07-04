@@ -95,6 +95,13 @@
                                 <small>Inserisci appartamento</small>
                             </a>
                         </li>
+                        <li class="nav-item p-2">
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.garbage' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
+                                href="{{ route('admin.garbage') }}">
+                                <i class="fa-solid fa-trash"></i>
+                                <small>Cestino</small>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
