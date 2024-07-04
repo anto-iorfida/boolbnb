@@ -60,9 +60,9 @@
                     <div class="invalid-feedback" id="addressError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="image" class="form-label"><strong>Altre immagini dell'appartamento *</strong></label>
-                    <input type="file" class="form-control" id="image" name="image" multiple>
-                    <div class="invalid-feedback" id="imageError"></div>
+                    <label for="images" class="form-label"><strong>Altre immagini dell'appartamento *</strong></label>
+                    <input type="file" class="form-control" id="images" name="images" multiple>
+                    <div class="invalid-feedback" id="imagesError"></div>
                 </div>
                 <div class="mb-3 col-12">
                     <label for="description" class="form-label"><strong>Descrizione *</strong></label>
