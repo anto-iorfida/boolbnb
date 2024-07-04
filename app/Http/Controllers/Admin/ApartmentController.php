@@ -12,6 +12,7 @@ use App\Models\Apartment;
 use App\Models\View;
 use App\Models\Service;
 use App\Models\Sponsor;
+use App\Models\Message;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -23,7 +24,8 @@ class ApartmentController extends Controller
     {
         $userId = Auth::id();
         $apartments = Apartment::where('id_user', $userId)->get();
-        return view('admin.apartments.index', compact('apartments'));
+        $messages = Message::orderByDesc('created_at')->get();
+        return view('admin.apartments.index', compact('apartments', 'messages'));
     }
 
     public function create(Service $services, Album $albums)
