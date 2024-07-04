@@ -47,7 +47,7 @@ class ApartmentController extends Controller
     }
 
 
-//     public function searchApartment()
+ //     public function searchApartment()
 // {
 //     // Codice per recuperare gli appartamenti con i servizi
 //     $apartments = Apartment::with('services')->get();
@@ -57,9 +57,7 @@ class ApartmentController extends Controller
 //             'result' => $apartments
 //         ]);
 // }
-
-public function searchApartments(Request $request)
-{
+  public function searchApartments(Request $request){
     // Ottiene la latitudine convertendola in float dal parametro 'latitude' della query
     $latitude = floatval($request->query('latitude'));
 
