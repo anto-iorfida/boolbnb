@@ -104,6 +104,13 @@
                                 <small>Cestino</small>
                             </a>
                         </li>
+                        <li class="nav-item p-2">
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.messages' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
+                                href="{{ route('admin.messages') }}">
+                                <i class="fa-regular fa-comment"></i>
+                                <small>Messaggi Ricevuti</small>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
