@@ -63,7 +63,7 @@ class ServicesTableSeeder extends Seeder
 
 
         $iconServices = [
-            'fa-solid fa-wifi',
+                'fa-solid fa-wifi',
                 'fi fi-rs-snowflakes',
                 ' fi fi-rs-croissant',
                 'fi fi-rs-screen',

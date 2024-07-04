@@ -35,19 +35,74 @@
 <body>
     {{-- ||||||||||||||||||||||||||||||||  inizio header ||||||||||||||||||||||||||||||| --}}
     <header class="sticky-top ms-bg-header">
-        <nav class="navbar navbar-light p-3">
-            <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
+        <nav class="navbar navbar-light gap-5 p-3 ">
+            <div
+                class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-grow-1 pe-3 ps-3 flex-md-nowrap justify-content-between">
                 <a class="navbar-brand" href="/">
                     <img src="{{ Vite::asset('resources/img/logo-dashboard.png') }}" alt="BoolB&B" class="ms-logo">
                 </a>
-                <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse"
-                    data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler d-md-none collapsed mb-3 " type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="collapse navbar-collapse d-md-none my-btn-navbar" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link text-white" aria-current="page" href="/">Home</a>
+                        <a class="nav-link text-white" href="{{ route('admin.apartments.index') }}">Appartamenti</a>
+                        <a class="nav-link text-white "  href="{{ route('admin.apartments.create') }}">Inserisci appartamento</a>
+                        <a class="nav-link text-white" href="{{ route('admin.messages') }}">Messaggi</a>
+                        <a class="nav-link text-white" href="{{ route('admin.garbage') }}">Cestino</a>
+                        <a class="dropdown-item text-white" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><i
+                                class="fa-solid fa-arrow-right-from-bracket text-white"></i>
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+
+                        {{-- logout display lg  --}}
+                        <div
+                            class="d-none d-md-flex  col-12 col-md-5 col-lg-1 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Ciao, {{ Auth::user()->name }}
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"><i
+                                                class="fa-solid fa-arrow-right-from-bracket"></i>
+                                            {{ __('Logout') }}
+                                        </a>
+                                    </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
+                                        @csrf
+                                    </form>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col d-none d-lg-flex justify-content-end me-5 gap-3">
+                <a href="{{ route('admin.garbage') }}"
+                    class="text-primary  p-2 rounded-pill d-flex align-items-center justify-content-center text-decoration-none my-btn-nav">
+                    <i class="fa-solid fa-trash fs-4 "></i>
+                </a>
+                <a href="{{ route('admin.messages') }}"
+                    class="text-primary  p-2 rounded-pill d-flex align-items-center justify-content-center text-decoration-none my-btn-nav">
+                    <i class="fa-regular fa-message fs-4 "></i>
+                </a>
             </div>
 
-            <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
-                <div class="btn-group">
+            <div
+                class="d-none d-md-flex  col-12 col-md-5 col-lg-1 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+                <div class="btn-group ">
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Ciao, {{ Auth::user()->name }}
@@ -84,14 +139,14 @@
                             </a>
                         </li>
                         <li class="nav-item p-2">
-                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' || Route::currentRouteName() == 'admin.apartments.show' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' || Route::currentRouteName() == 'admin.apartments.show' ? 'bg-body-secondary text-dark border-start border-primary rounded' : '' }}"
                                 href="{{ route('admin.apartments.index') }}">
                                 <i class="fa-solid fa-building"></i>
                                 <small>I miei appartamenti</small>
                             </a>
                         </li>
                         <li class="nav-item p-2">
-                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-body-secondary text-dark border-start border-primary  rounded' : '' }}"
                                 href="{{ route('admin.apartments.create') }}">
                                 <i class="fa-solid fa-plus"></i>
                                 <small>Inserisci appartamento</small>
@@ -211,11 +266,33 @@
         }
     }
 
+    .my-btn-nav {
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        border: 1px solid black;
+    }
+
+    .my-btn-nav:hover {
+        background: #0d81fd;
+        color: white;
+        border: 1px solid white;
+        transition: 0.3s;
+    }
+
+    .my-btn-nav:hover.my-btn-nav>i {
+        color: white;
+    }
+
     .sidebar .nav-link {
         color: #7d7979;
     }
 
     .sidebar .nav-link.active {
         color: #0d6efd;
+    }
+
+    .my-btn-navbar {
+        transition: 0.6s;
     }
 </style>
