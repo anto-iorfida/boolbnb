@@ -74,7 +74,7 @@
 </div>
 
   <!-- Sezione per i messaggi ricevuti -->
-    <div class="row mt-4">
+    {{-- <div class="row mt-4">
         <div class="col-11 mb-4 mb-lg-0">
             <div class="card">
                 <h5 class="card-header">Messaggi Ricevuti</h5>
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 <!-- Modal di Conferma -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
