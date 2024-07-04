@@ -14,7 +14,7 @@
                     </div>
                     @endif
 
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form id="reset-password-form" method="POST" action="{{ route('password.email') }}">
                         @csrf
 
                         <div class="mb-4 row">
@@ -28,6 +28,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <div id="email-error" class="invalid-feedback"></div>
                             </div>
                         </div>
 
@@ -44,4 +45,35 @@
         </div>
     </div>
 </div>
+
+<script>
+    // JavaScript per validazione aggiuntiva
+    document.getElementById('reset-password-form').addEventListener('submit', function(event) {
+        const emailField = document.getElementById('email');
+        const emailError = document.getElementById('email-error');
+
+        let valid = true;
+
+        // Reset dei messaggi di errore
+        emailError.innerHTML = '';
+        emailField.classList.remove('is-invalid');
+
+        // Validazione email
+        if (!isValidEmail(emailField.value)) {
+            emailError.innerHTML = '<strong>Per favore, inserisci un indirizzo email valido.</strong>';
+            emailField.classList.add('is-invalid');
+            valid = false;
+        }
+
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
+
+    // Funzione per la validazione dell'email
+    function isValidEmail(email) {
+        const re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+</script>
 @endsection

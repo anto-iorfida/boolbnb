@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\MessageController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +30,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/garbage',[ApartmentController::class, 'indexDeleted'])->name('garbage');
         Route::group(['prefix' => 'garbage'], function() {
             Route::post('/{apartment}/restore', [ApartmentController::class, 'restore'])->name('garbages.restore');
-            Route::delete('/{apartment}/force', [ApartmentController::class, 'forceDelete'])->name('garbages.forcedelete');
+//             Route::delete('/{apartment}/force', [ApartmentController::class, 'forceDelete'])->name('garbages.forcedelete');
             Route::post('/restore-all', [ApartmentController::class, 'restoreAll'])->name('garbages.restoreall');
         });
     });
