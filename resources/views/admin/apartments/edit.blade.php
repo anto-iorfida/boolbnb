@@ -118,6 +118,7 @@
                         <label for="checkbox"><strong>Servizi</strong></label>
                         <div class="row mb-3 mt-3 p-3">
                             @foreach ($services as $service)
+                            <div>  <i class="{{$service->icon}}"></i></div>
                                 <div class="form-check col-6 ">
                                     @if ($errors->any())
                                         {{-- Se cis sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}

@@ -44,7 +44,7 @@
                                                     </div>
                                                     <div>
                                                         {{-- Permanent Delete Form --}}
-                                                        <form
+                                                        {{-- <form
                                                             action="{{ route('admin.garbages.forcedelete', $apartment->id) }}"
                                                             method="POST">
                                                             @csrf
@@ -53,7 +53,7 @@
                                                                 <i class="fa-solid fa-trash-can"></i>
                                                                 Permanently Delete
                                                             </button>
-                                                        </form>
+                                                        </form> --}}
                                                     </div>
                                                 </div>
                                             </td>
@@ -61,6 +61,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @if ($apartments->count() > 1)
                             <div class="d-flex align-items-center justify-content-center ">
                                 <form action="{{ route('admin.garbages.restoreall') }}" method="POST">
                                     @csrf
@@ -71,6 +72,7 @@
                                     </button>
                                 </form>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>

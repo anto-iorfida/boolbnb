@@ -68,9 +68,6 @@
                         @endforeach
                     </div>
                 </div>
-
-
-
                 <div class="row mb-4">
                     <div class="col">
                         <div class="mb-2">
@@ -116,13 +113,15 @@
                         <strong>Servizi:</strong>
                         <br />
                         @if (count($apartment->services) > 0)
-                            @foreach ($apartment->services as $service)
-                                {{ $service->name }}@if (!$loop->last)
-                                    ,
-                                @endif
-                            @endforeach
-                        @else
-                            nessuno
+                            <div class="d-flex gap-3">
+                                @foreach ($apartment->services as $service)
+                                    <div><i class="{{ $service->icon }}"></i></div>
+                                    <div>{{ $service->name }}@if (!$loop->last)
+                                        @endif
+                                    </div>
+                                @endforeach
+                            @else
+                                nessuno
                         @endif
                     </div>
                 </div>
