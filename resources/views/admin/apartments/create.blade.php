@@ -79,19 +79,18 @@
                 </div>
                 <div class="mb-3 mt-4">
                     <label for="checkbox"><strong>Servizi</strong></label>
-                    <div class="row row-cols-4 mb-3 mt-3 p-3  g-3">
+                    <div class="row mb-3 mt-3 p-3  g-3">
                         @foreach ($services as $service)
-                            <div class="col">
-                                <div class="form-check ">
-                                    <label class="form-check-label " for="service-{{ $service->id }}">
-                                        <div> <i class="{{ $service->icon }}"></i></div>
-                                      <div>  {{ $service->name }}</div>
-                                    </label>
+                                <div class="form-check col-6">
                                     <input @checked(in_array($service->id, old('services', [])))
-                                        class="btn btn-primary @error('services') is-invalid @enderror" type="checkbox"
-                                        name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+                                    class="btn btn-primary @error('services') is-invalid @enderror" type="checkbox"
+                                    name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
+
+                                    <label class="form-check-label " for="service-{{ $service->id }}">
+                                        <span> {{ $service->name }}</span>
+                                        <span> <i class="{{ $service->icon }}"></i></span>
+                                    </label>
                                 </div>
-                            </div>
                         @endforeach
                     </div>
                     <div class="invalid-feedback" id="servicesError"></div>
