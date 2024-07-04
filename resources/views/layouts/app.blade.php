@@ -36,13 +36,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto d-flex align-items-center">
-                        <li class="nav-item">
-                            <a class="nav-link p-0 fs-6" href="{{ url('/') }}">{{ __('Home') }}</a>
-                        </li>
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto ">
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
