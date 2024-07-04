@@ -37,6 +37,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'date_birth' => [
                 'required', 'date',
+                'before: today',
                 'before:' . Carbon::now()->subYears(18)->format('d-m-Y'),
                 'after:' . Carbon::now()->subYears(110)->format('d-m-Y')
             ],
