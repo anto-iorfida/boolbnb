@@ -37,27 +37,20 @@
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="number_baths" class="form-label"><strong>Numero di Bagni</strong></label>
-                    <input type="number" class="form-control @error('number_baths') is-invalid @enderror" id="number_baths"
-                        name="number_baths" value="{{ old('number_baths') }}" min="1">
-                    @error('number_baths')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <input type="number" class="form-control" id="number_baths" name="number_baths"
+                        value="{{ old('number_baths') }}" min="0">
+                    <div class="invalid-feedback" id="number_bathsError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="square_meters" class="form-label"><strong>Metri Quadrati</strong></label>
-                    <input type="number" class="form-control @error('square_meters') is-invalid @enderror"
-                        id="square_meters" name="square_meters" value="{{ old('square_meters') }}" min="0">
-                    @error('square_meters')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <input type="number" class="form-control" id="square_meters" name="square_meters"
+                        value="{{ old('square_meters') }}" min="0">
+                    <div class="invalid-feedback" id="square_metersError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="thumb" class="form-label"><strong>Immagine copertina appartamento</strong></label>
-                    <input type="file" class="form-control @error('thumb') is-invalid @enderror" id="thumb"
-                        name="thumb">
-                    @error('thumb')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <input type="file" class="form-control" id="thumb" name="thumb">
+                    <div class="invalid-feedback" id="thumbError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="address" class="form-label"><strong>Indirizzo *</strong></label>
@@ -67,10 +60,9 @@
                     <div class="invalid-feedback" id="addressError"></div>
                 </div>
                 <div class="mb-3 col-12 col-md-6">
-                    <label for="images" class="form-label"><strong>Altre immagini dell'appartamento *</strong></label>
-                    <input type="file" class="form-control @error('images') is-invalid @enderror" id="images"
-                        name="images[]" multiple>
-                    <div class="invalid-feedback" id="imagesError"></div>
+                    <label for="image" class="form-label"><strong>Altre immagini dell'appartamento</strong></label>
+                    <input type="file" class="form-control" id="image" name="image" multiple>
+                    <div class="invalid-feedback" id="imageError"></div>
                 </div>
                 <div class="mb-3 col-12">
                     <label for="description" class="form-label"><strong>Descrizione *</strong></label>
@@ -78,19 +70,16 @@
                     <div class="invalid-feedback" id="descriptionError"></div>
                 </div>
                 <div class="mb-3 mt-4">
-                    <label for="checkbox"><strong>Servizi</strong></label>
-                    <div class="row mb-3 mt-3 p-3  g-3">
+                    <label for="checkbox"><strong>Servizi *</strong></label>
+                    <div class="row mb-3 mt-3 p-3">
                         @foreach ($services as $service)
-                                <div class="form-check col-6">
-                                    <input @checked(in_array($service->id, old('services', [])))
-                                    class="btn btn-primary @error('services') is-invalid @enderror" type="checkbox"
+                            <div class="form-check col-6">
+                                <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox"
                                     name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
-
-                                    <label class="form-check-label " for="service-{{ $service->id }}">
-                                        <span> {{ $service->name }}</span>
-                                        <span> <i class="{{ $service->icon }}"></i></span>
-                                    </label>
-                                </div>
+                                <label class="form-check-label" for="service-{{ $service->id }}">
+                                    {{ $service->name }}
+                                </label>
+                            </div>
                         @endforeach
                     </div>
                     <div class="invalid-feedback" id="servicesError"></div>
@@ -106,7 +95,8 @@
             </div>
 
             <input type="hidden" id="longitude" name="longitude" value="{{ old('longitude') }}">
-            <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude') }}">
+            <input type="hidden" id="latitude" name="latitude"
+            value="{{ old('latitude') }}">
             <button type="button" id="validateBtn" class="btn btn-primary mb-5">Crea Appartamento</button>
         </form>
     </div>
@@ -209,4 +199,3 @@
         });
     </script>
 @endsection
-
