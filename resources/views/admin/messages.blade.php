@@ -8,7 +8,9 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <strong>MESSAGGI RICEVUTI: {{ $messageCount }}</strong>
-                        <button id="deleteAllBtn" class="btn btn-danger float-end">Cancella Tutti</button>
+                       @if($messageCount > 1)
+                       <button id="deleteAllBtn" class="btn btn-danger float-end">Cancella Tutti</button>
+                       @endif
                     </div>
                     @if ($messages->isEmpty())
                         <p class="text-center">Non hai ancora ricevuto nessun messaggio.</p>
