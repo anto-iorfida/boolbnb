@@ -20,4 +20,17 @@ class MessageController extends Controller
     //     $culo = $messages->count();
     //     return view('layouts.admin', compact('culo', 'messages'));
     // }
+
+    public function delete($id)
+    {
+        $message = Message::findOrFail($id);
+        $message->delete();
+        return response()->json(['success' => true]);
+    }
+
+    public function deleteAll()
+    {
+        Message::truncate();
+        return response()->json(['success' => true]);
+    }
 }
