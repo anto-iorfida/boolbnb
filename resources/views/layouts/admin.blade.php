@@ -139,24 +139,17 @@
                             </a>
                         </li>
                         <li class="nav-item p-2">
-                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' || Route::currentRouteName() == 'admin.apartments.show' ? 'bg-body-secondary text-dark border-start border-primary rounded' : '' }}"
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.index' || Route::currentRouteName() == 'admin.apartments.show' || Route::currentRouteName() == 'admin.payment' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
                                 href="{{ route('admin.apartments.index') }}">
                                 <i class="fa-solid fa-building"></i>
                                 <small>I miei appartamenti</small>
                             </a>
                         </li>
                         <li class="nav-item p-2">
-                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-body-secondary text-dark border-start border-primary  rounded' : '' }}"
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.apartments.create' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
                                 href="{{ route('admin.apartments.create') }}">
                                 <i class="fa-solid fa-plus"></i>
                                 <small>Inserisci appartamento</small>
-                            </a>
-                        </li>
-                        <li class="nav-item p-2">
-                            <a class="nav-link {{ Route::currentRouteName() == 'admin.garbage' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
-                                href="{{ route('admin.garbage') }}">
-                                <i class="fa-solid fa-trash"></i>
-                                <small>Cestino</small>
                             </a>
                         </li>
                         <li class="nav-item p-2">
@@ -166,6 +159,13 @@
                                 <small>Messaggi Ricevuti</small>
                             </a>
                         </li>
+                        <li class="nav-item p-2">
+                            <a class="nav-link {{ Route::currentRouteName() == 'admin.garbage' ? 'bg-body-secondary text-dark border-start border-primary border-4 rounded' : '' }}"
+                                href="{{ route('admin.garbage') }}">
+                                <i class="fa-solid fa-trash"></i>
+                                <small>Cestino</small>
+                            </a>
+                        </li>                        
                     </ul>
                 </div>
             </nav>
@@ -176,7 +176,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Overview</li>
+                            <li class="breadcrumb-item" disabled><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                         </ol>
                     </nav>
 

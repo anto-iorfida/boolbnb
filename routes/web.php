@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +29,17 @@ Route::middleware(['auth', 'verified'])
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/messages', [MessageController::class, 'index'])->name('messages');
         Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
-        Route::get('/garbage',[ApartmentController::class, 'indexDeleted'])->name('garbage');
-        Route::group(['prefix' => 'garbage'], function() {
+        Route::get('/garbage', [ApartmentController::class, 'indexDeleted'])->name('garbage');
+        Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
+        Route::group(['prefix' => 'garbage'], function () {
             Route::post('/{apartment}/restore', [ApartmentController::class, 'restore'])->name('garbages.restore');
-//             Route::delete('/{apartment}/force', [ApartmentController::class, 'forceDelete'])->name('garbages.forcedelete');
+            //             Route::delete('/{apartment}/force', [ApartmentController::class, 'forceDelete'])->name('garbages.forcedelete');
             Route::post('/restore-all', [ApartmentController::class, 'restoreAll'])->name('garbages.restoreall');
+        });
+
+        Route::group(['prefix' => 'payment'], function () {
+            Route::get('/checkout', [PaymentController::class, 'make'])->name('payment.check');
+            Route::post('/process', [PaymentController::class, 'make'])->name('payment.process');
         });
     });
 

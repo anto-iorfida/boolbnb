@@ -92,7 +92,7 @@
                                         <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>
                                     </div>
                                     <div class="card-footer text-body-secondary">
-                                        <a href="#" class="btn btn-success">Attiva</a>
+                                        <a href="{{ route('admin.payment', ['sponsor_id'=> $singleSponsor->id]) }}" class="btn btn-success">Acquista</a>
                                     </div>
                                 </div>
                             @endforeach
