@@ -29,7 +29,7 @@ class ApartmentController extends Controller
 
     public function show($slug)
     {
-        $apartment = Apartment::where('slug', '=', $slug)->with('services')->first();
+        $apartment = Apartment::where('slug', '=', $slug)->with('services','albums','users')->first();
 
         if ($apartment) {
             $data = [
@@ -89,7 +89,7 @@ class ApartmentController extends Controller
             // Ordina i risultati per distanza in ordine ascendente
             ->orderBy("distance", 'asc')
             // Carica anche le relazioni di servizi degli appartamenti, se necessario
-            ->with('services')
+            ->with('services','users','albums')
             // Esegue la query e ottiene tutti i risultati
             ->get();
 
