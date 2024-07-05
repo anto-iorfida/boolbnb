@@ -102,8 +102,6 @@ class ApartmentController extends Controller
 }
 
 
-
-
     private function validation($data)
     {
         return Validator::make(
@@ -116,7 +114,7 @@ class ApartmentController extends Controller
                 'number_baths' => 'required|integer',
                 'square_meters' => 'required|integer',
                 'thumb' => 'required|image|max:1700',
-                'images' => 'required|image|max:1700',
+                'images' => 'required|array|max:1700',
                 'address' => 'required|string',
                 'longitude' => 'required|numeric|between:-180,180',
                 'latitude' => 'required|numeric|between:-90,90',

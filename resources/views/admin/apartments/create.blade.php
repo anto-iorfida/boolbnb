@@ -61,7 +61,7 @@
                 </div>
                 <div class="mb-3 col-12 col-md-6">
                     <label for="images" class="form-label"><strong>Altre immagini dell'appartamento *</strong></label>
-                    <input type="file" class="form-control" id="images" name="images" multiple>
+                    <input type="file" class="form-control" id="images" name="images[]" multiple>
                     <div class="invalid-feedback" id="imagesError"></div>
                 </div>
                 <div class="mb-3 col-12">
@@ -76,8 +76,9 @@
                             <div class="form-check col-6">
                                 <input @checked(in_array($service->id, old('services', []))) class="form-check-input" type="checkbox"
                                     name="services[]" value="{{ $service->id }}" id="service-{{ $service->id }}">
-                                <label class="form-check-label" for="service-{{ $service->id }}">
-                                    {{ $service->name }}
+                                <label class="form-check-label d-flex align-items-center" for="service-{{ $service->id }}">
+                                    <span>{{ $service->name }}</span>
+                                    <span class="ms-2"><i class="{{ $service->icon }}"></i></span>
                                 </label>
                             </div>
                         @endforeach
@@ -95,8 +96,7 @@
             </div>
 
             <input type="hidden" id="longitude" name="longitude" value="{{ old('longitude') }}">
-            <input type="hidden" id="latitude" name="latitude"
-            value="{{ old('latitude') }}">
+            <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude') }}">
             <button type="button" id="validateBtn" class="btn btn-primary mb-5">Crea Appartamento</button>
         </form>
     </div>
