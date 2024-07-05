@@ -3,29 +3,22 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use App\Models\Message;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function boot()
     {
-        // Braintree_Configuration::environment(env('BRAINTREE_ENVIRONMENT'));
-        // Braintree_Configuration::merchantId(env('BRAINTREE_MERCHANT_ID'));
-        // Braintree_Configuration::publicKey(env('BRAINTREE_PUBLIC_KEY'));
-        // Braintree_Configuration::privateKey(env('BRAINTREE_PRIVATE_KEY'));
+        // Pass the message count to the 'layouts.admin' view
+        View::composer('layouts.admin', function ($view) {
+            $messageCount = Message::count();
+            $view->with('messageCount', $messageCount);
+        });
+    }
+
+    public function register()
+    {
+        // Register any application services.
     }
 }

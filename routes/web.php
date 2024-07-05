@@ -28,6 +28,8 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+        Route::delete('/messages/{id}', [MessageController::class, 'delete'])->name('messages.delete');
+        Route::delete('/messages', [MessageController::class, 'deleteAll'])->name('messages.deleteAll');
         Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
         Route::get('/garbage', [ApartmentController::class, 'indexDeleted'])->name('garbage');
         Route::get('/payment', [PaymentController::class, 'index'])->name('payment');

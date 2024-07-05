@@ -7,6 +7,8 @@ use Database\Seeders\UsersTableSeeder;
 use Database\Seeders\ApartmentsTableSeeder;
 use Database\Seeders\ServicesTableSeeder;
 use Database\Seeders\MessagesTableSeeder;
+use Database\Seeders\AlbumsTableSeeder;
+use Database\Seeders\Apartments_ServicesTableSeeder;
 use Database\Seeders\SponsorsTableSeederTableSeeder;
 use Database\Seeders\ViewTableSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -36,6 +38,9 @@ class DatabaseSeeder extends Seeder
             MessagesTableSeeder::class,
             // ViewsTableSeeder::class,
             SponsorsTableSeeder::class,
+            AlbumsTableSeeder::class,
+            Apartments_ServicesTableSeeder::class
+
         ]);
     }
 }
