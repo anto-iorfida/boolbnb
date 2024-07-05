@@ -104,12 +104,14 @@
                         <strong>Servizi:</strong>
                         <br />
                         @if (count($apartment->services) > 0)
-                            <div class="d-flex gap-3">
+                            <div class="row my-3">
                                 @foreach ($apartment->services as $service)
-                                    <div><i class="{{ $service->icon }}"></i></div>
+                                <div class="col-6">
                                     <div>{{ $service->name }}@if (!$loop->last)
                                         @endif
                                     </div>
+                                    <div><i class="{{ $service->icon }}"></i></div>
+                                </div>
                                 @endforeach
                             @else
                                 nessuno
