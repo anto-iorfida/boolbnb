@@ -150,7 +150,7 @@ public function searchApartments(Request $request)
 
         // Se number_beds è stato fornito, aggiungi il filtro per number_beds
         if ($number_beds !== null) {
-            $query->where('number_beds', '=', $number_beds);
+            $query->where('number_beds', '>=', $number_beds);
         }
 
         // Esegui l'ordinamento per distanza in ordine ascendente e carica le relazioni
