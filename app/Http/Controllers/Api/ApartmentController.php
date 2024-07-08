@@ -57,6 +57,56 @@ class ApartmentController extends Controller
 //             'result' => $apartments
 //         ]);
 // }
+// public function searchApartments(Request $request)
+// {
+//     // Ottiene la latitudine convertendola in float dal parametro 'latitude' della query
+//     $latitude = floatval($request->query('latitude'));
+
+//     // Ottiene la longitudine convertendola in float dal parametro 'longitude' della query
+//     $longitude = floatval($request->query('longitude'));
+
+//     // Ottiene il raggio convertendolo in float dal parametro 'radius' della query, con default a 1000 km se non specificato
+//     $radius = floatval($request->query('radius', 1000));
+
+ 
+//     $number_beds = floatval($request->query('number_beds', 1));
+
+//     // Valida i parametri della richiesta
+//     $request->validate([
+//         'latitude' => 'required|numeric',
+//         'longitude' => 'required|numeric',
+//         'radius' => 'required|numeric|min:1',
+//         'number_beds' => 'required|numeric|min:1' 
+//     ]);
+
+//     try {
+//         // Esegue una query per selezionare gli appartamenti e calcolare la distanza in base alle coordinate fornite
+//         $apartments = Apartment::selectRaw(
+//             "*, 
+//             ( 6371 * acos( 
+//                 cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) 
+//                 + sin( radians(?) ) * sin( radians( latitude ) ) 
+//             ) ) AS distance",
+//             [$latitude, $longitude, $latitude]
+//         )
+//             // Filtra i risultati per distanza, includendo solo quelli entro il raggio specificato
+//             ->having("distance", "<", $radius)
+            
+//             ->where('number_beds', '>=', $number_beds)
+//             // Ordina i risultati per distanza in ordine ascendente
+//             ->orderBy("distance", 'asc')
+//             // Carica anche le relazioni di servizi degli appartamenti, se necessario
+//             ->with('services', 'users', 'albums')
+//             // Esegue la query e ottiene tutti i risultati
+//             ->get();
+
+//         // Restituisce una risposta JSON con i risultati degli appartamenti trovati
+//         return response()->json(['success' => true, 'result' => $apartments]);
+//     } catch (\Exception $e) {
+//         // Se si verifica un'eccezione durante l'esecuzione della query, restituisce un errore con codice 500
+//         return response()->json(['success' => false, 'error' => 'An error occurred while fetching apartments.'], 500);
+//     }
+// }
 public function searchApartments(Request $request)
 {
     // Ottiene la latitudine convertendola in float dal parametro 'latitude' della query
@@ -68,20 +118,27 @@ public function searchApartments(Request $request)
     // Ottiene il raggio convertendolo in float dal parametro 'radius' della query, con default a 1000 km se non specificato
     $radius = floatval($request->query('radius', 1000));
 
- 
-    $number_beds = floatval($request->query('number_beds', 1));
+    // Ottiene il numero di letti convertendolo in float dal parametro 'number_beds' della query, se presente
+    $number_beds = $request->filled('number_beds') ? floatval($request->query('number_beds')) : null;
 
-    // Valida i parametri della richiesta
-    $request->validate([
+    // Regole di validazione per i parametri della richiesta
+    $rules = [
         'latitude' => 'required|numeric',
         'longitude' => 'required|numeric',
         'radius' => 'required|numeric|min:1',
-        'number_beds' => 'required|numeric|min:1' 
-    ]);
+    ];
+
+    // Se number_beds è stato fornito, aggiungi la regola di validazione
+    if ($number_beds !== null) {
+        $rules['number_beds'] = 'required|numeric|min:1';
+    }
+
+    // Valida i parametri della richiesta
+    $request->validate($rules);
 
     try {
-        // Esegue una query per selezionare gli appartamenti e calcolare la distanza in base alle coordinate fornite
-        $apartments = Apartment::selectRaw(
+        // Costruisci la query per selezionare gli appartamenti e calcolare la distanza
+        $query = Apartment::selectRaw(
             "*, 
             ( 6371 * acos( 
                 cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) 
@@ -89,24 +146,26 @@ public function searchApartments(Request $request)
             ) ) AS distance",
             [$latitude, $longitude, $latitude]
         )
-            // Filtra i risultati per distanza, includendo solo quelli entro il raggio specificato
-            ->having("distance", "<", $radius)
-            
-            ->where('number_beds', '>=', $number_beds)
-            // Ordina i risultati per distanza in ordine ascendente
-            ->orderBy("distance", 'asc')
-            // Carica anche le relazioni di servizi degli appartamenti, se necessario
+            ->having("distance", "<", $radius);
+
+        // Se number_beds è stato fornito, aggiungi il filtro per number_beds
+        if ($number_beds !== null) {
+            $query->where('number_beds', '=', $number_beds);
+        }
+
+        // Esegui l'ordinamento per distanza in ordine ascendente e carica le relazioni
+        $apartments = $query->orderBy("distance", 'asc')
             ->with('services', 'users', 'albums')
-            // Esegue la query e ottiene tutti i risultati
             ->get();
 
-        // Restituisce una risposta JSON con i risultati degli appartamenti trovati
+        // Restituisci una risposta JSON con i risultati degli appartamenti trovati
         return response()->json(['success' => true, 'result' => $apartments]);
     } catch (\Exception $e) {
-        // Se si verifica un'eccezione durante l'esecuzione della query, restituisce un errore con codice 500
+        // Se si verifica un'eccezione durante l'esecuzione della query, restituisci un errore con codice 500
         return response()->json(['success' => false, 'error' => 'An error occurred while fetching apartments.'], 500);
     }
 }
+
 
 
 
