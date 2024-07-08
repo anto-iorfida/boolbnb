@@ -148,7 +148,7 @@ class ApartmentController extends Controller
         $request->validate($rules);
 
         try {
-            // Costruisci la query per selezionare gli appartamenti e calcolare la distanza
+            // Costruisci la query base per selezionare gli appartamenti e calcolare la distanza
             $query = Apartment::selectRaw(
                 "*, 
                 ( 6371 * acos( 
@@ -170,9 +170,9 @@ class ApartmentController extends Controller
             }
 
             // Se servizi sono stati forniti, aggiungi il filtro per i servizi
-            if (!empty($services)) {
-                $query->whereHas('services', function ($q) use ($services) {
-                    $q->whereIn('name', $services);
+            foreach ($services as $service) {
+                $query->whereHas('services', function ($q) use ($service) {
+                    $q->where('name', $service);
                 });
             }
 
@@ -188,6 +188,7 @@ class ApartmentController extends Controller
             return response()->json(['success' => false, 'error' => 'An error occurred while fetching apartments.'], 500);
         }
     }
+
 
 
     private function validation($data)
