@@ -121,12 +121,18 @@ public function searchApartments(Request $request)
     // Ottiene il numero di letti convertendolo in float dal parametro 'number_beds' della query, se presente
     $number_beds = $request->filled('number_beds') ? floatval($request->query('number_beds')) : null;
 
+    $number_baths = $request->filled('number_baths') ? floatval($request->query('number_baths')) : null;
+
     // Regole di validazione per i parametri della richiesta
     $rules = [
         'latitude' => 'required|numeric',
         'longitude' => 'required|numeric',
         'radius' => 'required|numeric|min:1',
     ];
+
+    if ($number_baths !== null) {
+        $rules['number_baths'] = 'required|numeric|min:1';
+    }
 
     // Se number_beds è stato fornito, aggiungi la regola di validazione
     if ($number_beds !== null) {
@@ -151,6 +157,10 @@ public function searchApartments(Request $request)
         // Se number_beds è stato fornito, aggiungi il filtro per number_beds
         if ($number_beds !== null) {
             $query->where('number_beds', '>=', $number_beds);
+        }
+
+        if ($number_baths !== null) {
+            $query->where('number_baths', '>=', $number_baths);
         }
 
         // Esegui l'ordinamento per distanza in ordine ascendente e carica le relazioni
