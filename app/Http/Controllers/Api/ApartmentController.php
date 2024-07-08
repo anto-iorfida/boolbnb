@@ -57,7 +57,8 @@ class ApartmentController extends Controller
 //             'result' => $apartments
 //         ]);
 // }
-  public function searchApartments(Request $request){
+public function searchApartments(Request $request)
+{
     // Ottiene la latitudine convertendola in float dal parametro 'latitude' della query
     $latitude = floatval($request->query('latitude'));
 
@@ -67,11 +68,15 @@ class ApartmentController extends Controller
     // Ottiene il raggio convertendolo in float dal parametro 'radius' della query, con default a 1000 km se non specificato
     $radius = floatval($request->query('radius', 1000));
 
+ 
+    $number_beds = floatval($request->query('number_beds', 1));
+
     // Valida i parametri della richiesta
     $request->validate([
         'latitude' => 'required|numeric',
         'longitude' => 'required|numeric',
-        'radius' => 'required|numeric|min:1'
+        'radius' => 'required|numeric|min:1',
+        'number_beds' => 'required|numeric|min:1' 
     ]);
 
     try {
@@ -86,10 +91,12 @@ class ApartmentController extends Controller
         )
             // Filtra i risultati per distanza, includendo solo quelli entro il raggio specificato
             ->having("distance", "<", $radius)
+            
+            ->where('number_beds', '>=', $number_beds)
             // Ordina i risultati per distanza in ordine ascendente
             ->orderBy("distance", 'asc')
             // Carica anche le relazioni di servizi degli appartamenti, se necessario
-            ->with('services','users','albums')
+            ->with('services', 'users', 'albums')
             // Esegue la query e ottiene tutti i risultati
             ->get();
 
@@ -100,6 +107,7 @@ class ApartmentController extends Controller
         return response()->json(['success' => false, 'error' => 'An error occurred while fetching apartments.'], 500);
     }
 }
+
 
 
     private function validation($data)

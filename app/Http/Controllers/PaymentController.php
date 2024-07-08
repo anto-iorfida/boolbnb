@@ -58,6 +58,7 @@ class PaymentController extends Controller
 
         // Inizializza $result a null per gestire il caso in cui non ci sia nessun risultato valido
         $result = null;
+        dd($request->all() , $sponsorId);
 
         // Effettua il pagamento in base all'ID dello sponsor
         if ($sponsorId == 3) {
@@ -101,7 +102,7 @@ class PaymentController extends Controller
         if ($result && $result->success) {
             dd('ciao');
             // Se il pagamento è andato a buon fine, visualizza la vista 'admin.payment.check' con il risultato
-            return view('admin.payment.check', compact('result'));
+            return view('admin.payment.checkout', compact('result'));
         } else {
             // Se c'è stato un errore durante il pagamento, gestiscilo di conseguenza
             dd('miau');
