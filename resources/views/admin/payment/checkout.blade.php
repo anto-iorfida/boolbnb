@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+{{-- @extends('layouts.admin')
 @section('content')
     <div class="container-promotion-activate-empty">
 
@@ -15,4 +15,4 @@
     <script>
         AOS.init();
     </script>
-@endsection
+@endsection --}}

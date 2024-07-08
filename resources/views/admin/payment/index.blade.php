@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+{{-- @extends('layouts.admin')
 
 @section('content')
     <div class="container-payment-maxwidth">
@@ -20,7 +20,7 @@
                             value="">
                     </div> --}}
 
-            @if ($sponsor)
+            {{-- @if ($sponsor)
                 <div>
                     <h2>Dettagli dello Sponsor</h2>
                     <p>Nome: {{ $sponsor->name }}</p>
@@ -69,4 +69,4 @@
             });
         });
     </script>
-@endsection
+@endsection --}} 
