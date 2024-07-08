@@ -57,8 +57,8 @@
     //     $sponsorId = $request->input('sponsor');
 
         // Inizializza $result a null per gestire il caso in cui non ci sia nessun risultato valido
-        $result = null;
-        dd($request->all() , $sponsorId);
+        // $result = null;
+        // dd($request->all() , $sponsorId);
         // $result = null;
 
         // Effettua il pagamento in base all'ID dello sponsor
@@ -100,18 +100,18 @@
         // }
 
         // Verifica se c'è un risultato valido e se il pagamento è andato a buon fine
-        if ($result && $result->success) {
-            dd('ciao');
-            // Se il pagamento è andato a buon fine, visualizza la vista 'admin.payment.check' con il risultato
-            return view('admin.payment.checkout', compact('result'));
-        } else {
-            // Se c'è stato un errore durante il pagamento, gestiscilo di conseguenza
-            dd('miau');
-            $errorMessage = $result ? $result->message : 'Errore durante il pagamento con Braintree.';
-            return back()->withErrors(['error' => $errorMessage]);
-            // Puoi anche gestire l'errore in altri modi, ad esempio ritornando alla pagina precedente con un messaggio di errore
-        }
-    }
-}
+//         if ($result && $result->success) {
+//             dd('ciao');
+//             // Se il pagamento è andato a buon fine, visualizza la vista 'admin.payment.check' con il risultato
+//             return view('admin.payment.checkout', compact('result'));
+//         } else {
+//             // Se c'è stato un errore durante il pagamento, gestiscilo di conseguenza
+//             dd('miau');
+//             $errorMessage = $result ? $result->message : 'Errore durante il pagamento con Braintree.';
+//             return back()->withErrors(['error' => $errorMessage]);
+//             // Puoi anche gestire l'errore in altri modi, ad esempio ritornando alla pagina precedente con un messaggio di errore
+//         }
+//     }
+// }
     
     // return response()->json($result); -->
