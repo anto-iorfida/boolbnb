@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-payment-maxwidth">
+<div class="container">
     <div class="container-payment-empty">
     </div>
 
@@ -28,10 +28,14 @@
 
             <div class="form-group">
                 <label for="amount">Prezzo</label>
-                <input type="number" class="form-control" id="amount" name="amount" value="{{ $sponsor->price }}" readonly>
+                <input type="number" class="form-control rounded-pill" id="amount" name="amount" value="{{ $sponsor->price }}" readonly>
             </div>
 
-            <button type="submit" class="btn btn-primary" id="submit-payment">Submit Payment</button>
+           <div class="w-100 row justify-content-center">
+             <div class="col-12 col-md-2">
+                <button type="submit" class=" w-100 btn btn-primary mt-5 rounded-pill px-5 d-flex justify-content-center" id="submit-payment">Acquista</button>
+             </div>
+           </div>
         </form>
     </div>
 </div>
