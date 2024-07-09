@@ -244,7 +244,7 @@ class ApartmentController extends Controller
         ])->validate();
     }
 
-    // softdelete 
+    // softdeletee
     public function indexDeleted(Apartment $apartments)
     {
 
