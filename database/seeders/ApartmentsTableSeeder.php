@@ -58,10 +58,10 @@ class ApartmentsTableSeeder extends Seeder
             "Elegante duplex con finiture di pregio, situato in un edificio storico.",
         ];
 
-        for ($i = 0; $i < 10; $i++) {
-            $title = $titles[$i];
-            $description = $descriptions[$i];
-            $thumb = $thumbs[$i];
+        for ($i = 0; $i < 2000; $i++) {
+            $title = $titles[$i % count($titles)];
+            $description = $descriptions[$i % count($descriptions)];
+            $thumb = $thumbs[$i % count($thumbs)];
 
             // Genera un identificatore univoco per lo slug
             $slug = Str::slug($title) . '-' . Str::random(5);

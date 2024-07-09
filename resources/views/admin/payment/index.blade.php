@@ -1,4 +1,4 @@
-{{-- @extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container-payment-maxwidth">
@@ -11,16 +11,16 @@
             <div id="dropin-container">
 
             </div>
-            {{-- <button type="button" class="btn btn-success" id="submit-button"> Conferma e attiva la promo </button>
+           <button type="button" class="btn btn-success" id="submit-button"> Conferma e attiva la promo </button>
             <form name="form" action="{{ route('admin.payment.process') }}" method="post">
                 @csrf
                 @method('POST')
                     <div class="form-group">
                         <input type="hidden" class="form-control" name="payment_Method_Nonce" id="nonce" placeholder=""
                             value="">
-                    </div> --}}
+                    </div> 
 
-            {{-- @if ($sponsor)
+           @if ($sponsor)
                 <div>
                     <h2>Dettagli dello Sponsor</h2>
                     <p>Nome: {{ $sponsor->name }}</p>
@@ -71,4 +71,4 @@
             });
         });
     </script>
-@endsection --}} 
+@endsection 
