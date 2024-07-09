@@ -12,6 +12,8 @@
         <form id="payment-form" action="{{ route('admin.payment.checkoutSucceeded') }}" method="POST">
             @csrf
             <input type="hidden" name="payment_Method_Nonce" id="nonce">
+            <input type="hidden" name="id_apartment" value="{{ $apartment->id }}">
+            @dump($apartment)
             <input type="hidden" name="sponsor_id" value="{{ $sponsor ? $sponsor->id : '' }}">
 
             @if ($sponsor)
