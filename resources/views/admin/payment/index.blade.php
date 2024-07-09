@@ -13,14 +13,14 @@
             @csrf
             <input type="hidden" name="payment_Method_Nonce" id="nonce">
             <input type="hidden" name="id_apartment" value="{{ $apartment->id }}">
-            @dump($apartment)
+            {{-- @dump($apartment) --}}
             <input type="hidden" name="sponsor_id" value="{{ $sponsor ? $sponsor->id : '' }}">
 
             @if ($sponsor)
             <div>
                 <h2>Dettagli dello Sponsor</h2>
                 <p>Nome: {{ $sponsor->name }}</p>
-                <p>Id: {{ $sponsor->id }}</p>
+                {{-- <p>Id: {{ $sponsor->id }}</p> --}}
                 <p>Durata: {{ $sponsor->duration }} ore</p>
                 <p>Prezzo: {{ $sponsor->price }}</p>
             </div>

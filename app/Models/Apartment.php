@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Service;
+use App\Models\Sponsor;
 use App\Models\View;
 use App\Models\User;
 use App\Models\Album;
@@ -62,5 +63,11 @@ class Apartment extends Model
     public function getVisibilityTextAttribute()
     {
         return $this->visibility ? 'visibile' : 'non visibile';
+    }
+
+    public function sponsors()
+    {
+        return $this->belongsToMany(Sponsor::class, 'apartments_sponsors', 'id_apartment', 'id_sponsor')
+                    ->withPivot('start_time', 'end_time');
     }
 }
