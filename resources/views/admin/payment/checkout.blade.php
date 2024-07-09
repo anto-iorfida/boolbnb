@@ -1,4 +1,4 @@
-{{-- @extends('layouts.admin')
+@extends('layouts.admin')
 @section('content')
     <div class="container-promotion-activate-empty">
 
@@ -7,7 +7,7 @@
         <div class="container-promotion-activate-minwidth">
             <h1 data-aos="flip-left"
                 data-aos-duration="1500"> Pagamento effettuato con successo! </h1>
-            <a href="{{route('admin.apartament.index')}}"class="btn btn-outline-success"> Torna alla tua dashboard </a>
+            {{-- <a href="{{route('admin.apartament.index')}}"class="btn btn-outline-success"> Torna alla tua dashboard </a> --}}
         </div>
     </div>
 
@@ -15,4 +15,4 @@
     <script>
         AOS.init();
     </script>
-@endsection --}}
+@endsection

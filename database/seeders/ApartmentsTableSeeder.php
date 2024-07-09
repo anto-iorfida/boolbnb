@@ -77,7 +77,7 @@ class ApartmentsTableSeeder extends Seeder
             $longitude = $faker->longitude($minLongitude, $maxLongitude);
 
             Apartment::create([
-                'id_user' => $faker->numberBetween(1, 6),
+                'id_user' => $faker->numberBetween(1, 900),
                 'title' => $title,
                 'slug' => $slug,
                 'description' => $description,
