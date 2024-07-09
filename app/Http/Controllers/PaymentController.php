@@ -24,11 +24,6 @@ class PaymentController extends Controller
         return view('admin.payment.index', compact('sponsor'));
     }
 
-    public function checkout(Request $request)
-    {
-        return view('admin.payment.checkout');
-    }
-
     public function process(Request $request)
     {
         $gateway = new Gateway([

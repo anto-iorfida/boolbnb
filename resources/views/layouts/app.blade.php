@@ -25,7 +25,7 @@
             <div class="container d-flex align-items-center">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                     <div>
-                        <img src="{{ Vite::asset('resources/img/logo-boolbnb.png') }}" class="img-fluid ms-logo" alt="Logo Bool BnB">
+                        <img src="{{ Vite::asset('resources/img/logo-boolbnb.png') }}" class="img-fluid ms-logo" alt="Logo BoolBnB">
                     </div>
                 </a>
 
@@ -53,11 +53,11 @@
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle fs-5" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle fs-6" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right fs-5" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-right fs-6" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('admin.dashboard') }}">{{__('Dashboard')}}</a>
                                 <a class="dropdown-item" href="{{ url('profile') }}">{{__('Profile')}}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

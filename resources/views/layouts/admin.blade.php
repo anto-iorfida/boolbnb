@@ -41,19 +41,19 @@
                 <a class="navbar-brand" href="/">
                     <img src="{{ Vite::asset('resources/img/logo-dashboard.png') }}" alt="BoolB&B" class="ms-logo">
                 </a>
-                <button class="navbar-toggler d-md-none collapsed mb-3 " type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler d-md-none collapsed mb-3 border border-light" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="text-light"><i class="fa-solid fa-bars"></i></i></span>
                 </button>
                 <div class="collapse navbar-collapse d-md-none my-btn-navbar" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link text-white" aria-current="page" href="/">Home</a>
-                        <a class="nav-link text-white" href="{{ route('admin.apartments.index') }}">Appartamenti</a>
-                        <a class="nav-link text-white "  href="{{ route('admin.apartments.create') }}">Inserisci appartamento</a>
-                        <a class="nav-link text-white" href="{{ route('admin.messages') }}">Messaggi</a>
-                        <a class="nav-link text-white" href="{{ route('admin.garbage') }}">Cestino</a>
-                        <a class="dropdown-item text-white" href="{{ route('logout') }}"
+                        <a class="nav-link text-white px-1 ms-myhover" href="{{ route('admin.dashboard') }}"><i class="fa-solid fa-house"></i> Dashboard utente</a>
+                        <a class="nav-link text-white px-1 ms-myhover" href="{{ route('admin.apartments.index') }}"><i class="fa-solid fa-building"></i> I miei appartamenti</a>
+                        <a class="nav-link text-white px-1 ms-myhover" href="{{ route('admin.apartments.create') }}"><i class="fa-solid fa-plus"></i> Inserisci appartamento</a>
+                        <a class="nav-link text-white px-1 ms-myhover" href="{{ route('admin.messages') }}"><i class="fa-regular fa-comment"></i> Messaggi ricevuti <span class="badge bg-info">{{ $messageCount }}</span></a>
+                        <a class="nav-link text-white px-1 ms-myhover" href="{{ route('admin.garbage') }}"><i class="fa-solid fa-trash"></i> Cestino</a>
+                        <a class="dropdown-item nav-link text-white px-1 ms-myhover" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();"><i
                                 class="fa-solid fa-arrow-right-from-bracket text-white"></i>
@@ -123,7 +123,7 @@
             </div>
         </nav>
     </header>
-    {{-- |||||||||||||||||||||||||||||||  fini header |||||||||||||||||||||||||||||| --}}
+    {{-- |||||||||||||||||||||||||||||||  fine header |||||||||||||||||||||||||||||| --}}
 
     <div class="container-fluid">
         <div class="row">
@@ -185,7 +185,7 @@
                 </div>
 
                 <footer class="pt-5 d-flex justify-content-between">
-                    <span>Copyright © 2024-2025 <a href="/">BoolB&B</a></span>
+                    <span>Copyright ©2024-2025 <a href="/">BoolB&B</a></span>
                     <ul class="nav m-0">
                         <li class="nav-item">
                             <a class="nav-link text-secondary" aria-current="page" href="#">Privacy Policy</a>
@@ -231,6 +231,13 @@
     .ms-bg-header {
         background-color: #0d6efd;
     }
+    
+    .ms-myhover:hover {
+        background-color: #057eff;
+        color: white;
+        border-radius: 10px; 
+    }
+
 
     main {
         height: 100%;
