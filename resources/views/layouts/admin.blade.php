@@ -35,13 +35,12 @@
 <body class="p-0">
     {{-- ||||||||||||||||||||||||||||||||  inizio header ||||||||||||||||||||||||||||||| --}}
     <header class="sticky-top ms-bg-header">
-        <nav class="navbar navbar-light gap-5 p-3 ">
-            <div
-                class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-grow-1 pe-3 ps-3 flex-md-nowrap justify-content-between">
+        <nav class="navbar navbar-light gap-5 d-flex align-items-center px-2">
+            <div class="d-flex col-12 col-md-3 col-lg-2 mb-lg-0 flex-wrap flex-grow-1 px-3 flex-md-nowrap justify-content-between align-items-center">
                 <a class="navbar-brand" href="/">
                     <img src="{{ Vite::asset('resources/img/logo-dashboard.png') }}" alt="BoolB&B" class="ms-logo">
                 </a>
-                <button class="navbar-toggler d-md-none collapsed mb-3 border border-light" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler d-md-none collapsed border border-light" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span class="text-light"><i class="fa-solid fa-bars"></i></i></span>
@@ -64,8 +63,7 @@
                         </form>
 
                         {{-- logout display lg  --}}
-                        <div
-                            class="d-none d-md-flex  col-12 col-md-5 col-lg-1 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+                        <div class="d-none d-md-flex  col-12 col-md-5 col-lg-1 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false">
@@ -89,23 +87,24 @@
                     </div>
                 </div>
             </div>
-            <div class="col d-none d-lg-flex justify-content-end me-5 gap-3">
+
+            <div class="col-2 d-none d-xl-flex gap-2">
                 <a href="{{ route('admin.garbage') }}"
-                    class="text-primary  p-2 rounded-pill d-flex align-items-center justify-content-center text-decoration-none my-btn-nav">
-                    <i class="fa-solid fa-trash fs-4 "></i>
+                    class="text-primary p-2 rounded-pill d-flex align-items-center justify-content-center text-decoration-none my-btn-nav" style="height: 40px">
+                    <i class="fa-solid fa-trash fs-4"></i>
                 </a>
                 <a href="{{ route('admin.messages') }}"
-                    class="text-primary  p-2 rounded-pill d-flex align-items-center justify-content-center text-decoration-none my-btn-nav">
-                    <i class="fa-regular fa-message fs-4 "></i>
+                    class="text-primary p-2 rounded-pill d-flex align-items-center justify-content-center text-decoration-none my-btn-nav" style="height: 40px">
+                    <i class="fa-regular fa-message fs-4"></i>
                 </a>
             </div>
 
             <div
                 class="d-none d-md-flex  col-12 col-md-5 col-lg-1 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
-                <div class="btn-group ">
+                <div class="btn-group">
                     <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Ciao, {{ Auth::user()->name }}
+                        Ciao, <strong>{{ Auth::user()->name }}</strong>
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('logout') }}"
@@ -157,7 +156,7 @@
                                 href="{{ route('admin.messages') }}">
                                 <i class="fa-regular fa-comment"></i>
                                 <small>Messaggi Ricevuti</small>
-                                <span class="badge bg-primary">{{ $messageCount }}</span>
+                                <span class="badge bg-primary">{{ $messageCount}}</span>
                             </a>
                         </li>
                         <li class="nav-item p-2">
@@ -184,19 +183,23 @@
                     @yield('content')
                 </div>
 
-                <footer class="pt-5 d-flex justify-content-between">
-                    <span>Copyright ©2024-2025 <a href="/">BoolB&B</a></span>
-                    <ul class="nav m-0">
-                        <li class="nav-item">
-                            <a class="nav-link text-secondary" aria-current="page" href="#">Privacy Policy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">Termini e condizioni</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">Contatti</a>
-                        </li>
-                    </ul>
+                <footer class="row-container pt-5 d-flex justify-content-between">
+                    <div class="col-6">
+                        <span>Copyright ©2024-2025 <a href="/">BoolB&B</a></span>
+                    </div>
+                    <div class="col-6">
+                        <ul class="nav m-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" aria-current="page" href="#">Privacy Policy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" href="#">Termini e condizioni</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" href="#">Contatti</a>
+                            </li>
+                        </ul>
+                    </div>
                 </footer>
             </main>
 
@@ -229,7 +232,7 @@
     }
 
     .ms-bg-header {
-        background-color: #0d6efd;
+        background-color: #0D6EFD;
     }
     
     .ms-myhover:hover {
@@ -241,7 +244,6 @@
 
     main {
         height: 100%;
-
     }
 
     .sidebar {
@@ -275,10 +277,10 @@
     }
 
     .my-btn-nav {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         background-color: white;
-        border: 1px solid black;
+        border: 1px solid white;
     }
 
     .my-btn-nav:hover {

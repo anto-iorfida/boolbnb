@@ -52,26 +52,7 @@ class ApartmentController extends Controller
         return response()->json($data);
     }
 
-    // public function fetchSponsoredApartments()
-    // {
-    //     try {
-    //         // Ottieni la data e l'ora attuali
-    //         $now = Carbon::now();
 
-    //         // Costruisci la query per selezionare gli appartamenti con sponsor e non scaduti
-    //         $apartments = Apartment::whereHas('sponsor', function ($query) use ($now) {
-    //             $query->where('end_date', '>', $now);
-    //         })
-    //             ->with(['services', 'albums', 'users', 'sponsors'])
-    //             ->get();
-
-    //         // Restituisci una risposta JSON con i risultati degli appartamenti sponsorizzati
-    //         return response()->json(['success' => true, 'result' => $apartments]);
-    //     } catch (\Exception $e) {
-    //         // Se si verifica un'eccezione durante l'esecuzione della query, restituisci un errore con codice 500
-    //         return response()->json(['success' => false, 'error' => 'An error occurred while fetching sponsored apartments.'], 500);
-    //     }
-    // }
     public function fetchSponsoredApartments()
     {
         try {
