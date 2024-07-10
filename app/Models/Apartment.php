@@ -70,4 +70,8 @@ class Apartment extends Model
         return $this->belongsToMany(Sponsor::class, 'apartments_sponsors', 'id_apartment', 'id_sponsor')
                     ->withPivot('start_time', 'end_time');
     }
+    public function sponsor()
+    {
+        return $this->hasMany(Sponsor::class);
+    }
 }
