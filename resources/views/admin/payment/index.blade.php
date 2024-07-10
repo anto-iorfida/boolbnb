@@ -18,14 +18,13 @@
 
             @if ($sponsor)
             <div>
-                <h2>Dettagli dello Sponsor</h2>
-                <p>Nome: {{ $sponsor->name }}</p>
-                {{-- <p>Id: {{ $sponsor->id }}</p> --}}
+                <h5>Dettagli dello Sponsor</h5>
+                <p>Offerta {{ $sponsor->name }}</p>
                 <p>Durata: {{ $sponsor->duration }} ore</p>
                 <p>Prezzo: {{ $sponsor->price }}</p>
             </div>
             @else
-            <p>Nessuno sponsor trovato per l'ID specificato.</p>
+                <p>Nessuno sponsor trovato per l'ID specificato.</p>
             @endif
 
             <div class="form-group">

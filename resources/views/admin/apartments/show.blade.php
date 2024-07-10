@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 @section('content')
     @if (session('apartments_create'))
-        <div class="mess-info">Progetto creato con successo!</div>
+        <div class="mess-info">Appartamento creato con successo!</div>
     @endif
     @if (session('apartments_edit'))
-        <div class="mess-info">Progetto modificato con successo!</div>
+        <div class="mess-info">Appartamento modificato con successo!</div>
     @endif
-    <div class="card p-5 mb-2">
-        <div class="card-body">
+    <div class="container mb-2">
+        <div class="row">
             <div class="container">
-                <h1 class=" text-secondary">Titolo: {{ $apartment->title }}</h1>
-                <div class=" p-5 mb-2 ">
-                    <h3>Immagine di copertina</h3>
+                <h1 class="text-secondary">{{ $apartment->title }}</h1>
+                <div class="mt-3">
+                    <h4>Immagine di copertina</h4>
                     @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
                         <div class="col-12 mb-4 d-block">
                             <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}"
@@ -22,7 +22,7 @@
                             <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}" class="img-fluid rounded-4">
                         </div>
                     @endif
-                    <div class="row ">
+                    <div class="row">
                         @foreach ($apartment->albums as $album)
                             <div class="col-4 col-md-4  d-inline">
                                 <img src="{{ asset('storage/' . $album->image) }}" alt="Immagine appartamento"
@@ -31,7 +31,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="row mb-4">
+                <div class="row my-4">
                     <div class="col">
                         <div class="mb-2">
                             <strong>Slug:</strong> {{ $apartment->slug }}
@@ -44,36 +44,44 @@
                         </div>
                     </div>
                 </div>
-                <div class="section mb-4">
-                    {{-- prova  --}}
+
+                <div class="mb-4">
+                {{-- chi lo tocca lo ammazzo by mattia --}}
                     <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <div class="accordion-item" >
+                        <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button collapsed ms-bg-primary rounded-pill" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <i class="fa-solid fa-money-bill-trend-up"></i> Sponsorizza il tuo appartamento
+                                    <strong><i class="fa-solid fa-money-bill-trend-up"></i>  Sponsorizza il tuo appartamento</strong>
                                 </button>
                             </h2>
-                          <div class="d-block d-md-flex justify-content-center">
-                            @foreach ($sponsor as $singleSponsor)
-                                <div class="card text-center me-2 mb-2" style="min-width: 200px;">
-                                    <div class="card-header">
-                                        <strong>{{ $singleSponsor->name }}</strong>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore</div>
-                                        <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>
-                                    </div>
-                                    <div class="card-footer text-body-secondary">
-                                        <a href="{{ route('admin.payment', ['sponsor_id'=> $singleSponsor->id,'id_apartment'=>$apartment->id]) }}" class="btn btn-success">Acquista</a>
-                                    </div>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body d-block d-lg-flex justify-content-evenly border border-0">
+                                    @foreach ($sponsor as $singleSponsor)
+                                        <div class="card text-center mb-2" style="min-width: 200px;">
+                                            <div class="card-header">
+                                                <strong>{{ $singleSponsor->name }}</strong>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore
+                                                </div>
+                                                <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>
+                                            </div>
+                                            <div class="card-footer text-body-secondary">
+                                                <a href="{{ route('admin.payment', ['sponsor_id' => $singleSponsor->id, 'id_apartment' => $apartment->id]) }}"
+                                                    class="btn btn-success">Acquista</a>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            @endforeach
-                          </div>
+                            </div>
                         </div>
                     </div>
+                {{-- fine accordion --}}
                 </div>
+
                 <div class="section mb-4">
                     <div class="mb-2">
                         <strong>Servizi:</strong>
@@ -81,12 +89,12 @@
                         @if (count($apartment->services) > 0)
                             <div class="row my-3">
                                 @foreach ($apartment->services as $service)
-                                <div class="col-6">
-                                    <div>{{ $service->name }}@if (!$loop->last)
-                                        <span><i class="{{ $service->icon }}"></i></span>
-                                        @endif
+                                    <div class="col-6">
+                                        <div>{{ $service->name }}@if (!$loop->last)
+                                                <span><i class="{{ $service->icon }}"></i></span>
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
                                 @endforeach
                             @else
                                 nessuno
@@ -141,6 +149,10 @@
         </div>
     </div>
     <style>
+
+        .ms-bg-primary {
+            background-color: rgb(101, 159, 230)
+        }
         .card-title {
             font-size: 1.75rem;
             font-weight: bold;
