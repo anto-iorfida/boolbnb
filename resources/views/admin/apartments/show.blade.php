@@ -79,9 +79,9 @@
                                 @foreach ($apartment->services as $service)
                                 <div class="col-6">
                                     <div>{{ $service->name }}@if (!$loop->last)
+                                        <span><i class="{{ $service->icon }}"></i></span>
                                         @endif
                                     </div>
-                                    <div><i class="{{ $service->icon }}"></i></div>
                                 </div>
                                 @endforeach
                             @else
