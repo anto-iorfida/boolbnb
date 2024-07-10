@@ -24,14 +24,14 @@
                     @endif
                     <div class="row">
                         @foreach ($apartment->albums as $album)
-                            
                             @if ($apartment->album && file_exists(public_path('storage/' . $apartment->album)))
-                            {{-- @dump('ciao') --}}
+                                {{-- @dump('ciao') --}}
                                 <div class="col-4 col-md-4  d-inline">
-                                    <img src="{{ asset('storage/' . $album->image) }}" class="img-fluid rounded-4" style="min-height: 400px;width:auto;object-fit:contain">
+                                    <img src="{{ asset('storage/' . $album->image) }}" class="img-fluid rounded-4"
+                                        style="min-height: 400px;width:auto;object-fit:contain">
                                 </div>
                             @else
-                            {{-- @dump($album) --}}
+                                {{-- @dump($album) --}}
                                 <div class="col-4 col-md-4  d-inline">
                                     <img src="{{ asset('storage/' . $album->image) }}" class="img-fluid rounded-4">
                                 </div>
@@ -145,6 +145,29 @@
                 <div class="me-2">
                     <strong>Visibilità:</strong> {{ $apartment->visibility ? 'Visibile' : 'Non Visibile' }}
                 </div>
+                {{--  --}}
+                <div class="col my-4">
+                    <div class="card">
+                        <div class="card m-3">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <!-- <img class="img-fluid" src="img/stats.jpeg" alt=""> -->
+                                    <canvas id="myChart" width="300" height="150"></canvas>
+
+                                    <p>Messaggi e Visualizzazioni</p>
+                                    <p>Lista statistiche</p>
+                                </li>
+                                <li class="list-group-item">Marzo: </br>Messaggi= 12 Visualizzazioni= 100</li>
+                                <li class="list-group-item">Aprile:</br> Messaggi= 15 Visualizzazioni= 110</li>
+                                <li class="list-group-item">Maggio:</br> Messaggi= 20 Visualizzazioni= 100</li>
+                                <li class="list-group-item">Giugno:</br> Messaggi= 16 Visualizzazioni= 150</li>
+                                <li class="list-group-item">Luglio:</br> Messaggi= 25 Visualizzazioni= 180</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {{--  --}}
                 <div class="d-flex justify-content-between my-4">
                     <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">
                         <i class="fa-solid fa-arrow-left"></i> Indietro
@@ -157,6 +180,8 @@
             </div>
         </div>
     </div>
+
+
     <style>
         .ms-bg-primary {
             background-color: rgb(101, 159, 230)
@@ -218,6 +243,10 @@
 
 @section('scripts')
     <!-- Librerie di TomTom -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
     <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps.css">
     <script>
@@ -232,6 +261,52 @@
             let marker = new tt.Marker()
                 .setLngLat([{{ $apartment->longitude }}, {{ $apartment->latitude }}])
                 .addTo(map);
+
+
+            // Inizializzazione del grafico
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio'],
+                        datasets: [{
+                            label: 'Messaggi',
+                            data: [12, 15, 20, 16, 25],
+                            backgroundColor: 'rgba(101, 159, 230, 0.5)', // Azzurro
+                            borderColor: 'rgba(101, 159, 230, 1)',
+                            borderWidth: 1
+                        }, {
+                            label: 'Visualizzazioni',
+                            data: [100, 110, 100, 150, 180],
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)', // Rosso
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                grid: {
+                                    display: false // Imposta display: false per rimuovere la griglia dell'asse y
+                                },
+                                beginAtZero: true,
+                                // min: 0,
+                                // max: 2000,
+                                // stepSize: 200,
+                                // callback: function(value, index, values) {
+                                //     return value + ' €';
+                                // }
+                            },
+                            x: {
+                                grid: {
+                                    display: false // Imposta display: false per rimuovere la griglia dell'asse x
+                                }
+                            }
+                        
+                    
+                    }
+                }
+            });
         });
     </script>
 @endsection
