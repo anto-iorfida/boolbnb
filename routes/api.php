@@ -29,6 +29,9 @@ Route::get('/apartments/{slug}', [ApartmentController::class, 'show']);
 // http://127.0.0.1:8000/api/apartment/search  + params = latitude + longitude + radius   ricerca appartamenti per coordinate e raggio
 Route::get('/apartment/search', [ApartmentController::class, 'searchApartments']);
 
+// http://127.0.0.1:8000/api/sponsored-apartments
+Route::get('/sponsored-apartments', [ApartmentController::class, 'fetchSponsoredApartments']);
+
 // rotta per la validazione
 Route::post('/validate-apartment', [ApartmentController::class, 'validateApartment'])->name('api.validate.apartment');
 
