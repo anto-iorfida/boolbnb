@@ -79,33 +79,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="mb-3 mt-4">
-                        <label for="checkbox"><strong>Servizi</strong></label>
-                        <div class="row mb-3 mt-3 p-3 ">
-                            @foreach ($services as $service)
-                                <div class="form-check col-6 ">
-                                    @if ($errors->any())
-                                        {{-- Se cis sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}
-                                        <input class="form-check-input" @checked(in_array($service->id, old('services', []))) type="checkbox"
-                                            name="services[]" value="{{ $service->id }}"
-                                            id="service-{{ $service->id }}">
-                                    @else
-                                        {{-- Altrimenti vuol dire che stiamo caricando la pagina per la prima volta quindi controlliamo la presenza del service nella collection che ci arriva dal db --}}
-                                        <input class="form-check-input" @checked($apartment->services->contains($service)) type="checkbox"
-                                            name="services[]" value="{{ $service->id }}"
-                                            id="service-{{ $service->id }}">
-                                    @endif
-
-                                    <label class="form-check-label" for="service-{{ $service->id }}">
-                                        {{ $service->name }} <i class="{{ $service->icon }}"></i>
-                                    </label>
-                                </div>
-                            @endforeach
-                            @error('services')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
                     <div class=" mb-3 col-12 ">
                         <label for="visibility" class="form-label"><strong>Visibilità</strong></label>
                         <select class="form-control @error('visibility') is-invalid @enderror" id="visibility"
@@ -169,6 +142,34 @@
                     <input type="hidden" id="longitude" name="longitude" value="{{ $apartment->longitude }}">
                     <input type="hidden" id="latitude" name="latitude" value="{{ $apartment->latitude }}">
 
+                </div>
+
+                <div class="mb-3 mt-4">
+                    <label for="checkbox"><strong>Servizi</strong></label>
+                    <div class="row mb-3 mt-3 p-3 ">
+                        @foreach ($services as $service)
+                            <div class="form-check col-6 ">
+                                @if ($errors->any())
+                                    {{-- Se cis sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}
+                                    <input class="form-check-input" @checked(in_array($service->id, old('services', []))) type="checkbox"
+                                        name="services[]" value="{{ $service->id }}"
+                                        id="service-{{ $service->id }}">
+                                @else
+                                    {{-- Altrimenti vuol dire che stiamo caricando la pagina per la prima volta quindi controlliamo la presenza del service nella collection che ci arriva dal db --}}
+                                    <input class="form-check-input" @checked($apartment->services->contains($service)) type="checkbox"
+                                        name="services[]" value="{{ $service->id }}"
+                                        id="service-{{ $service->id }}">
+                                @endif
+
+                                <label class="form-check-label" for="service-{{ $service->id }}">
+                                    {{ $service->name }} <i class="{{ $service->icon }}"></i>
+                                </label>
+                            </div>
+                        @endforeach
+                        @error('services')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class=" mb-3 col-12 ">
