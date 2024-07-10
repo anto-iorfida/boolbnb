@@ -14,7 +14,7 @@ use Carbon\Carbon;
 
 class ApartmentController extends Controller
 {
-    
+
 
     public function index()
     {
@@ -26,7 +26,7 @@ class ApartmentController extends Controller
             'result' => $apartments
         ]);
     }
-    
+
 
 
 
@@ -54,7 +54,7 @@ class ApartmentController extends Controller
 
     // public function fetchSponsoredApartments()
     // {
-//     try {
+    //     try {
     //         // Ottieni la data e l'ora attuali
     //         $now = Carbon::now();
 
@@ -63,15 +63,15 @@ class ApartmentController extends Controller
     //             $query->where('end_date', '>', $now);
     //         })
     //             ->with(['services', 'albums', 'users', 'sponsors'])
-//             ->get();
+    //             ->get();
 
     //         // Restituisci una risposta JSON con i risultati degli appartamenti sponsorizzati
-//         return response()->json(['success' => true, 'result' => $apartments]);
-//     } catch (\Exception $e) {
+    //         return response()->json(['success' => true, 'result' => $apartments]);
+    //     } catch (\Exception $e) {
     //         // Se si verifica un'eccezione durante l'esecuzione della query, restituisci un errore con codice 500
     //         return response()->json(['success' => false, 'error' => 'An error occurred while fetching sponsored apartments.'], 500);
-//     }
-// }
+    //     }
+    // }
     public function fetchSponsoredApartments()
     {
         try {
@@ -243,14 +243,14 @@ class ApartmentController extends Controller
                 'email_sender' => 'required|email|max:255',
                 'body' => 'required|string',
             ]);
-    
+
             Log::info('Validated Data: ' . json_encode($validatedData));
-    
+
             // Recupera l'appartamento tramite l'ID passato nel payload della richiesta
             $apartment = Apartment::findOrFail($validatedData['apartment_id']);
-    
+
             Log::info('Apartment found: ' . json_encode($apartment));
-    
+
             // Crea e salva il messaggio
             $message = new Message();
             $message->apartment_id = $apartment->id;
@@ -258,7 +258,7 @@ class ApartmentController extends Controller
             $message->email_sender = $validatedData['email_sender'];
             $message->body = $validatedData['body'];
             $message->save();
-    
+
             // Risposta JSON con conferma di successo
             return response()->json(['message' => 'Messaggio inviato con successo'], 200);
         } catch (\Exception $e) {
@@ -267,12 +267,12 @@ class ApartmentController extends Controller
             return response()->json(['error' => 'Errore durante il salvataggio del messaggio'], 500);
         }
     }
-    
+
     public function showMessages($slug)
     {
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
 
-        $messages = $apartment->messages()->get(); 
+        $messages = $apartment->messages()->get();
 
         return view('messages.index', compact('messages'));
     }
