@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container-payment-maxwidth">
+<div class="container">
     <div class="container-payment-empty">
     </div>
 
@@ -13,14 +13,14 @@
             @csrf
             <input type="hidden" name="payment_Method_Nonce" id="nonce">
             <input type="hidden" name="id_apartment" value="{{ $apartment->id }}">
-            @dump($apartment)
+            {{-- @dump($apartment) --}}
             <input type="hidden" name="sponsor_id" value="{{ $sponsor ? $sponsor->id : '' }}">
 
             @if ($sponsor)
             <div>
                 <h2>Dettagli dello Sponsor</h2>
                 <p>Nome: {{ $sponsor->name }}</p>
-                <p>Id: {{ $sponsor->id }}</p>
+                {{-- <p>Id: {{ $sponsor->id }}</p> --}}
                 <p>Durata: {{ $sponsor->duration }} ore</p>
                 <p>Prezzo: {{ $sponsor->price }}</p>
             </div>
@@ -30,10 +30,14 @@
 
             <div class="form-group">
                 <label for="amount">Prezzo</label>
-                <input type="number" class="form-control" id="amount" name="amount" value="{{ $sponsor->price }}" readonly>
+                <input type="number" class="form-control rounded-pill" id="amount" name="amount" value="{{ $sponsor->price }}" readonly>
             </div>
 
-            <button type="submit" class="btn btn-primary" id="submit-payment">Submit Payment</button>
+           <div class="w-100 row justify-content-center">
+             <div class="col-12 col-md-2">
+                <button type="submit" class=" w-100 btn btn-primary mt-5 rounded-pill px-5 d-flex justify-content-center" id="submit-payment">Acquista</button>
+             </div>
+           </div>
         </form>
     </div>
 </div>

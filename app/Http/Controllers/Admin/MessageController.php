@@ -9,7 +9,8 @@ class MessageController extends Controller
 {
     public function index()
     {
-        $messages = Message::orderByDesc('created_at')->get();
+        // $messages = Message::orderByDesc('created_at')->get();
+        $messages = Message::with('apartment')->orderByDesc('created_at')->get();
         $messageCount = $messages->count();
         return view('admin.messages', compact('messages', 'messageCount'));
     }

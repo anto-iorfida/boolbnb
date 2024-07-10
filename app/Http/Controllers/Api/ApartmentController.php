@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Log;
 
 class ApartmentController extends Controller
 {
+    
+
     public function index()
     {
-        // $apartments = Apartment::with('services')->paginate(3);
-        $apartments = Apartment::with('services')->get();
+        $apartments = Apartment::with(['services', 'sponsors'])->get();
+
 
         return response()->json([
             'success' => true,
@@ -29,7 +31,10 @@ class ApartmentController extends Controller
 
     public function show($slug)
     {
-        $apartment = Apartment::where('slug', '=', $slug)->with('services','albums','users')->first();
+        // $apartment = Apartment::where('slug', '=', $slug)->with('services','albums','users','sponsors')->first();
+        $apartment = Apartment::where('slug', '=', $slug)
+            ->with(['services', 'albums', 'users', 'sponsors'])
+            ->first();
 
         if ($apartment) {
             $data = [
