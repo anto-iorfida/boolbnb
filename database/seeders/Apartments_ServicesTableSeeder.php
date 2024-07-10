@@ -69,7 +69,7 @@ class Apartments_ServicesTableSeeder extends Seeder
     public function run()
     {
         $totalServices = 12; // Numero totale di servizi disponibili
-        $apartments = range(1, 2000);
+        $apartments = range(1, 4000);
 
         foreach ($apartments as $apartment_id) {
             // Genera un numero casuale di servizi da assegnare a ciascun appartamento

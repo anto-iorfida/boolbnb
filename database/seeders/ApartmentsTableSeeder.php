@@ -29,7 +29,27 @@ class ApartmentsTableSeeder extends Seeder
             "Luminoso Appartamento con Accesso al Giardino",
             "Appartamento alla Moda nel Quartiere Trendy",
             "Rifugio Tranquillo Vicino alle Spiagge",
-            "Bellissimo Duplex con Patio Privato"
+            "Bellissimo Duplex con Patio Privato",
+            "Appartamento Spazioso in Zona Residenziale",
+            "Monolocale Arredato con Cura",
+            "Casa Moderna con Ampio Soggiorno",
+            "Loft di Design in Centro Storico",
+            "Elegante Bilocale con Parcheggio",
+            "Condominio con Palestra e Piscina",
+            "Attico con Terrazza Panoramica",
+            "Appartamento con Vista Mare",
+            "Bilocale Vicino alla Stazione",
+            "Monolocale con Cucina Attrezzata",
+            "Trilocale con Giardino Privato",
+            "Appartamento con Garage",
+            "Casa con Cortile Interno",
+            "Loft Industrial in Zona Artistica",
+            "Bilocale in Quartiere Tranquillo",
+            "Monolocale con Wi-Fi Incluso",
+            "Appartamento con Caminetto",
+            "Casa con Ampia Cantina",
+            "Loft con Finestre Panoramiche",
+            "Bilocale con Balcone Privato"
         ];
 
         $thumbs = [
@@ -43,22 +63,51 @@ class ApartmentsTableSeeder extends Seeder
             "https://c8.alamy.com/compit/2g9pg6k/case-cittadine-di-new-york-con-fughe-di-ferro-colore-applicato-tonificante-stati-uniti-2g9pg6k.jpg",
             "https://media-assets.ad-italia.it/photos/61bb3f5262236c86545c1d22/16:9/w_2560%2Cc_limit/1.jpg",
             "https://www.newyorkfacile.it/wp-content/uploads/casa-friends-new-york.jpg",
+            "https://www.avantgardeconstruct.it/wp-content/uploads/2019/06/Gallery-case-prefabbricate-in-legno.jpg",
+            "https://www.lidimare.com/images/00950/venditacaselidiferraresi_large.jpeg",
+            "https://i.pinimg.com/736x/b9/1a/ca/b91aca7ab95315233e1b7c1582259cbd.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM6RX5ZtgPzfmptwrGQ4jwLdGTjUdOOwa21A&s",
+            "https://i.pinimg.com/736x/20/fe/9c/20fe9ca091423be52c1cdbe191695f1d.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSOqlW6KIBJ2Cn_op6Kbh2cEKWg-Qow5pwXA&s",
+            "https://www.viaggi-usa.it/wp-content/uploads/2016/12/copertina-opt-1.jpg",
+            "https://hips.hearstapps.com/hmg-prod/images/ej-central-park-tower-brooke-goldberg-salon-blanco-1624135435.jpg",
+            "https://a3.cdn.japantravel.com/photo/59506-200798/738x553.5!/japanese-homes-200798.jpg"
         ];
-
+        
         $descriptions = [
-            "Ampio appartamento con 3 camere da letto e 2 bagni in zona centrale, perfetto per famiglie.",
-            "Grazioso monolocale con vista sul mare, ideale per una coppia in cerca di relax.",
-            "Elegante attico con terrazza panoramica, situato in un prestigioso quartiere.",
-            "Moderno bilocale con giardino privato, perfetto per chi ama stare all'aria aperta.",
-            "Confortevole appartamento con posto auto, situato in una zona ben servita.",
-            "Luminoso trilocale con cantina e solaio, in una palazzina appena ristrutturata.",
-            "Funzionale bilocale con cucina attrezzata, ideale per studenti o lavoratori fuori sede.",
-            "Accogliente monolocale con balcone, situato in un condominio tranquillo.",
-            "Spazioso appartamento con 4 camere da letto e 3 bagni, perfetto per gruppi di amici o famiglie numerose.",
-            "Elegante duplex con finiture di pregio, situato in un edificio storico.",
+            "Spazioso appartamento situato in una zona centrale, comodo per spostamenti e servizi.",
+            "Monolocale accogliente perfetto per giovani coppie o studenti.",
+            "Casa ampia e luminosa, ideale per famiglie numerose.",
+            "Loft moderno con dettagli di design e finiture di pregio.",
+            "Condominio elegante in un quartiere storico e tranquillo.",
+            "Attico lussuoso con vista mozzafiato sul panorama cittadino.",
+            "Appartamento luminoso con accesso diretto a spazi verdi.",
+            "Alloggio trendy in una zona ricca di vita e attrazioni.",
+            "Rifugio tranquillo per chi cerca pace e relax.",
+            "Duplex con patio per piacevoli serate all'aperto.",
+            "Appartamento spazioso ideale per una vita comoda e rilassata.",
+            "Monolocale arredato con cura e attenzione ai dettagli.",
+            "Casa moderna con ampio soggiorno per una vita confortevole.",
+            "Loft di design in una posizione centrale e ben collegata.",
+            "Bilocale elegante con parcheggio riservato.",
+            "Condominio con servizi esclusivi per i residenti.",
+            "Attico con terrazza per momenti di relax e divertimento.",
+            "Appartamento con vista mare per vacanze indimenticabili.",
+            "Bilocale comodo e funzionale vicino ai mezzi di trasporto.",
+            "Monolocale con cucina attrezzata e spazi ben organizzati.",
+            "Trilocale con giardino privato per una vita serena.",
+            "Appartamento con garage per una maggiore comodità.",
+            "Casa con cortile interno per momenti di tranquillità.",
+            "Loft industrial in una zona artistica e vibrante.",
+            "Bilocale in un quartiere tranquillo e sicuro.",
+            "Monolocale con connessione internet inclusa.",
+            "Appartamento con camino per serate accoglienti.",
+            "Casa con ampia cantina per maggiori spazi di archiviazione.",
+            "Loft con grandi finestre panoramiche.",
+            "Bilocale con balcone privato per godersi l'aria aperta."
         ];
 
-        for ($i = 0; $i < 2000; $i++) {
+        for ($i = 0; $i < 4000; $i++) {
             $title = $titles[$i % count($titles)];
             $description = $descriptions[$i % count($descriptions)];
             $thumb = $thumbs[$i % count($thumbs)];

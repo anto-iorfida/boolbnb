@@ -39,8 +39,8 @@ class DatabaseSeeder extends Seeder
             // ViewsTableSeeder::class,
             SponsorsTableSeeder::class,
             AlbumsTableSeeder::class,
-            Apartments_ServicesTableSeeder::class
-
+            Apartments_ServicesTableSeeder::class,
+            Apartaments_SponsorsTableSeeder::class
         ]);
     }
 }

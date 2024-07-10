@@ -24,8 +24,8 @@ class AlbumsTableSeeder extends Seeder
             'https://st3.depositphotos.com/1041088/35593/i/450/depositphotos_355930350-stock-photo-cedar-brown-mountain-home-great.jpg'
         ];
 
-        // Genera gli appartamenti dinamicamente da 1 a 2000
-        $apartments = range(1, 2000);
+        // Genera gli appartamenti dinamicamente da 1 a 4000
+        $apartments = range(1, 4000);
 
         foreach ($apartments as $apartment_id) {
             foreach ($albums as $singleAlbum) {
