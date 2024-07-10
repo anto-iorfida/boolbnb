@@ -9,7 +9,7 @@
     <div class="card p-5 mb-2">
         <div class="card-body">
             <div class="container">
-                <h1 class=" text-secondary">Titolo: {{ $apartment->title }}</h1>
+                <h1 class=" text-secondary">{{ $apartment->title }}</h1>
                 <div class=" p-5 mb-2 ">
                     <h3>Immagine di copertina</h3>
                     @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
