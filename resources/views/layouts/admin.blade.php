@@ -183,19 +183,23 @@
                     @yield('content')
                 </div>
 
-                <footer class="pt-5 d-flex justify-content-between">
-                    <span>Copyright ©2024-2025 <a href="/">BoolB&B</a></span>
-                    <ul class="nav m-0">
-                        <li class="nav-item">
-                            <a class="nav-link text-secondary" aria-current="page" href="#">Privacy Policy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">Termini e condizioni</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">Contatti</a>
-                        </li>
-                    </ul>
+                <footer class="row-container pt-5 d-flex justify-content-between">
+                    <div class="col-6">
+                        <span>Copyright ©2024-2025 <a href="/">BoolB&B</a></span>
+                    </div>
+                    <div class="col-6">
+                        <ul class="nav m-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" aria-current="page" href="#">Privacy Policy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" href="#">Termini e condizioni</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" href="#">Contatti</a>
+                            </li>
+                        </ul>
+                    </div>
                 </footer>
             </main>
 
@@ -228,7 +232,7 @@
     }
 
     .ms-bg-header {
-        background-color: #0d6efd;
+        background-color: #0D6EFD;
     }
     
     .ms-myhover:hover {
@@ -240,7 +244,6 @@
 
     main {
         height: 100%;
-
     }
 
     .sidebar {

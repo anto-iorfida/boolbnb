@@ -2,7 +2,7 @@
 @section('content')
     <!-- Section for received messages -->
     <div class="row mt-4">
-        <div class="col-11 mb-4 mb-lg-0">
+        <div class="col-12 mb-4 mb-lg-0">
             <div class="card">
                 <h5 class="card-header">Messaggi Ricevuti</h5>
                 <div class="card-body">
