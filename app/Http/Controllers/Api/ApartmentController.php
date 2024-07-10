@@ -14,8 +14,6 @@ use Carbon\Carbon;
 
 class ApartmentController extends Controller
 {
-
-
     public function index()
     {
         $apartments = Apartment::with(['services', 'sponsors'])->get();
@@ -26,9 +24,6 @@ class ApartmentController extends Controller
             'result' => $apartments
         ]);
     }
-
-
-
 
     public function show($slug)
     {
@@ -52,7 +47,6 @@ class ApartmentController extends Controller
         return response()->json($data);
     }
 
-
     public function fetchSponsoredApartments()
     {
         try {
@@ -73,7 +67,6 @@ class ApartmentController extends Controller
             return response()->json(['success' => false, 'error' => 'An error occurred while fetching sponsored apartments.'], 500);
         }
     }
-
 
     public function searchApartments(Request $request)
     {
@@ -156,8 +149,6 @@ class ApartmentController extends Controller
             return response()->json(['success' => false, 'error' => 'An error occurred while fetching apartments.'], 500);
         }
     }
-
-
 
     private function validation($data)
     {
