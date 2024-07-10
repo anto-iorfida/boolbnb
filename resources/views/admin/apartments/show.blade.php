@@ -58,26 +58,18 @@
                                         appartamento</strong>
                                 </button>
                             </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <div class="d-block d-md-flex justify-content-center">
-                                        @foreach ($sponsor as $singleSponsor)
-                                            <div class="card text-center me-2 mb-2" style="min-width: 200px;">
-                                                <div class="card-header">
-                                                    <strong class="fs-5">{{ $singleSponsor->name }}</strong>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore
-                                                    </div>
-                                                    <div class="card-text fs-5">Prezzo: {{ $singleSponsor->price }}</div>
-                                                </div>
-                                                <div class="card-footer text-body-secondary">
-                                                    <a href="{{ route('admin.payment', ['sponsor_id' => $singleSponsor->id]) }}"
-                                                        class="btn btn-success fs-5">Acquista</a>
-                                                </div>
-                                            </div>
-                                        @endforeach
+                          <div class="d-block d-md-flex justify-content-center">
+                            @foreach ($sponsor as $singleSponsor)
+                                <div class="card text-center me-2 mb-2" style="min-width: 200px;">
+                                    <div class="card-header">
+                                        <strong>{{ $singleSponsor->name }}</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore</div>
+                                        <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>
+                                    </div>
+                                    <div class="card-footer text-body-secondary">
+                                        <a href="{{ route('admin.payment', ['sponsor_id'=> $singleSponsor->id]) }}" class="btn btn-success">Acquista</a>
                                     </div>
                                 </div>
                             </div>
@@ -92,11 +84,10 @@
                             <div class="row my-3">
                                 @foreach ($apartment->services as $service)
                                     <div class="col-6">
-                                        <div class="d-flex gap-2 align-items-center">{{ $service->name }}
-                                            <i class="{{ $service->icon }}"></i>
-                                            @if (!$loop->last)
+                                        <div>{{ $service->name }}@if (!$loop->last)
                                             @endif
                                         </div>
+                                        <div><i class="{{ $service->icon }}"></i></div>
                                     </div>
                                 @endforeach
                             @else
