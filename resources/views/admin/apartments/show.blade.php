@@ -32,6 +32,7 @@
                                         class="img-fluid rounded-4" style="min-height: 400px;width:auto;object-fit:contain">
                                 </div>
                             @else
+                            
                                 <div class="col-4 col-md-4  d-inline">
                                     <img src="{{ $album->image }}" alt="{{ $apartment->title }}"
                                         class="img-fluid rounded-4">

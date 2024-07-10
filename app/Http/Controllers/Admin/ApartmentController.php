@@ -170,13 +170,25 @@ class ApartmentController extends Controller
         }
 
         // Caricamento delle altre immagini (images)
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $imgPath = Storage::disk('public')->put('apartment_images', $image);
-                $formData['images'][] = $imgPath;
-            }
-        }
+        // if ($request->hasFile('images')) {
+        //     foreach ($request->file('images') as $image) {
+        //         $imgPath = Storage::disk('public')->put('apartment_images', $image);
+        //         $formData['images'][] = $imgPath;
+        //     }
+        // }
+// Caricamento delle altre immagini (images)
+if ($request->hasFile('images')) {
+    // Elimina vecchie immagini se necessario
+    foreach ($apartment->albums as $album) {
+        Storage::disk('public')->delete($album->image);
+        $album->delete();
+    }
 
+    foreach ($request->file('images') as $image) {
+        $imgPath = Storage::disk('public')->put('apartment_images', $image);
+        $apartment->albums()->create(['image' => $imgPath]);
+    }
+}
         $apartment->slug = Str::slug($formData['title'], '-');
         $apartment->update($formData);
 
