@@ -6,41 +6,11 @@
     @if (session('apartments_edit'))
         <div class="mess-info">Progetto modificato con successo!</div>
     @endif
-    <div class="card p-5 mb-2">
-        {{-- <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                @foreach ($apartment->albums as $key => $album)
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key + 1 }}" aria-label="Slide {{ $key + 2 }}"></button>
-                @endforeach
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
-                        <img src="{{ asset('storage/' . $apartment->thumb) }}" class="d-block w-100" alt="{{ $apartment->title }}">
-                    @else
-                        <img src="{{ $apartment->thumb }}" class="d-block w-100" alt="{{ $apartment->title }}">
-                    @endif
-                </div>
-                @foreach ($apartment->albums as $album)
-                    <div class="carousel-item">
-                        <img src="{{ asset('storage/' . $album->image) }}" class="d-block w-100" alt="Immagine appartamento">
-                    </div>
-                @endforeach
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div> --}}
-        <div class="card-body">
+    <div class="container-fluid  mb-2">
+        <div class="">
             <div class="container">
                 <h1 class=" text-secondary">Titolo: {{ $apartment->title }}</h1>
-                <div class=" p-5 mb-2 ">
+                <div class="  mb-2 ">
                     <h3>Immagine di copertina</h3>
                     @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
                         <div class="col-12 mb-4 d-block">
@@ -64,58 +34,69 @@
                 <div class="row mb-4">
                     <div class="col">
                         <div class="mb-2">
-                            <strong>Slug:</strong> {{ $apartment->slug }}
+                            <strong class="fs-5">Slug:</strong> {{ $apartment->slug }}
                         </div>
                         <div class="mb-2">
-                            <strong>Data di Creazione:</strong> {{ $apartment->created_at->format('d/m/Y H:i') }}
+                            <strong class="fs-5">Data di Creazione:</strong>
+                            {{ $apartment->created_at->format('d/m/Y H:i') }}
                         </div>
                         <div class="mb-2">
-                            <strong>Data di Modifica:</strong> {{ $apartment->updated_at->format('d/m/Y H:i') }}
+                            <strong class="fs-5">Data di Modifica:</strong>
+                            {{ $apartment->updated_at->format('d/m/Y H:i') }}
                         </div>
                     </div>
                 </div>
                 <div class="section mb-4">
-                    {{-- prova  --}}
                     <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <div class="accordion-item" >
+                        <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#flush-collapseOne" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <i class="fa-solid fa-money-bill-trend-up"></i> Sponsorizza il tuo appartamento
+                                    <strong class="fs-5  d-flex align-items-center gap-3"><i
+                                            class="fa-solid fa-money-bill-trend-up"></i> Sponsorizza il tuo
+                                        appartamento</strong>
                                 </button>
                             </h2>
-                          <div class="d-block d-md-flex justify-content-center">
-                            @foreach ($sponsor as $singleSponsor)
-                                <div class="card text-center me-2 mb-2" style="min-width: 200px;">
-                                    <div class="card-header">
-                                        <strong>{{ $singleSponsor->name }}</strong>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore</div>
-                                        <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>
-                                    </div>
-                                    <div class="card-footer text-body-secondary">
-                                        <a href="{{ route('admin.payment', ['sponsor_id'=> $singleSponsor->id]) }}" class="btn btn-success">Acquista</a>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="d-block d-md-flex justify-content-center">
+                                        @foreach ($sponsor as $singleSponsor)
+                                            <div class="card text-center me-2 mb-2" style="min-width: 200px;">
+                                                <div class="card-header">
+                                                    <strong class="fs-5">{{ $singleSponsor->name }}</strong>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore
+                                                    </div>
+                                                    <div class="card-text fs-5">Prezzo: {{ $singleSponsor->price }}</div>
+                                                </div>
+                                                <div class="card-footer text-body-secondary">
+                                                    <a href="{{ route('admin.payment', ['sponsor_id' => $singleSponsor->id]) }}"
+                                                        class="btn btn-success fs-5">Acquista</a>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
-                            @endforeach
-                          </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="section mb-4">
                     <div class="mb-2">
-                        <strong>Servizi:</strong>
+                        <strong class="fs-5">Servizi:</strong>
                         <br />
                         @if (count($apartment->services) > 0)
                             <div class="row my-3">
                                 @foreach ($apartment->services as $service)
                                     <div class="col-6">
-                                        <div>{{ $service->name }}@if (!$loop->last)
+                                        <div class="d-flex gap-2 align-items-center">{{ $service->name }}
+                                            <i class="{{ $service->icon }}"></i>
+                                            @if (!$loop->last)
                                             @endif
                                         </div>
-                                        <div><i class="{{ $service->icon }}"></i></div>
                                     </div>
                                 @endforeach
                             @else
@@ -125,38 +106,38 @@
                 </div>
                 @if ($apartment->description)
                     <div class="mb-2">
-                        <strong>Descrizione:</strong>
+                        <strong class="fs-5">Descrizione:</strong>
                         <p>{{ $apartment->description }}</p>
                     </div>
                 @endif
                 <div class="mb-4">
                     <div class="row">
                         <div class="col-md-6 mb-2">
-                            <strong>Visualizzazioni:</strong> {{ $apartment->views_count }}
+                            <strong class="fs-5">Visualizzazioni:</strong> {{ $apartment->views_count }}
                         </div>
                         <div class="col-md-6 mb-2">
-                            <strong>Numero di Camere:</strong> {{ $apartment->number_rooms }}
+                            <strong class="fs-5">Numero di Camere:</strong> {{ $apartment->number_rooms }}
                         </div>
                         <div class="col-md-6 mb-2">
-                            <strong>Numero di Letti:</strong> {{ $apartment->number_beds }}
+                            <strong class="fs-5">Numero di Letti:</strong> {{ $apartment->number_beds }}
                         </div>
                         <div class="col-md-6 mb-2">
-                            <strong>Numero di Bagni:</strong> {{ $apartment->number_baths ?? 'N/A' }}
+                            <strong class="fs-5">Numero di Bagni:</strong> {{ $apartment->number_baths ?? 'N/A' }}
                         </div>
                         <div class="col-md-6 mb-2">
-                            <strong>Metri Quadrati:</strong> {{ $apartment->square_meters ?? 'N/A' }}
+                            <strong class="fs-5">Metri Quadrati:</strong> {{ $apartment->square_meters ?? 'N/A' }}
                         </div>
                     </div>
                 </div>
                 <div class="mb-4">
                     <div class="pe-2">
-                        <strong>Indirizzo:</strong> {{ $apartment->address }}
+                        <strong class="fs-5">Indirizzo:</strong> {{ $apartment->address }}
                     </div>
                 </div>
                 <!-- Mappa -->
                 <div id="map" class="rounded mb-4"></div>
                 <div class="me-2">
-                    <strong>Visibilità:</strong> {{ $apartment->visibility ? 'Visibile' : 'Non Visibile' }}
+                    <strong class="fs-5">Visibilità:</strong> {{ $apartment->visibility ? 'Visibile' : 'Non Visibile' }}
                 </div>
                 <div class="d-flex justify-content-between my-4">
                     <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary">

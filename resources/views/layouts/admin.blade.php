@@ -32,7 +32,7 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body>
+<body class="p-0">
     {{-- ||||||||||||||||||||||||||||||||  inizio header ||||||||||||||||||||||||||||||| --}}
     <header class="sticky-top ms-bg-header">
         <nav class="navbar navbar-light gap-5 p-3 ">

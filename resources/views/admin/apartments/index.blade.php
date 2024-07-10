@@ -15,7 +15,7 @@
     @endif
     <p>In questa pagina puoi visualizzare i tuoi appartamenti caricati su BoolB&B</p>
     <div class="row">
-        <div class="col-11 mb-4 mb-lg-0">
+        <div class="col-12 mb-4 mb-lg-0">
             <div class="card">
                 <h5 class="card-header">Appartamenti inseriti</h5>
                 <div class="card-body">
@@ -41,10 +41,10 @@
                                 <tbody>
                                     @foreach ($apartments as $apartment)
                                         <tr>
-                                            <td>{{ $apartment->title}}</td>
-                                            <td  class="d-none d-md-table-cell">{{ $apartment->address }}</td>
-                                            <td  class="d-none d-lg-table-cell">{{ $apartment->visibility_text }}</td>
-                                            <td  class="d-none d-lg-table-cell">{{ $apartment->views_count }}</td>
+                                            <td>{{ $apartment->title }}</td>
+                                            <td class="d-none d-md-table-cell">{{ $apartment->address }}</td>
+                                            <td class="d-none d-lg-table-cell">{{ $apartment->visibility_text }}</td>
+                                            <td class="d-none d-lg-table-cell">{{ $apartment->views_count }}</td>
                                             <td class="d-flex flex-column gap-2">
                                                 <a href="{{ route('admin.apartments.show', ['apartment' => $apartment->slug]) }}"
                                                     class="btn btn-sm btn-success w-75">
@@ -71,32 +71,8 @@
         </div>
     </div>
 
-    <!-- Sezione per i messaggi ricevuti -->
-    {{-- <div class="row mt-4">
-        <div class="col-11 mb-4 mb-lg-0">
-            <div class="card">
-                <h5 class="card-header">Messaggi Ricevuti</h5>
-                <div class="card-body">
-                    @if ($messages->isEmpty())
-                        <p class="text-center">Non hai ancora ricevuto nessun messaggio.</p>
-                    @else
-                        @foreach ($messages as $message)
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $message->name_lastname }}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">{{ $message->email_sender }}</h6>
-                                    <p class="card-text">{{ $message->body }}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
-    <!-- Modal di Conferma -->
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+    <!-- Modale 1 di Conferma -->
+    <div class="modal fade p-0 mt-3 "  id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -118,6 +94,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 <script>
     setTimeout(function() {
@@ -127,3 +104,10 @@
         });
     }, 3000); // 3 secondi
 </script>
+<style>
+    @media (max-width: 575.98px) {
+        .my-class {
+            width: 100vw;
+        }
+    }
+</style>
