@@ -26,16 +26,14 @@
                         @foreach ($apartment->albums as $album)
                             
                             @if ($apartment->album && file_exists(public_path('storage/' . $apartment->album)))
-                            
+                            {{-- @dump('ciao') --}}
                                 <div class="col-4 col-md-4  d-inline">
-                                    <img src="{{ asset('storage/' . $album->image) }}" alt="{{ $apartment->title }}"
-                                        class="img-fluid rounded-4" style="min-height: 400px;width:auto;object-fit:contain">
+                                    <img src="{{ asset('storage/' . $album->image) }}" class="img-fluid rounded-4" style="min-height: 400px;width:auto;object-fit:contain">
                                 </div>
                             @else
-                            
+                            {{-- @dump($album) --}}
                                 <div class="col-4 col-md-4  d-inline">
-                                    <img src="{{ $album->image }}" alt="{{ $apartment->title }}"
-                                        class="img-fluid rounded-4">
+                                    <img src="{{ asset('storage/' . $album->image) }}" class="img-fluid rounded-4">
                                 </div>
                             @endif
                         @endforeach

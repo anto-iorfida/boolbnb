@@ -122,25 +122,17 @@
 
                 <div class="col-12 col-md-6">
                     <div class="mb-3 col-12 ">
-                        <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong>Immagine
-                                copertina appartamento</strong></label>
+                        <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong>Immagine copertina appartamento</strong></label>
                         <input class="form-control mb-3" type="file" id="thumb" name="thumb">
-                        {{-- @if ($apartment->thumb)
-                            <div class="mt-2 image-edit">
-                                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->thumb }}">
-                            </div>
-                        @endif
-                        @error('thumb')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror --}}
+                        
                         @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
                             <div class="col-12 mb-4 d-block">
                                 <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}"
-                                    class="img-fluid rounded-4" style="min-height: 400px;width:auto;object-fit:contain">
+                                    class="img-fluid rounded-4" style='width: 100px; height: 100px;'>
                             </div>
                         @else
                             <div class="mb-4 card" style='width: 100px; height: 100px;'>
-                                <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}"
+                                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}"
                                     class="img-fluid rounded-4">
                             </div>
                         @endif
@@ -150,20 +142,19 @@
                                 *</strong></label>
                         <input type="file" class="form-control mb-3" id="images" name="images[]" multiple>
                         <div class="invalid-feedback" id="imagesError"></div>
-                        {{-- @dump($apartment->albums) --}}
                         @if ($apartment->album)
                             <div class="mt-2 image-edit">
                                 <img src="{{ asset('storage/' . $apartment->album) }}" alt="{{ $apartment->album }}">
                             </div>
                         @endif
-                        <div class="col-4 col-md-4  d-inline" >
+                        <div class="col-4 col-md-4 d-inline">
                             @foreach ($apartment->albums as $album)
                                 @if ($apartment->album && file_exists(public_path('storage/' . $apartment->album)))
                                     <img src="{{ asset('storage/' . $album->image) }}" alt="{{ $apartment->title }}"
                                         class="img-fluid rounded-4"
                                         style='width: 100px;height: 100px'>
                                 @else
-                                    <img src="{{ $album->image }}" alt="{{ $apartment->title }}"
+                                    <img src="{{ asset('storage/' . $album->image) }}" alt="{{ $apartment->title }}"
                                         class="img-fluid rounded-4" style='width: 100px;height: 100px'>
                                 @endif
                             @endforeach
