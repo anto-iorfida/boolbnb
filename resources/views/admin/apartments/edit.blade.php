@@ -95,7 +95,8 @@
 
                 <div class="col-12 col-md-6">
                     <div class="mb-3 col-12 ">
-                        <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong>Immagine copertina appartamento</strong></label>
+                        <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong>Immagine
+                                copertina appartamento</strong></label>
                         <input class="form-control" type="file" id="thumb" name="thumb">
                         @if ($apartment->thumb)
                             <div class="mt-2 image-edit">
@@ -105,6 +106,11 @@
                         @error('thumb')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                    </div>
+                    <div class="mb-3 col-12 ">
+                        <label for="images" class="form-label"><strong>Altre immagini dell'appartamento *</strong></label>
+                        <input type="file" class="form-control" id="images" name="images[]" multiple>
+                        <div class="invalid-feedback" id="imagesError"></div>
                     </div>
                     <div class=" mb-3 col-12 ">
                         <label for="description" class="form-label"><strong>Descrizione</strong></label>
@@ -118,7 +124,7 @@
                         <label for="checkbox"><strong>Servizi</strong></label>
                         <div class="row mb-3 mt-3 p-3">
                             @foreach ($services as $service)
-                            <div>  <i class="{{$service->icon}}"></i></div>
+                                <div> <i class="{{ $service->icon }}"></i></div>
                                 <div class="form-check col-6 ">
                                     @if ($errors->any())
                                         {{-- Se cis sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}

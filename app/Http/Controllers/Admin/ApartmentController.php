@@ -154,7 +154,6 @@ class ApartmentController extends Controller
                 'services.*.exists' => 'Il servizio selezionato non esiste',
             ]
         );
-
         $formData = $request->all();
 
         // Caricamento dell'immagine di copertina (thumb)
@@ -184,6 +183,19 @@ class ApartmentController extends Controller
             $apartment->services()->detach();
         }
 
+        if ($request->has('albums')) {
+            $apartment->albums()->sync($validatedData['albums']);
+        } else {
+            $apartment->albums()->sync([]);
+        }
+
+    
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $img_path = Storage::disk('public')->put('apartment_images', $file);
+                $apartment->albums()->create(['image' => $img_path]);
+            }
+        }
         session()->flash('apartments_edit', true);
         return redirect()->route('admin.apartments.show', $apartment->slug);
     }
@@ -199,49 +211,52 @@ class ApartmentController extends Controller
 
     private function validation($data)
     {
-        return Validator::make($data, [
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'number_rooms' => 'required|integer|min:1',
-            'number_beds' => 'required|integer|min:1',
-            'number_baths' => 'required|integer|min:1',
-            'square_meters' => 'required|integer|min:0',
-            'thumb' => 'required|image|max:1700',
-            'images' => 'required|array|min:1',
-            'images.*' => 'image|max:1700',
-            'address' => 'required|string',
-            'longitude' => 'required|numeric|between:-180,180',
-            'latitude' => 'required|numeric|between:-90,90',
-            'visibility' => 'required|boolean',
-            'services' => 'required|array|min:1',
-            'services.*' => 'integer|exists:services,id',
-        ], 
-        [
-            'title.required' => 'Il campo titolo è obbligatorio',
-            'description.required' => 'Il campo descrizione è obbligatorio',
-            'number_rooms.required' => 'Il campo numero di stanze è obbligatorio',
-            'number_beds.required' => 'Il campo numero di letti è obbligatorio',
-            'number_baths.required' => 'Il campo numero di bagni è obbligatorio',
-            'square_meters.required' => 'Il campo metri quadri è obbligatorio',
-            'thumb.required' => 'Il campo immagine di copertina è obbligatorio',
-            'thumb.image' => 'Il file deve essere un\'immagine',
-            'thumb.max' => 'L\'immagine non può superare i 1700KB',
-            'images.required' => 'Il campo immagini è obbligatorio',
-            'images.array' => 'Le immagini devono essere un array',
-            'images.min' => 'Seleziona almeno una immagine',
-            'images.*.image' => 'Il file deve essere un\'immagine',
-            'images.*.max' => 'Ogni immagine non può superare i 1700KB',
-            'address.required' => 'Il campo indirizzo è obbligatorio',
-            'longitude.required' => 'Il campo longitudine è obbligatorio',
-            'longitude.between' => 'Il campo longitudine deve essere compreso tra -180 e 180',
-            'latitude.required' => 'Il campo latitudine è obbligatorio',
-            'latitude.between' => 'Il campo latitudine deve essere compreso tra -90 e 90',
-            'visibility.required' => 'Il campo visibilità è obbligatorio',
-            'services.required' => 'Seleziona almeno un servizio.',
-            'services.array' => 'I servizi devono essere un array',
-            'services.*.integer' => 'Il servizio deve essere un ID valido',
-            'services.*.exists' => 'Il servizio selezionato non esiste',
-        ])->validate();
+        return Validator::make(
+            $data,
+            [
+                'title' => 'required|string|max:255',
+                'description' => 'required|string',
+                'number_rooms' => 'required|integer|min:1',
+                'number_beds' => 'required|integer|min:1',
+                'number_baths' => 'required|integer|min:1',
+                'square_meters' => 'required|integer|min:0',
+                'thumb' => 'required|image|max:1700',
+                'images' => 'required|array|min:1',
+                'images.*' => 'image|max:1700',
+                'address' => 'required|string',
+                'longitude' => 'required|numeric|between:-180,180',
+                'latitude' => 'required|numeric|between:-90,90',
+                'visibility' => 'required|boolean',
+                'services' => 'required|array|min:1',
+                'services.*' => 'integer|exists:services,id',
+            ],
+            [
+                'title.required' => 'Il campo titolo è obbligatorio',
+                'description.required' => 'Il campo descrizione è obbligatorio',
+                'number_rooms.required' => 'Il campo numero di stanze è obbligatorio',
+                'number_beds.required' => 'Il campo numero di letti è obbligatorio',
+                'number_baths.required' => 'Il campo numero di bagni è obbligatorio',
+                'square_meters.required' => 'Il campo metri quadri è obbligatorio',
+                'thumb.required' => 'Il campo immagine di copertina è obbligatorio',
+                'thumb.image' => 'Il file deve essere un\'immagine',
+                'thumb.max' => 'L\'immagine non può superare i 1700KB',
+                'images.required' => 'Il campo immagini è obbligatorio',
+                'images.array' => 'Le immagini devono essere un array',
+                'images.min' => 'Seleziona almeno una immagine',
+                'images.*.image' => 'Il file deve essere un\'immagine',
+                'images.*.max' => 'Ogni immagine non può superare i 1700KB',
+                'address.required' => 'Il campo indirizzo è obbligatorio',
+                'longitude.required' => 'Il campo longitudine è obbligatorio',
+                'longitude.between' => 'Il campo longitudine deve essere compreso tra -180 e 180',
+                'latitude.required' => 'Il campo latitudine è obbligatorio',
+                'latitude.between' => 'Il campo latitudine deve essere compreso tra -90 e 90',
+                'visibility.required' => 'Il campo visibilità è obbligatorio',
+                'services.required' => 'Seleziona almeno un servizio.',
+                'services.array' => 'I servizi devono essere un array',
+                'services.*.integer' => 'Il servizio deve essere un ID valido',
+                'services.*.exists' => 'Il servizio selezionato non esiste',
+            ]
+        )->validate();
     }
 
     // softdeletee
@@ -258,17 +273,17 @@ class ApartmentController extends Controller
         session()->flash('apartments_restore', true);
         return redirect()->route('admin.apartments.index')->with('status', 'User restored successfully.');
     }
-    public function forceDelete( $id)
+    public function forceDelete($id)
     {
         $apartment = Apartment::withTrashed()->find($id);
         $apartment->forceDelete();
         session()->flash('apartments_forceDelete', true);
-         return redirect()->back();
+        return redirect()->back();
     }
-    public function restoreAll() 
-{
-    Apartment::onlyTrashed()->restore();
-    session()->flash('apartments_restoreAll', true);
-    return redirect()->route('admin.apartments.index')->withSuccess(__('All users restored successfully.'));
-}
+    public function restoreAll()
+    {
+        Apartment::onlyTrashed()->restore();
+        session()->flash('apartments_restoreAll', true);
+        return redirect()->route('admin.apartments.index')->withSuccess(__('All users restored successfully.'));
+    }
 }
