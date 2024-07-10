@@ -25,7 +25,7 @@ class ApartmentController extends Controller
         $userId = Auth::id();
         $apartments = Apartment::where('id_user', $userId)->get();
         // $messages = Message::orderByDesc('created_at')->get();
-        return view('admin.apartments.index', compact('apartments', 'messages'));
+        return view('admin.apartments.index', compact('apartments'));
     }
 
     public function create(Service $services, Album $albums)
