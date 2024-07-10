@@ -156,7 +156,7 @@
                                 href="{{ route('admin.messages') }}">
                                 <i class="fa-regular fa-comment"></i>
                                 <small>Messaggi Ricevuti</small>
-                                <span class="badge bg-primary">{{ $messageCount }}</span>
+                                <span class="badge bg-primary">{{ $messageCount}}</span>
                             </a>
                         </li>
                         <li class="nav-item p-2">
