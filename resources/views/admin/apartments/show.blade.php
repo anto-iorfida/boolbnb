@@ -7,36 +7,6 @@
         <div class="mess-info">Progetto modificato con successo!</div>
     @endif
     <div class="card p-5 mb-2">
-        {{-- <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                @foreach ($apartment->albums as $key => $album)
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key + 1 }}" aria-label="Slide {{ $key + 2 }}"></button>
-                @endforeach
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
-                        <img src="{{ asset('storage/' . $apartment->thumb) }}" class="d-block w-100" alt="{{ $apartment->title }}">
-                    @else
-                        <img src="{{ $apartment->thumb }}" class="d-block w-100" alt="{{ $apartment->title }}">
-                    @endif
-                </div>
-                @foreach ($apartment->albums as $album)
-                    <div class="carousel-item">
-                        <img src="{{ asset('storage/' . $album->image) }}" class="d-block w-100" alt="Immagine appartamento">
-                    </div>
-                @endforeach
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div> --}}
         <div class="card-body">
             <div class="container">
                 <h1 class=" text-secondary">Titolo: {{ $apartment->title }}</h1>
@@ -111,12 +81,12 @@
                         @if (count($apartment->services) > 0)
                             <div class="row my-3">
                                 @foreach ($apartment->services as $service)
-                                    <div class="col-6">
-                                        <div>{{ $service->name }}@if (!$loop->last)
-                                            @endif
-                                        </div>
-                                        <div><i class="{{ $service->icon }}"></i></div>
+                                <div class="col-6">
+                                    <div>{{ $service->name }}@if (!$loop->last)
+                                        <span><i class="{{ $service->icon }}"></i></span>
+                                        @endif
                                     </div>
+                                </div>
                                 @endforeach
                             @else
                                 nessuno
