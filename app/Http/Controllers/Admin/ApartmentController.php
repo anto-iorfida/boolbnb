@@ -14,6 +14,7 @@ use App\Models\Service;
 use App\Models\Sponsor;
 use App\Models\Message;
 use Carbon\Carbon;
+use Faker\Provider\Image;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -99,6 +100,8 @@ class ApartmentController extends Controller
     public function edit(Apartment $apartment, Album $album)
     {
         $services = Service::all();
+        $album = $apartment->albums;
+
         return view('admin.apartments.edit', compact('apartment', 'album', 'services'));
     }
 
@@ -110,16 +113,16 @@ class ApartmentController extends Controller
                     'required',
                     'min:3',
                     'max:255',
-                    Rule::unique('apartments')->ignore($apartment)
+                    // Rule::unique('apartments')->ignore($apartment)
                 ],
                 'description' => 'required|string',
                 'number_rooms' => 'required|integer|min:1',
                 'number_beds' => 'required|integer|min:1',
                 'number_baths' => 'required|integer|min:1',
                 'square_meters' => 'required|integer|min:0',
-                'thumb' => 'required|image|max:1700',
-                'images' => 'required|array|min:1',
-                'images.*' => 'image|max:1700',
+                // 'thumb' => 'required|image|max:1700',
+                // 'images' => 'required|array|min:1',
+                // 'images.*' => 'image|max:1700',
                 'address' => 'required|string',
                 'longitude' => 'required|numeric|between:-180,180',
                 'latitude' => 'required|numeric|between:-90,90',

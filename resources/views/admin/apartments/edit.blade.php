@@ -79,6 +79,33 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="mb-3 mt-4">
+                        <label for="checkbox"><strong>Servizi</strong></label>
+                        <div class="row mb-3 mt-3 p-3 ">
+                            @foreach ($services as $service)
+                                <div class="form-check col-6 ">
+                                    @if ($errors->any())
+                                        {{-- Se cis sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}
+                                        <input class="form-check-input" @checked(in_array($service->id, old('services', []))) type="checkbox"
+                                            name="services[]" value="{{ $service->id }}"
+                                            id="service-{{ $service->id }}">
+                                    @else
+                                        {{-- Altrimenti vuol dire che stiamo caricando la pagina per la prima volta quindi controlliamo la presenza del service nella collection che ci arriva dal db --}}
+                                        <input class="form-check-input" @checked($apartment->services->contains($service)) type="checkbox"
+                                            name="services[]" value="{{ $service->id }}"
+                                            id="service-{{ $service->id }}">
+                                    @endif
+
+                                    <label class="form-check-label" for="service-{{ $service->id }}">
+                                        {{ $service->name }} <i class="{{ $service->icon }}"></i>
+                                    </label>
+                                </div>
+                            @endforeach
+                            @error('services')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                     <div class=" mb-3 col-12 ">
                         <label for="visibility" class="form-label"><strong>Visibilità</strong></label>
                         <select class="form-control @error('visibility') is-invalid @enderror" id="visibility"
@@ -95,62 +122,76 @@
 
                 <div class="col-12 col-md-6">
                     <div class="mb-3 col-12 ">
-                        <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong>Immagine copertina appartamento</strong></label>
-                        <input class="form-control" type="file" id="thumb" name="thumb">
-                        @if ($apartment->thumb)
+                        <label for="thumb" class="form-label @error('thumb') is-invalid @enderror"><strong>Immagine
+                                copertina appartamento</strong></label>
+                        <input class="form-control mb-3" type="file" id="thumb" name="thumb">
+                        {{-- @if ($apartment->thumb)
                             <div class="mt-2 image-edit">
                                 <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->thumb }}">
                             </div>
                         @endif
                         @error('thumb')
                             <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        @enderror --}}
+                        @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
+                            <div class="col-12 mb-4 d-block">
+                                <img src="{{ asset('storage/' . $apartment->thumb) }}" alt="{{ $apartment->title }}"
+                                    class="img-fluid rounded-4" style="min-height: 400px;width:auto;object-fit:contain">
+                            </div>
+                        @else
+                            <div class="mb-4 card" style='width: 100px; height: 100px;'>
+                                <img src="{{ $apartment->thumb }}" alt="{{ $apartment->title }}"
+                                    class="img-fluid rounded-4">
+                            </div>
+                        @endif
                     </div>
-                    <div class=" mb-3 col-12 ">
-                        <label for="description" class="form-label"><strong>Descrizione</strong></label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ $apartment->description }}</textarea>
-                        @error('description')
+                    <div class="mb-3 col-12 col-md-6">
+                        <label for="images" class="form-label"><strong>Altre immagini dell'appartamento
+                                *</strong></label>
+                        <input type="file" class="form-control mb-3" id="images" name="images[]" multiple>
+                        <div class="invalid-feedback" id="imagesError"></div>
+                        {{-- @dump($apartment->albums) --}}
+                        @if ($apartment->album)
+                            <div class="mt-2 image-edit">
+                                <img src="{{ asset('storage/' . $apartment->album) }}" alt="{{ $apartment->album }}">
+                            </div>
+                        @endif
+                        <div class="col-4 col-md-4  d-inline" >
+                            @foreach ($apartment->albums as $album)
+                                @if ($apartment->album && file_exists(public_path('storage/' . $apartment->album)))
+                                    <img src="{{ asset('storage/' . $album->image) }}" alt="{{ $apartment->title }}"
+                                        class="img-fluid rounded-4"
+                                        style='width: 100px;height: 100px'>
+                                @else
+                                    <img src="{{ $album->image }}" alt="{{ $apartment->title }}"
+                                        class="img-fluid rounded-4" style='width: 100px;height: 100px'>
+                                @endif
+                            @endforeach
+                        </div>
+
+
+                        @error('thumb')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                    </div>
-
-                    <div class="mb-3 mt-4">
-                        <label for="checkbox"><strong>Servizi</strong></label>
-                        <div class="row mb-3 mt-3 p-3">
-                            @foreach ($services as $service)
-                            <div>  <i class="{{$service->icon}}"></i></div>
-                                <div class="form-check col-6 ">
-                                    @if ($errors->any())
-                                        {{-- Se cis sono errori di validazione vuol dire che l'utente ha gia inviato il form quindi controllo l'old --}}
-                                        <input class="form-check-input" @checked(in_array($service->id, old('services', []))) type="checkbox"
-                                            name="services[]" value="{{ $service->id }}"
-                                            id="service-{{ $service->id }}">
-                                    @else
-                                        {{-- Altrimenti vuol dire che stiamo caricando la pagina per la prima volta quindi controlliamo la presenza del service nella collection che ci arriva dal db --}}
-                                        <input class="form-check-input" @checked($apartment->services->contains($service)) type="checkbox"
-                                            name="services[]" value="{{ $service->id }}"
-                                            id="service-{{ $service->id }}">
-                                    @endif
-
-                                    <label class="form-check-label" for="service-{{ $service->id }}">
-                                        {{ $service->name }}
-                                    </label>
-                                </div>
-                            @endforeach
-                            @error('services')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
                     </div>
 
                     <input type="hidden" id="longitude" name="longitude" value="{{ $apartment->longitude }}">
                     <input type="hidden" id="latitude" name="latitude" value="{{ $apartment->latitude }}">
 
-                    <div>
-                        <button type="submit" class="btn btn-primary mb-5">Salva Modifiche</button>
-                        <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary mb-5">Annulla</a>
-                    </div>
                 </div>
+
+                <div class=" mb-3 col-12 ">
+                    <label for="description" class="form-label"><strong>Descrizione</strong></label>
+                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ $apartment->description }}</textarea>
+                    @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary mb-5">Salva Modifiche</button>
+                    <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary mb-5">Annulla</a>
+                </div>
+
 
         </form>
     </div>

@@ -24,10 +24,19 @@
                     @endif
                     <div class="row">
                         @foreach ($apartment->albums as $album)
-                            <div class="col-4 col-md-4  d-inline">
-                                <img src="{{ asset('storage/' . $album->image) }}" alt="Immagine appartamento"
-                                    class="img-fluid rounded-4">
-                            </div>
+                            
+                            @if ($apartment->album && file_exists(public_path('storage/' . $apartment->album)))
+                            
+                                <div class="col-4 col-md-4  d-inline">
+                                    <img src="{{ asset('storage/' . $album->image) }}" alt="{{ $apartment->title }}"
+                                        class="img-fluid rounded-4" style="min-height: 400px;width:auto;object-fit:contain">
+                                </div>
+                            @else
+                                <div class="col-4 col-md-4  d-inline">
+                                    <img src="{{ $album->image }}" alt="{{ $apartment->title }}"
+                                        class="img-fluid rounded-4">
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -46,14 +55,15 @@
                 </div>
 
                 <div class="mb-4">
-                {{-- chi lo tocca lo ammazzo by mattia --}}
+                    {{-- chi lo tocca lo ammazzo by mattia --}}
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed ms-bg-primary rounded-pill" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                <button class="accordion-button collapsed ms-bg-primary rounded-pill" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                                     aria-controls="flush-collapseOne">
-                                    <strong><i class="fa-solid fa-money-bill-trend-up"></i>  Sponsorizza il tuo appartamento</strong>
+                                    <strong><i class="fa-solid fa-money-bill-trend-up"></i> Sponsorizza il tuo
+                                        appartamento</strong>
                                 </button>
                             </h2>
                             <div id="flush-collapseOne" class="accordion-collapse collapse"
@@ -79,7 +89,7 @@
                             </div>
                         </div>
                     </div>
-                {{-- fine accordion --}}
+                    {{-- fine accordion --}}
                 </div>
 
                 <div class="section mb-4">
@@ -149,10 +159,10 @@
         </div>
     </div>
     <style>
-
         .ms-bg-primary {
             background-color: rgb(101, 159, 230)
         }
+
         .card-title {
             font-size: 1.75rem;
             font-weight: bold;
