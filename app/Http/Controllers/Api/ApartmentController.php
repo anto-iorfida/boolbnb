@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 
 class ApartmentController extends Controller
@@ -51,67 +52,48 @@ class ApartmentController extends Controller
         return response()->json($data);
     }
 
-
- //     public function searchApartment()
-// {
-//     // Codice per recuperare gli appartamenti con i servizi
-//     $apartments = Apartment::with('services')->get();
-
-//         return response()->json([
-//             'success' => true,
-//             'result' => $apartments
-//         ]);
-// }
-// public function searchApartments(Request $request)
-// {
-//     // Ottiene la latitudine convertendola in float dal parametro 'latitude' della query
-//     $latitude = floatval($request->query('latitude'));
-
-//     // Ottiene la longitudine convertendola in float dal parametro 'longitude' della query
-//     $longitude = floatval($request->query('longitude'));
-
-//     // Ottiene il raggio convertendolo in float dal parametro 'radius' della query, con default a 1000 km se non specificato
-//     $radius = floatval($request->query('radius', 1000));
-
- 
-//     $number_beds = floatval($request->query('number_beds', 1));
-
-//     // Valida i parametri della richiesta
-//     $request->validate([
-//         'latitude' => 'required|numeric',
-//         'longitude' => 'required|numeric',
-//         'radius' => 'required|numeric|min:1',
-//         'number_beds' => 'required|numeric|min:1' 
-//     ]);
-
+    // public function fetchSponsoredApartments()
+    // {
 //     try {
-//         // Esegue una query per selezionare gli appartamenti e calcolare la distanza in base alle coordinate fornite
-//         $apartments = Apartment::selectRaw(
-//             "*, 
-//             ( 6371 * acos( 
-//                 cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) 
-//                 + sin( radians(?) ) * sin( radians( latitude ) ) 
-//             ) ) AS distance",
-//             [$latitude, $longitude, $latitude]
-//         )
-//             // Filtra i risultati per distanza, includendo solo quelli entro il raggio specificato
-//             ->having("distance", "<", $radius)
-            
-//             ->where('number_beds', '>=', $number_beds)
-//             // Ordina i risultati per distanza in ordine ascendente
-//             ->orderBy("distance", 'asc')
-//             // Carica anche le relazioni di servizi degli appartamenti, se necessario
-//             ->with('services', 'users', 'albums')
-//             // Esegue la query e ottiene tutti i risultati
+    //         // Ottieni la data e l'ora attuali
+    //         $now = Carbon::now();
+
+    //         // Costruisci la query per selezionare gli appartamenti con sponsor e non scaduti
+    //         $apartments = Apartment::whereHas('sponsor', function ($query) use ($now) {
+    //             $query->where('end_date', '>', $now);
+    //         })
+    //             ->with(['services', 'albums', 'users', 'sponsors'])
 //             ->get();
 
-//         // Restituisce una risposta JSON con i risultati degli appartamenti trovati
+    //         // Restituisci una risposta JSON con i risultati degli appartamenti sponsorizzati
 //         return response()->json(['success' => true, 'result' => $apartments]);
 //     } catch (\Exception $e) {
-//         // Se si verifica un'eccezione durante l'esecuzione della query, restituisce un errore con codice 500
-//         return response()->json(['success' => false, 'error' => 'An error occurred while fetching apartments.'], 500);
+    //         // Se si verifica un'eccezione durante l'esecuzione della query, restituisci un errore con codice 500
+    //         return response()->json(['success' => false, 'error' => 'An error occurred while fetching sponsored apartments.'], 500);
 //     }
 // }
+    public function fetchSponsoredApartments()
+    {
+        try {
+            // Ottieni la data e l'ora attuali usando Carbon
+            $now = Carbon::now();
+
+            // Costruisci la query per selezionare gli appartamenti con sponsor e non scaduti
+            $apartments = Apartment::whereHas('sponsors', function ($query) use ($now) {
+                $query->where('end_time', '>', $now); // Assumo 'end_time' anziché 'end_date'
+            })
+                ->with(['services', 'albums', 'users', 'sponsors'])
+                ->get();
+
+            // Restituisci una risposta JSON con i risultati degli appartamenti sponsorizzati
+            return response()->json(['success' => true, 'result' => $apartments]);
+        } catch (\Exception $e) {
+            // Se si verifica un'eccezione durante l'esecuzione della query, restituisci un errore con codice 500
+            return response()->json(['success' => false, 'error' => 'An error occurred while fetching sponsored apartments.'], 500);
+        }
+    }
+
+
     public function searchApartments(Request $request)
     {
         // Ottiene la latitudine convertendola in float dal parametro 'latitude' della query
