@@ -6,11 +6,41 @@
     @if (session('apartments_edit'))
         <div class="mess-info">Progetto modificato con successo!</div>
     @endif
-    <div class=" container-fluid border-0 border mb-2">
-        <div class="">
-            <div class="container-fluid container-md">
+    <div class="card p-5 mb-2">
+        {{-- <div id="carouselExampleIndicators" class="carousel slide mb-4" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                @foreach ($apartment->albums as $key => $album)
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key + 1 }}" aria-label="Slide {{ $key + 2 }}"></button>
+                @endforeach
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
+                        <img src="{{ asset('storage/' . $apartment->thumb) }}" class="d-block w-100" alt="{{ $apartment->title }}">
+                    @else
+                        <img src="{{ $apartment->thumb }}" class="d-block w-100" alt="{{ $apartment->title }}">
+                    @endif
+                </div>
+                @foreach ($apartment->albums as $album)
+                    <div class="carousel-item">
+                        <img src="{{ asset('storage/' . $album->image) }}" class="d-block w-100" alt="Immagine appartamento">
+                    </div>
+                @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div> --}}
+        <div class="card-body">
+            <div class="container">
                 <h1 class=" text-secondary">Titolo: {{ $apartment->title }}</h1>
-                <div class="mb-2 ">
+                <div class=" p-5 mb-2 ">
                     <h3>Immagine di copertina</h3>
                     @if ($apartment->thumb && file_exists(public_path('storage/' . $apartment->thumb)))
                         <div class="col-12 mb-4 d-block">
@@ -57,24 +87,18 @@
                             </h2>
                           <div class="d-block d-md-flex justify-content-center">
                             @foreach ($sponsor as $singleSponsor)
-                            <div id="flush-collapseOne" class="accordion-collapse  collapse"
-                                data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <div class="card text-center me-2 mb-2" style="min-width: 200px;">
-                                        <div class="card-header">
-                                            <strong>{{ $singleSponsor->name }}</strong>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore</div>
-                                            <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>
-                                        </div>
-                                        <div class="card-footer text-body-secondary">
-                                            <a href="{{ route('admin.payment', ['sponsor_id' => $singleSponsor->id]) }}"
-                                                class="btn btn-success rounded-pill px-4">Attiva</a>
-                                        </div>
+                                <div class="card text-center me-2 mb-2" style="min-width: 200px;">
+                                    <div class="card-header">
+                                        <strong>{{ $singleSponsor->name }}</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-title fs-5">Durata: {{ $singleSponsor->duration }} ore</div>
+                                        <div class="card-text">Prezzo: {{ $singleSponsor->price }}</div>
+                                    </div>
+                                    <div class="card-footer text-body-secondary">
+                                        <a href="{{ route('admin.payment', ['sponsor_id'=> $singleSponsor->id]) }}" class="btn btn-success">Acquista</a>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                           </div>
                         </div>
@@ -200,6 +224,7 @@
         @media (max-width: 575.98px) {}
     </style>
 @endsection
+
 @section('scripts')
     <!-- Librerie di TomTom -->
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.25.0/maps/maps-web.min.js"></script>
