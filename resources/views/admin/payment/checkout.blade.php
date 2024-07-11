@@ -8,7 +8,7 @@
             <h1 data-aos="flip-left"
                 data-aos-duration="1500"> Pagamento effettuato con successo! </h1>
             <div class="container mt-5">
-                <a href="{{route('admin.apartments.index')}}"class="btn btn-outline-success"> Torna alla tua dashboard </a>
+                <a href="{{route('admin.apartments.index')}}"class="btn btn-outline-success"> Torna ai tuoi appartamenti </a>
             </div>
         </div>
     </div>
